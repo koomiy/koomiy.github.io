@@ -1,6 +1,11 @@
 # 公開するページのURL
 baseURL = "https://koomiy.github.io"
 
+# 古いページからリダイレクト
+aliases = [
+  "https://miyatanikoki.github.io"
+]
+
 languageCode = "ja"
 DefaultContentLanguage = "ja"
 HasCJKLanguage = true
