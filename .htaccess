@@ -1,0 +1,3 @@
+RewriteEngine on
+
+RewriteRule ^https://miyatanikoki.github.io$ http://koomiy.github.io [R=301,L]
