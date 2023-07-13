@@ -85,22 +85,11 @@ $x$, $y$, $z$軸周りの回転に対応します。
 
 ## サンプルコードの解説
 
-'vnoid/src/fksolver.cpp'を、脚の順運動学計算を例に解説します。  
+`vnoid/src/fksolver.cpp`を、脚の順運動学計算を例に解説します。  
 脚の順運動学計算は、FkSolver::Comp関数内の124行目から始まります。
 
-まず変数の定義についてです。
-```cpp
-leg_pos
-```
-、
-```cpp
-leg_ori
-```
-、
-```cpp
-leg_axis
-```
-はそれぞれ、  
+まず変数の定義についてです。  
+`leg_pos`、`leg_ori`、`leg_axis`はそれぞれ、  
 ベースリンク座標を基準としたときの、  
 脚関節のローカル座標の位置、回転姿勢、回転軸ベクトルです。  
 なお回転姿勢については四元数で定義されます。
@@ -116,10 +105,45 @@ for(int i = 0; i < 2; i++){
 	...
 ```
 
-最初のfor文は、左右脚のうち一本ずつ順運動学計算をすることを意味します。  
-その一つ下の階層のfor文で、脚関節の回転変位を一つずつ一般変位$q[7]$に代入します。
+最初のfor文は、左右脚のうち一本ずつ順運動学計算をすることを意味します。
 
+その一つ下の階層のfor文で、脚関節の回転変位を一つずつ読み込みます。  
+ここで`leg_joint_index`とは、脚の付け根関節のidであり、  
+左脚であれば18、右脚であれば24である。
 
+次に130行目のCompLegFk関数について説明します。  
+```cpp
+CompLegFk(param.upper_leg_length, param.lower_leg_length, q, &leg_pos[i][0], &leg_ori[i][0], &leg_axis[i][0]);
+```
+
+```cpp
+void FkSolver::CompLegFk(double l1, double l2, const double* q, Vector3* pos, Quaternion* ori, Vector3* axis){
+    Vector3  pos_local[6];
+    Vector3  axis_local[6];
+    pos_local[0] = Vector3(0.0, 0.0, 0.0);
+    pos_local[1] = Vector3(0.0, 0.0, 0.0);
+    pos_local[2] = Vector3(0.0, 0.0, 0.0);
+    pos_local[3] = Vector3(0.0, 0.0, -l1);
+    pos_local[4] = Vector3(0.0, 0.0, -l2);
+    pos_local[5] = Vector3(0.0, 0.0, 0.0);
+    axis_local[0] = Vector3::UnitZ();
+    axis_local[1] = Vector3::UnitX();
+    axis_local[2] = Vector3::UnitY();
+    axis_local[3] = Vector3::UnitY();
+    axis_local[4] = Vector3::UnitY();
+    axis_local[5] = Vector3::UnitX();
+
+    Vector3    pbase(0.0, 0.0, 0.0);
+    Quaternion qbase(1.0, 0.0, 0.0, 0.0);
+    for(int i = 0; i < 6; i++){
+        axis[i] = (i == 0 ? qbase : ori[i-1])*axis_local[i];
+        pos [i] = (i == 0 ? pbase : pos[i-1]) + (i == 0 ? qbase : ori[i-1])*pos_local[i];
+        ori [i] = (i == 0 ? qbase : ori[i-1])*AngleAxis(q[i], axis_local[i]);
+    }
+}
+```
+この関数は大腿・下腿のリンク長さや、  
+関節の回転変位、脚関節の位置・姿勢・回転軸を引数に持ちます。
 
 
 
