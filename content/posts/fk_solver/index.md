@@ -63,23 +63,38 @@ $\boldsymbol{q} = [q_1, q_2, ..., q_n]^T$ により定義します。
 
 ---
 
-## サンプルコードの解説
+## vnoidロボットの機構モデル
 
-サンプルコードの解説に入る前に、vnoidロボットの機構モデルについて説明します。
+サンプルコードの解説に入る前に、vnoidロボットの機構モデルについて説明します。  
+以下図に示すのが、vnoidロボットの機構モデルです。  
+{{<figure src="./biped_robot_model.png" class="center" alt="vnoidロボットの機構モデル" width="50%">}}
 
-vnoidのロボットには1本の脚につき6つの関節がついています。
+vnoidのロボットには1本の脚につき6つの関節がついています。  
 また、1本の腕につき7つの関節がついています。  
 ロボットの関節にはそれぞれが識別できるように以下図のようにidが振られています。  
-{{<figure src="./biped_robot_model.png" class="center" alt="vnoidロボットの機構モデル" width="50%">}}  
 {{<figure src="./biped_leg_model.png" class="center" alt="脚の機構モデル" width="50%">}}  
-{{<figure src="./biped_arm_model.png" class="center" alt="腕の機構モデル" width="50%">}}  
+{{<figure src="./biped_arm_model.png" class="center" alt="腕の機構モデル" width="50%">}}
 
+図中の$r$, $p$, $y$ はそれぞれロール・ピッチ・ヨーを表しており、  
+その刻印が入った関節モーターは、その方向に回転します。  
+なお、ロール・ピッチ・ヨー方向の回転はそれぞれ、  
+$x$, $y$, $z$軸周りの回転を意味します。
+
+## サンプルコードの解説
 
 'vnoid/src/fksolver.cpp'を、脚の順運動学計算を例に解説します。  
 脚の順運動学計算は、FkSolver::Comp関数内の124行目から始まります。
 
 まず変数の定義についてです。
-'''leg_pos'''、'''leg_ori'''、'''leg_axis'''はそれぞれ、  
+'''cpp
+leg_pos
+'''、
+'''cpp
+leg_ori
+'''、
+'''cpp
+leg_axis
+'''はそれぞれ、  
 ベースリンク座標を基準としたときの、  
 脚関節のローカル座標の位置、回転姿勢、回転軸ベクトルです。  
 なお回転姿勢については四元数で定義されます。
