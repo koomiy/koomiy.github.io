@@ -70,9 +70,9 @@ $\boldsymbol{q} = [q_1, q_2, ..., q_n]^T$ により定義します。
 vnoidのロボットには1本の脚につき6つの関節がついています。
 また、1本の腕につき7つの関節がついています。  
 ロボットの関節にはそれぞれが識別できるように以下図のようにidが振られています。  
-{{<figure src="./biped_robot_model.png" class="center" alt="vnoidロボットの機構モデル" width="75%">}}  
-{{<figure src="./biped_leg_model.png" class="center" alt="脚の機構モデル" width="75%">}}  
-{{<figure src="./biped_arm_model.png" class="center" alt="腕の機構モデル" width="75%">}}  
+{{<figure src="./biped_robot_model.png" class="center" alt="vnoidロボットの機構モデル" width="50%">}}  
+{{<figure src="./biped_leg_model.png" class="center" alt="脚の機構モデル" width="50%">}}  
+{{<figure src="./biped_arm_model.png" class="center" alt="腕の機構モデル" width="50%">}}  
 
 
 'vnoid/src/fksolver.cpp'を、脚の順運動学計算を例に解説します。  
