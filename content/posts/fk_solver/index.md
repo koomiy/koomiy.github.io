@@ -7,6 +7,8 @@ menu: main
 
 ---
 
+(こちらは制作中の記事です)
+
 ## 今回の内容
 
 本チャレンジでは、初心者の方でも簡単に人形ロボットの運動計画ができるように、  
@@ -107,48 +109,67 @@ $x$, $y$, $z$軸周りの回転に対応します。
 		...
 	```
 
-最初のfor文は、左右脚のうち一本ずつ順運動学計算をすることを意味します。
+	最初のfor文は、左右脚のうち一本ずつ順運動学計算をすることを意味します。
 
-その一つ下の階層のfor文で、脚関節の回転変位を一つずつ読み込みます。  
-ここで`leg_joint_index`とは、脚の付け根関節のidであり、  
-左脚であれば18、右脚であれば24である。
+	その一つ下の階層のfor文で、脚関節の回転変位を一つずつ読み込みます。  
+	ここで`leg_joint_index`とは、脚の付け根関節のidであり、  
+	左脚であれば18、右脚であれば24である。
 
-次に130行目のCompLegFk関数について説明します。  
-```cpp
-CompLegFk(param.upper_leg_length, param.lower_leg_length, q, &leg_pos[i][0], &leg_ori[i][0], &leg_axis[i][0]);
-```
-
-```cpp
-void FkSolver::CompLegFk(double l1, double l2, const double* q, Vector3* pos, Quaternion* ori, Vector3* axis){
-    Vector3  pos_local[6];
-    Vector3  axis_local[6];
-    pos_local[0] = Vector3(0.0, 0.0, 0.0);
-    pos_local[1] = Vector3(0.0, 0.0, 0.0);
-    pos_local[2] = Vector3(0.0, 0.0, 0.0);
-    pos_local[3] = Vector3(0.0, 0.0, -l1);
-    pos_local[4] = Vector3(0.0, 0.0, -l2);
-    pos_local[5] = Vector3(0.0, 0.0, 0.0);
-    axis_local[0] = Vector3::UnitZ();
-    axis_local[1] = Vector3::UnitX();
-    axis_local[2] = Vector3::UnitY();
-    axis_local[3] = Vector3::UnitY();
-    axis_local[4] = Vector3::UnitY();
-    axis_local[5] = Vector3::UnitX();
-
-    Vector3    pbase(0.0, 0.0, 0.0);
-    Quaternion qbase(1.0, 0.0, 0.0, 0.0);
-    for(int i = 0; i < 6; i++){
-        axis[i] = (i == 0 ? qbase : ori[i-1])*axis_local[i];
-        pos [i] = (i == 0 ? pbase : pos[i-1]) + (i == 0 ? qbase : ori[i-1])*pos_local[i];
-        ori [i] = (i == 0 ? qbase : ori[i-1])*AngleAxis(q[i], axis_local[i]);
-    }
-}
-```
-この関数は大腿・下腿のリンク長さや、  
-関節の回転変位、脚関節の位置・姿勢・回転軸を引数に持ちます。
-
-
-
+-	脚の順運動学(130行目、8~31行目)
+	
+	次に130行目のCompLegFk関数について説明します。
+	
+	```cpp
+	CompLegFk(param.upper_leg_length, param.lower_leg_length, q, &leg_pos[i][0], &leg_ori[i][0], &leg_axis[i][0]);
+	```
+	
+	この関数は大腿・下腿のリンク長さや、  
+	関節の回転変位、脚関節の位置・姿勢・回転軸を引数に持ちます。
+	
+	この関数では、名前の通り脚に関する順運動学を解き、  
+	脚関節の回転変位から、`leg_pos`、`leg_ori`を計算します。
+	
+	関数の定義を見てみましょう(8~31行目)。
+	
+	```cpp
+	void FkSolver::CompLegFk(double l1, double l2, const double* q, Vector3* pos, Quaternion* ori, Vector3* axis){
+	    Vector3  pos_local[6];
+	    Vector3  axis_local[6];
+	    pos_local[0] = Vector3(0.0, 0.0, 0.0);
+	    pos_local[1] = Vector3(0.0, 0.0, 0.0);
+	    pos_local[2] = Vector3(0.0, 0.0, 0.0);
+	    pos_local[3] = Vector3(0.0, 0.0, -l1);
+	    pos_local[4] = Vector3(0.0, 0.0, -l2);
+	    pos_local[5] = Vector3(0.0, 0.0, 0.0);
+	    axis_local[0] = Vector3::UnitZ();
+	    axis_local[1] = Vector3::UnitX();
+	    axis_local[2] = Vector3::UnitY();
+	    axis_local[3] = Vector3::UnitY();
+	    axis_local[4] = Vector3::UnitY();
+	    axis_local[5] = Vector3::UnitX();
+	
+	    Vector3    pbase(0.0, 0.0, 0.0);
+	    Quaternion qbase(1.0, 0.0, 0.0, 0.0);
+	    for(int i = 0; i < 6; i++){
+	        axis[i] = (i == 0 ? qbase : ori[i-1])*axis_local[i];
+	        pos [i] = (i == 0 ? pbase : pos[i-1]) + (i == 0 ? qbase : ori[i-1])*pos_local[i];
+	        ori [i] = (i == 0 ? qbase : ori[i-1])*AngleAxis(q[i], axis_local[i]);
+	    }
+	}
+	```
+	
+	(鋭意製作中...)
+	
+-	足の位置、姿勢を計算(132~134行目)
+	
+	```cpp
+	foot[i].ori   = base.ori*leg_ori[i][5];
+	foot[i].angle = ToRollPitchYaw(foot[i].ori);
+	foot[i].pos   = base.pos + base.ori*(leg_pos[i][5] + param.base_to_hip[i]) + foot[i].ori*param.ankle_to_foot[i];
+	```
+	
+	
+	(鋭意製作中...)
 
 
 ---
