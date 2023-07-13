@@ -69,16 +69,18 @@ $\boldsymbol{q} = [q_1, q_2, ..., q_n]^T$ により定義します。
 以下図に示すのが、vnoidロボットの機構モデルです。  
 {{<figure src="./biped_robot_model.png" class="center" alt="vnoidロボットの機構モデル" width="50%">}}
 
-vnoidのロボットには1本の脚につき6つの関節がついています。  
-また、1本の腕につき7つの関節がついています。  
+vnoidのロボットには、1本の腕につき7つ、1本の脚につき6つの関節がついています。  
 ロボットの関節にはそれぞれが識別できるように以下図のようにidが振られています。  
-{{<figure src="./biped_leg_model.png" class="center" alt="脚の機構モデル" width="50%">}}  
+なお、ロボットから見て右側の機構については省略しています。  
+{{<figure src="./biped_leg_model.png" class="center" alt="脚の機構モデル" width="35%">}}  
 {{<figure src="./biped_arm_model.png" class="center" alt="腕の機構モデル" width="50%">}}
 
 図中の$r$, $p$, $y$ はそれぞれロール・ピッチ・ヨーを表しており、  
 その刻印が入った関節モーターは、その方向に回転します。  
 なお、ロール・ピッチ・ヨー方向の回転はそれぞれ、  
 $x$, $y$, $z$軸周りの回転を意味します。
+
+---
 
 ## サンプルコードの解説
 
