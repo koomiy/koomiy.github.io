@@ -165,21 +165,25 @@ $x$, $y$, $z$軸周りの回転に対応します。
 
 	今回の場合、脚の付け根から数えて2番目から3番目の関節の間に大腿があり、  
 	3番目から4番目の関節の間に下腿があります。  
-	したがって、$\boldsymbol{{}^{2}p_3} = [0.0, 0.0, -upper\_leg\_length]^T$、  
-	$\boldsymbol{{}^{3}p_4} = [0.0, 0.0, -lower\_leg\_length]^T$となります。
+	大腿の長さは$\text{upper\_leg\_length} = 0.3$、  
+	下腿の長さは$\text{lower\_leg\_length} = 0.4$です。
+	
+	したがって、$\boldsymbol{{}^{2}p_3} = [0.0, 0.0, -\text{upper\_leg\_length}]^T$、  
+	$\boldsymbol{{}^{3}p_4} = [0.0, 0.0, -\text{lower\_leg\_length}]^T$となります。
 
 	`axis_local[i]`は、第$i$関節の回転軸の方向で、  
 	ロール・ピッチ・ヨー(UnitX・UnitY・UnitZ)から選択できます。
 	
 	プログラム26行目から始まるfor文内で順運動学を解きます。  
-	ベースリンク基準の$i$番目リンクの座標位置$\boldsymbol{{}^{0}p_i}$(`pos`)は、  
+	ベースリンク基準の$i$番目リンクの座標位置$\boldsymbol{{}^{0}p_i}$(`pos` = `leg_pos`)は、  
 	次のように計算されます。  
-	$$\boldsymbol{{}^{0}p_i} = \boldsymbol{{}^{0}p_{i-1}} + \boldsymbol{{}^{0}Q_{i-1}} \boldsymbol{{}^{i-1}p_i} \boldsymbol{{}^{0}Q_{i-1}}^{-1}$$
+	$$\boldsymbol{{}^{0}p_i} = \boldsymbol{{}^{0}p_{i-1}} + \boldsymbol{{}^{0}Q_{i-1}} \cdot \boldsymbol{{}^{i-1}p_i} \cdot \boldsymbol{{}^{0}Q_{i-1}}^{-1}$$
 	
-	ベースリンク基準の$i$番目リンクの座標姿勢$\boldsymbol{{}^{0}Q_i}$(`ori`)は、  
+	ベースリンク基準の$i$番目リンクの座標姿勢$\boldsymbol{{}^{0}Q_i}$(`ori` = `leg_ori`)は、  
 	次のように計算されます。  
-	$$\boldsymbol{{}^{0}Q_{i}} = \boldsymbol{{}^{0}Q_{i-1}} * \boldsymbol{{}^{i-1}Q_{i}}$$  
-	なお、$\boldsymbol{{}^{0}Q_{i-1}}$はEigenの[AngleAxis](https://knasa.hateblo.jp/entry/2019/09/01/180535)メソッドを使って計算されます。
+	$$\boldsymbol{{}^{0}Q_{i}} = \boldsymbol{{}^{0}Q_{i-1}} \cdot \boldsymbol{{}^{i-1}Q_{i}}$$  
+	なお、四元数$\boldsymbol{{}^{i-1}Q_{i}}$はEigenのAngleAxisメソッドを使って、  
+	回転量`q[i]`と回転軸`axis_local[i]`から生成されます。
 	
 -	**足の位置、姿勢を計算(132~134行目)**
 	
@@ -189,8 +193,17 @@ $x$, $y$, $z$軸周りの回転に対応します。
 	foot[i].pos   = base.pos + base.ori*(leg_pos[i][5] + param.base_to_hip[i]) + foot[i].ori*param.ankle_to_foot[i];
 	```
 	
+	前節で、ベースリンク座標を基準とした、  
+	足の先端関節(くるぶし)までの位置・姿勢が計算できました。  
+	ここでは、それをワールド座標系から見た位置・姿勢に変換します。
 	
-	(鋭意製作中...)
+	ワールド座標を基準とした足裏中心座標の位置を$\boldsymbol{{}^Wp_E}$(`foot[i].pos)`、  
+	姿勢を$\boldsymbol{{}^WQ_E}$`foot[i].angle`を計算します。
+	
+	$$\boldsymbol{{}^Wp_E} = \boldsymbol{{}^Wp_0} + \boldsymbol{{}^WQ_0} \cdot (\boldsymbol{{}^0p_5} + \text{base\_to\_hip}) + \boldsymbol{{}^WQ_E} \cdot \text{ankle\_to\_foot} \cdot \boldsymbol{{}^WQ_E}^{-1}$$
+	
+	$$\boldsymbol{{}^WQ_E} = \boldsymbol{{}^WQ_0} \cdot \boldsymbol{{}^0p_5}$$
+	
 
 
 ---
