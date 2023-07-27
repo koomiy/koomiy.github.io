@@ -26,7 +26,7 @@
      showgrid="false"
      inkscape:zoom="0.54047838"
      inkscape:cx="34.228936"
-     inkscape:cy="520.8349"
+     inkscape:cy="522.68511"
      inkscape:window-width="1848"
      inkscape:window-height="1016"
      inkscape:window-x="72"
@@ -406,7 +406,10 @@
        style="font-size:6.35px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"
        x="101.11916"
        y="125.14286"
-       id="text2293"><tspan
+       id="text2293"
+       inkscape:export-filename="a_to_e.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan2291"
          style="font-size:6.35px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-opacity:1"
@@ -423,11 +426,11 @@
        transform="translate(-38.672404,29.858112)"><tspan
          x="153.1805"
          y="152.90689"
-         id="tspan8639"><tspan
+         id="tspan615"><tspan
            style="fill:#00c800;stroke:none"
-           id="tspan8635">∑</tspan><tspan
+           id="tspan611">∑</tspan><tspan
            style="font-size:65%;baseline-shift:sub;fill:#00c800;stroke:none"
-           id="tspan8637">b</tspan></tspan></text>
+           id="tspan613">b</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6.35px;white-space:pre;inline-size:13.3278;display:inline;fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"
@@ -437,11 +440,11 @@
        transform="translate(-85.99654,-36.720629)"><tspan
          x="153.1805"
          y="152.90689"
-         id="tspan8645"><tspan
+         id="tspan621"><tspan
            style="fill:#00c800;stroke:none"
-           id="tspan8641">∑</tspan><tspan
+           id="tspan617">∑</tspan><tspan
            style="font-size:65%;baseline-shift:sub;fill:#00c800;stroke:none"
-           id="tspan8643">b</tspan></tspan></text>
+           id="tspan619">b</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6.35px;white-space:pre;inline-size:20.8158;display:inline;fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"
@@ -451,11 +454,11 @@
        transform="translate(-21.900453,-22.942202)"><tspan
          x="153.1805"
          y="152.90689"
-         id="tspan8651"><tspan
+         id="tspan627"><tspan
            style="fill:#ff0000;stroke:none"
-           id="tspan8647">∑</tspan><tspan
+           id="tspan623">∑</tspan><tspan
            style="font-size:65%;baseline-shift:sub;fill:#ff0000;stroke:none"
-           id="tspan8649">a</tspan></tspan></text>
+           id="tspan625">a</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6.35px;white-space:pre;inline-size:20.8158;display:inline;fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
@@ -465,13 +468,13 @@
        transform="translate(-46.682457,6.4184433)"><tspan
          x="153.1805"
          y="152.90689"
-         id="tspan8659"><tspan
+         id="tspan635"><tspan
            style="font-size:65%;baseline-shift:super;stroke:#000000"
-           id="tspan8653">a</tspan><tspan
+           id="tspan629">a</tspan><tspan
            style="fill:#000000;stroke:#000000"
-           id="tspan8655">p</tspan><tspan
+           id="tspan631">p</tspan><tspan
            style="font-size:65%;baseline-shift:sub;stroke:#000000"
-           id="tspan8657">b</tspan></tspan></text>
+           id="tspan633">b</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6.35px;white-space:pre;inline-size:20.8158;display:inline;fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
@@ -481,9 +484,9 @@
        transform="translate(-40.236973,46.389748)"><tspan
          x="153.1805"
          y="152.90689"
-         id="tspan8663"><tspan
+         id="tspan639"><tspan
            style="fill:#000005;stroke:none"
-           id="tspan8661">・</tspan></tspan></text>
+           id="tspan637">・</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6.35px;white-space:pre;inline-size:20.8158;display:inline;fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
@@ -493,13 +496,13 @@
        transform="translate(-33.823049,45.808423)"><tspan
          x="153.1805"
          y="152.90689"
-         id="tspan8671"><tspan
+         id="tspan647"><tspan
            style="font-size:65%;baseline-shift:super;stroke:#000000"
-           id="tspan8665">b</tspan><tspan
+           id="tspan641">b</tspan><tspan
            style="fill:#000000;stroke:#000000"
-           id="tspan8667">p</tspan><tspan
+           id="tspan643">p</tspan><tspan
            style="font-size:65%;baseline-shift:sub;stroke:#000000"
-           id="tspan8669">E</tspan></tspan></text>
+           id="tspan645">E</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6.35px;white-space:pre;inline-size:20.8158;display:inline;fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
@@ -509,13 +512,13 @@
        transform="translate(-86.026796,-11.620515)"><tspan
          x="153.1805"
          y="152.90689"
-         id="tspan8679"><tspan
+         id="tspan655"><tspan
            style="font-size:65%;baseline-shift:super;stroke:#000000"
-           id="tspan8673">b</tspan><tspan
+           id="tspan649">b</tspan><tspan
            style="fill:#000000;stroke:#000000"
-           id="tspan8675">p</tspan><tspan
+           id="tspan651">p</tspan><tspan
            style="font-size:65%;baseline-shift:sub;stroke:#000000"
-           id="tspan8677">E</tspan></tspan></text>
+           id="tspan653">E</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6.35px;white-space:pre;inline-size:20.8158;display:inline;fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
@@ -525,13 +528,13 @@
        transform="translate(-49.257019,45.769068)"><tspan
          x="153.1805"
          y="152.90689"
-         id="tspan8687"><tspan
+         id="tspan663"><tspan
            style="font-size:65%;baseline-shift:super;stroke:#000000"
-           id="tspan8681">a</tspan><tspan
+           id="tspan657">a</tspan><tspan
            style="fill:#000000;stroke:#000000"
-           id="tspan8683">R</tspan><tspan
+           id="tspan659">R</tspan><tspan
            style="font-size:65%;baseline-shift:sub;stroke:#000000"
-           id="tspan8685">b</tspan></tspan></text>
+           id="tspan661">b</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6.35px;white-space:pre;inline-size:20.8158;display:inline;fill:#ff0000;fill-opacity:1;stroke:#0000ff;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
@@ -541,13 +544,13 @@
        transform="translate(-19.357831,9.7157929)"><tspan
          x="153.1805"
          y="152.90689"
-         id="tspan8695"><tspan
+         id="tspan671"><tspan
            style="font-size:65%;baseline-shift:super;stroke:#ff0000"
-           id="tspan8689">a</tspan><tspan
+           id="tspan665">a</tspan><tspan
            style="stroke:#ff0000"
-           id="tspan8691">p</tspan><tspan
+           id="tspan667">p</tspan><tspan
            style="font-size:65%;baseline-shift:sub;stroke:#ff0000"
-           id="tspan8693">E</tspan></tspan></text>
+           id="tspan669">E</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6.35px;white-space:pre;inline-size:13.3278;display:inline;fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"
@@ -557,11 +560,11 @@
        transform="translate(3.7416446,46.105485)"><tspan
          x="153.1805"
          y="152.90689"
-         id="tspan8701"><tspan
+         id="tspan677"><tspan
            style="stroke:none"
-           id="tspan8697">∑</tspan><tspan
+           id="tspan673">∑</tspan><tspan
            style="font-size:65%;baseline-shift:sub;stroke:none"
-           id="tspan8699">E</tspan></tspan></text>
+           id="tspan675">E</tspan></tspan></text>
     <circle
        style="fill:none;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.5"
        id="path111"
