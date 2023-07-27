@@ -27,7 +27,7 @@ vnoidというサンプルパッケージが用意されております。
 
 {{<figure src="./base_to_links.png" class="center" alt="基準座標から見た各リンク座標" width="50%">}}
 
-目標達成のため、ある座標系 $\Sigma_a$ から別の座標系 $\Sigma_b$ を定義する  
+目標達成のため、ある座標系 $\Sigma_a$ から別の座標系 $\Sigma_b$ を定義する、  
 一般的な方法について考えてみましょう。
 
 $\Sigma_a$に対する$\Sigma_b$の位置に関しては、  
@@ -38,28 +38,27 @@ $\Sigma_a$に対する$\Sigma_b$の位置に関しては、
 つまり、$\boldsymbol{{}^bp_E}$は固定ベクトルです。
 
 $\Sigma_a$ から見た点$E$ $\boldsymbol{{}^ap_E}$ は、  
-$\Sigma_b$ の回転に伴って位置が変わったように見えます。  
+$\Sigma_b$ の回転に伴って位置が変わります。  
 よって、$\boldsymbol{{}^ap_E}$ を、$\Sigma_a$から見た$\Sigma_b$の回転で表現できれば、  
 $\Sigma_a$に対する$\Sigma_b$の姿勢をうまく表現できていることになります。
 
-$\Sigma_a$ の各軸周りに $\Sigma_b$ がどれだけ回転しているかを考えます。  
-一般にロール・ピッチ・ヨー方向に回転しているとして、  
-各軸周りの回転を、回転行列 $\boldsymbol{{}^aR_b}$ で定義します。  
+$\Sigma_a$ の関節軸周りに $\Sigma_b$ がどれだけ回転しているかを考えます。  
+ロール・ピッチ・ヨー方向のいずれかに回転しているとして、  
+回転を回転行列 $\boldsymbol{{}^aR_b}$ で定義します。  
 回転行列をかければベクトルは指定したロール・ピッチ・ヨー回転をしますので、  
-以下図のような構図が見えてきます。  
-(画像: 座標系と点Eの構図が分かる図)
-よって、$\boldsymbol{{}^ap_E}$を次の式で与えられます。  
+以下図のような構図が見えてきます。
+
+{{<figure src="./a_to_e.png" class="center" alt="a_to_e" width="50%">}}
+
+よって、$\boldsymbol{{}^ap_E}$は次の式で与えられます。  
 $$ \boldsymbol{{}^ap_E} = \boldsymbol{{}^ap_b} + \boldsymbol{{}^aR_b} \boldsymbol{{}^bp_E} $$  
 
 以上のことから、$\Sigma_a$から見た$\Sigma_b$の位置・姿勢は、  
-$\boldsymbol{{}^ap_b}$と$\boldsymbol{{}^aR_b}$によって表現できることが分かります。  
-(同次変換行列によって簡潔に座標変換式を与えられる)
+$\boldsymbol{{}^ap_b}$と$\boldsymbol{{}^aR_b}$によって表現できることが分かります。
 
-ロボットの関節変位は $q_i$ で表され、  
-デフォルトのvnoidでは、回転変位のみ扱えます。
-
-関節変位をリストで並べた関節変位ベクトルを、  
-$\boldsymbol{q} = [q_1, q_2, ..., q_n]^T$ により定義します。
+以上のように、リンク座標間の相対位置と関節変位が与えられれば、  
+基準座標から見たリンクの絶対位置が計算できることが分かります。  
+この計算を順運動学計算といいます。
 
 ---
 
@@ -164,8 +163,7 @@ $x$, $y$, $z$軸周りの回転に対応します。
 	今回の場合、脚の付け根から数えて2番目から3番目の関節の間に大腿があり、  
 	3番目から4番目の関節の間に下腿があります。  
 	大腿の長さは$\text{upper\_leg\_length} = 0.3$、  
-	下腿の長さは$\text{lower\_leg\_length} = 0.4$です。
-	
+	下腿の長さは$\text{lower\_leg\_length} = 0.4$です。  
 	したがって、$\boldsymbol{{}^{2}p_3} = [0.0, 0.0, -\text{upper\_leg\_length}]^T$、  
 	$\boldsymbol{{}^{3}p_4} = [0.0, 0.0, -\text{lower\_leg\_length}]^T$となります。
 
@@ -183,7 +181,7 @@ $x$, $y$, $z$軸周りの回転に対応します。
 	なお、四元数$\boldsymbol{{}^{i-1}Q_{i}}$はEigenのAngleAxisメソッドを使って、  
 	回転量`q[i]`と回転軸`axis_local[i]`から生成されます。
 	
--	**足の位置、姿勢を計算(132~134行目)**
+-	**足裏中心の位置、姿勢を計算(132~134行目)**
 	
 	```cpp
 	foot[i].ori   = base.ori*leg_ori[i][5];
@@ -204,16 +202,14 @@ $x$, $y$, $z$軸周りの回転に対応します。
 	
 	$$\boldsymbol{{}^Wp_E} = \boldsymbol{{}^Wp_0} + \boldsymbol{{}^WQ_0} \cdot (\boldsymbol{{}^0p_5} + \text{base\_to\_hip}) \cdot \boldsymbol{{}^WQ_0}^{-1} + \boldsymbol{{}^WQ_E} \cdot \text{ankle\_to\_foot} \cdot \boldsymbol{{}^WQ_E}^{-1}$$
 	
-	$$\boldsymbol{{}^WQ_E} = \boldsymbol{{}^WQ_0} \cdot \boldsymbol{{}^0p_5}$$
+	$$\boldsymbol{{}^WQ_E} = \boldsymbol{{}^WQ_0} \cdot \boldsymbol{{}^0Q_5}$$
 	
-
-
 ---
 
 ## 例題
 
-開発のサンプルについては前回投稿した(005の記事)[https://koomiy.github.io/posts/fk_solver_sample/]を  
-ぜひ参考にしてみてください！
+順運動学ソルバーを使ってどんなことができるかについては、  
+前回投稿した[005の記事](https://koomiy.github.io/posts/fk_solver_sample/)を参考にしてください！
 
 ---
 
