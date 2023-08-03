@@ -19,14 +19,84 @@ vnoidというサンプルパッケージが用意されております。
 
 ---
 
-## 順運動学とは
+## 順運動学ってなに？
 
+ロボットにある関節変位を与えるとします。  
+そのときのリンクの位置・姿勢を計算することを、順運動学を解くといいます。
+
+---
+
+## 事前準備
+
+今回は`myrobot.cpp`をメインに作業します。
+
+準備として、まずプログラムの先頭に`#include <cmath>`を追加してください。  
+これにより、`M_PI`という変数を円周率 $\pi$ として使用できます。
+
+次に、プログラム10行目を`base_actuation = true;`と設定してください。  
+これにより、ベースリンクの位置・姿勢を直接指定するモードに切り替えることができます。
+
+次に、151行目の`Robot::Sense`関数以下に下記のようなプログラムを追加してください。  
+```c
+void MyRobot::Control(){
+    Robot::Sense(timer, base, foot, joint);
+    
+    // set base
+    base.pos_ref = Vector3(0.0, 0.0, 1.0);
+    base.ori_ref = Quaternion(1.0, 0.0, 0.0, 0.0);
+    
+    ...
+    
+```
+これにより、ベースリンクの位置を原点から高さ1.0mの場所に固定し、  
+姿勢は常にまっすぐで変化しないように設定できます。
+
+最後に、今回は`Robot::Sense`、`fk_solver`、  
+`Robot::Actuate`、`timer.Countup`以外の関数を使用しないので、  
+`MyRobot::Control`内にある上記４つ以外の関数はすべてコメントアウトしましょう。
+
+これで事前準備完了です！
 
 ---
 
 ## 例題1: 関節を一つ曲げてみる
 
+試しに右腕のひじ関節を90度曲げてみましょう。  
+```c
+void MyRobot::Control(){
+    Robot::Sense(timer, base, foot, joint);
+    
+    // set base
+    base.pos_ref = Vector3(0.0, 0.0, 1.0);
+    base.ori_ref = Quaternion(1.0, 0.0, 0.0, 0.0);
+    
+    // set head joint
 
+    // set trunk joint
+
+    // set arm joint
+    joint[7].q_ref = -M_PI/2;
+
+    // set leg joint
+    
+    // calc FK
+    fk_solver.Comp(param, joint, base, centroid, hand, foot);
+    
+    ...
+    
+```
+vnoidのロボットに使用される関節(joint)には、  
+それぞれが識別できるようにidが割り当てられています。  
+関節のid割当は、[006 - 順運動学(理論編)](https://koomiy.github.io/posts/fk_solver/)の記事で確認できます。
+
+右腕のひじ関節のidは7番なので、  
+7番目の関節の目標角度変位`joint[7].q_ref`を$-\pi/2$にします。
+
+このようにすることで、右腕のひじ関節を90度曲げられます。  
+{{<figure src="./right_elbow.gif" class="center" alt="右ひじを曲げる" width="50%">}}
+
+これを応用することで、右ひじ以外にもいろいろな関節を曲げて、  
+自分好みのポーズをロボットにとらせることができます！
 
 ---
 
