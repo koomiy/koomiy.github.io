@@ -44,8 +44,8 @@ void MyRobot::Control(){
 これにより、ベースリンクの位置を原点から高さ1.0mの場所に固定し、  
 姿勢は常にまっすぐで変化しないように設定できます。
 
-最後に、今回は`Robot::Sense`、`fk_solver`、  
-`Robot::Actuate`、`timer.Countup`以外の関数を使用しないので、  
+最後に、今回は`Robot::Sense`、`Robot::Actuate`、  
+`timer.Countup`以外の関数を使用しないので、  
 `MyRobot::Control`内にある上記４つ以外の関数はすべてコメントアウトしましょう。
 
 これで事前準備完了です！
@@ -73,7 +73,7 @@ void MyRobot::Control(){
     // set leg joint
     
     // calc FK
-    fk_solver.Comp(param, joint, base, centroid, hand, foot);
+    //fk_solver.Comp(param, joint, base, centroid, hand, foot);
     
     ...
     
@@ -136,7 +136,7 @@ void MyRobot::Control(){
     joint[23].q_ref = 0.0;
     
     // calc FK
-    fk_solver.Comp(param, joint, base, centroid, hand, foot);
+    //fk_solver.Comp(param, joint, base, centroid, hand, foot);
     
     ...
     
