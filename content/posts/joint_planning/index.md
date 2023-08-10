@@ -14,15 +14,8 @@ menu: main
 本チャレンジでは、初心者の方でも簡単に人形ロボットの運動計画ができるように、  
 vnoidというサンプルパッケージが用意されております。
 
-今回はvnoidパッケージの機能の一つ、  
-順運動学ソルバーを使って遊んでみましょう。
-
----
-
-## 順運動学ってなに？
-
-ロボットにある関節変位を与えるとします。  
-そのときのリンクの位置・姿勢を計算することを、順運動学を解くといいます。
+今回はvnoidパッケージのプログラムを介して、  
+choreonoid上の人型ロボットを動かしてみましょう。
 
 ---
 
@@ -102,20 +95,72 @@ vnoidのロボットに使用される関節(joint)には、
 
 ## 例題2: ヨガのポーズ！
 
+例題1を応用して、ヨガのポーズを取らせてみましょう。  
+以下のように目標関節角を指定してみます。
 
+```c
+void MyRobot::Control(){
+    Robot::Sense(timer, base, foot, joint);
+    
+    // set base
+    base.pos_ref = Vector3(0.0, 0.0, 1.0);
+    base.ori_ref = Quaternion(1.0, 0.0, 0.0, 0.0);
+    
+    // set head joint
+
+    // set trunk joint
+
+    // set arm joint
+    joint[4].q_ref = -M_PI/4;
+    joint[5].q_ref = -M_PI/6;
+    joint[6].q_ref = M_PI/2;
+    joint[7].q_ref = -M_PI*(2./3.);
+    joint[8].q_ref = M_PI/4;
+    joint[9].q_ref = 0.0;
+    joint[10].q_ref = -M_PI/2;
+
+    joint[11].q_ref = -M_PI/4;
+    joint[12].q_ref = M_PI/6;
+    joint[13].q_ref = -M_PI/2;
+    joint[14].q_ref = -M_PI*(2./3.);
+    joint[15].q_ref = -M_PI/4;
+    joint[16].q_ref = 0.0;
+    joint[17].q_ref = M_PI/2;
+
+    // set leg joint
+    joint[18].q_ref = -M_PI/2;
+    joint[19].q_ref = 0.0;
+    joint[20].q_ref = -M_PI/3;
+    joint[21].q_ref = M_PI*(2./3.);
+    joint[22].q_ref = M_PI/6;
+    joint[23].q_ref = 0.0;
+    
+    // calc FK
+    fk_solver.Comp(param, joint, base, centroid, hand, foot);
+    
+    ...
+    
+```
+
+すると、次のようなポーズをとってくれます。  
+{{<figure src="./yoga_pose.gif" class="center" alt="ヨガのポーズ" width="50%">}}
 
 ---
 
 ## 例題3: ダンスパフォーマンス！！
 
+もっと応用して、ダンスさせてみましょう。
 
 
 ---
 
 ## まとめ・次回予告
 
-今回はvnoidパッケージの順運動学ソルバーを使って  
-何ができるかを紹介しました。
+今回はロボットにある目標関節角を与えて、いろんなポーズや動作をさせてみました。  
+このようにロボットにある関節変位を与えたときの、  
+リンクの位置・姿勢を計算することを、順運動学を解くといいます。
+
+次回はその順運動学について解説したいと思います。
 
 
 次回：順運動学(理論編)
