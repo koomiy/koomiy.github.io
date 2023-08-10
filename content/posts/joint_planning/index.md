@@ -1,7 +1,7 @@
 ---
-title: "007 - 順運動学(実践編)"
-date: 2023-08-03
-categories: ["vnoidベースの開発"]
+title: "005 - 関節を動かしてみる"
+date: 2023-07-27
+categories: ["choreonoidの練習"]
 menu: main
 ---
 

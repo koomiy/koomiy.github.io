@@ -1,6 +1,6 @@
 ---
 title: "006 - 順運動学(理論編)"
-date: 2023-08-03
+date: 2023-07-28
 categories: ["vnoidベースの開発"]
 menu: main
 ---
