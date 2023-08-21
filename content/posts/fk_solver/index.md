@@ -29,28 +29,25 @@ vnoidというサンプルパッケージが用意されております。
 目標達成のため、ある座標系 $\Sigma_a$ から別の座標系 $\Sigma_b$ を定義する、  
 一般的な方法について考えてみましょう。
 
-$\Sigma_a$に対する$\Sigma_b$の位置に関しては、  
-並進方向の位置の差$\boldsymbol{{}^ap_b}$によって表現できます。
+$\Sigma_a$ に対する $\Sigma_b$ の位置に関しては、  
+並進方向の位置の差 $\boldsymbol{{}^ap_b}$ によって表現できます。
 
-次に、$\Sigma_a$に対する$\Sigma_b$の姿勢の表現方法について考えてみましょう。  
-$\Sigma_a$を基準とした姿勢とはつまり、  
-「$\Sigma_a$ の関節軸周りに $\Sigma_b$ がどれだけ回転しているか」です。
+次に、 $\Sigma_a$ に対する $\Sigma_b$ の姿勢の表現方法について考えてみましょう。  
+$\Sigma_a$ を基準とした姿勢とはつまり、  
+「 $\Sigma_a$ の関節軸周りに $\Sigma_b$ がどれだけ回転しているか」です。
 
-$\Sigma_a$と$\Sigma_b$をつなぐ関節が、  
+$\Sigma_a$ と $\Sigma_b$ をつなぐ関節が、  
 ロール・ピッチ・ヨー方向のいずれかに回転しているとして、  
 回転を回転行列 $\boldsymbol{{}^aR_b}$ で定義します。
 
-すると、$\Sigma_a$に対する$\Sigma_b$の姿勢は、  
-回転行列 $\boldsymbol{{}^aR_b}$ によって表現できます。
+すると、 $\Sigma_a$ に対する $\Sigma_b$ の姿勢は、回転行列 $\boldsymbol{{}^aR_b}$ によって表現できます。
 
-$\boldsymbol{{}^ap_b}$と$\boldsymbol{{}^aR_b}$によって、  
-$\Sigma_b$から見たある点を$\Sigma_a$の系から表現できるかを確認してみましょう。
+$\boldsymbol{{}^ap_b}$ と $\boldsymbol{{}^aR_b}$ によって、  
+$\Sigma_b$ 系の点を $\Sigma_a$ 系から表現できるかを確認してみましょう。
 
 そこで、$\Sigma_b$ から見て常に同じ場所に位置する点$E$について考えてみます。  
-つまり、$\boldsymbol{{}^bp_E}$は固定ベクトルです。
-
-$\Sigma_a$ から見た点$E$ $\boldsymbol{{}^ap_E}$ は、  
-$\Sigma_b$ の回転に伴って位置が変わります。
+$\boldsymbol{{}^bp_E}$ は固定ベクトルですが、  
+$\Sigma_a$ から見た点 $E$ $\boldsymbol{{}^ap_E}$ は、 $\Sigma_b$ の回転に伴って位置が変わります。
 
 回転行列をかければベクトルは指定したロール・ピッチ・ヨー回転をしますので、  
 以下図のような構図が見えてきます。
@@ -61,7 +58,10 @@ $\Sigma_b$ の回転に伴って位置が変わります。
 $$ \boldsymbol{{}^ap_E} = \boldsymbol{{}^ap_b} + \boldsymbol{{}^aR_b} \boldsymbol{{}^bp_E} $$  
 
 以上のことから、$\Sigma_a$ から別の座標系 $\Sigma_b$ は、  
-$\boldsymbol{{}^ap_b}$と$\boldsymbol{{}^aR_b}$によって定義できることが分かります。
+$\boldsymbol{{}^ap_b}$ と $\boldsymbol{{}^aR_b}$ によって定義できることが分かります。
+
+さて、目標は人型ロボットの基準座標系$\Sigma_0$から見た、  
+各リンク座標系 $\Sigma_i$ の位置・姿勢を計算し、最終的に先端効果器の位置・姿勢を求めることでした。
 
 
 
