@@ -99,10 +99,10 @@ vnoidのロボットには、1本の腕につき7つ、1本の脚につき6つ�
 {{<figure src="./biped_leg_model.png" class="center" alt="脚の機構モデル" width="35%">}}
 
 
-図中の$r$, $p$, $y$ はそれぞれロール・ピッチ・ヨーを表しており、  
+図中の $r$ , $p$ , $y$ はそれぞれロール・ピッチ・ヨーを表しており、  
 その刻印が入った関節モーターは、その方向に回転します。  
 なお、ロール・ピッチ・ヨー方向の回転はそれぞれ、  
-$x$, $y$, $z$軸周りの回転に対応します。
+$x$ , $y$ , $z$ 軸周りの回転に対応します。
 
 ---
 
@@ -118,7 +118,7 @@ $x$, $y$, $z$軸周りの回転に対応します。
 	ベースリンク座標を基準としたときの、  
 	脚関節のローカル座標の位置、回転姿勢、回転軸です。  
 	
-	なお回転姿勢については回転行列$\boldsymbol{R}$の代わりに四元数$\boldsymbol{Q}$で表現されます。  
+	なお回転姿勢については回転行列 $\boldsymbol{R}$ の代わりに四元数 $\boldsymbol{Q}$ で表現されます。  
 	四元数の詳細な説明に関しましては、ぜひ[こちら](https://eater.net/quaternions)の記事をご参照ください。
 
 -	**関節回転変位の読み込み(125~128行目)**
@@ -181,28 +181,28 @@ $x$, $y$, $z$軸周りの回転に対応します。
 	}
 	```
 
-	`pos_local[i]`は、第$i-1$関節座標からみた第$i$関節の座標の位置$\boldsymbol{{}^{i-1}p_i}$です。  
-	ただし、$i = 0$のときは$\boldsymbol{{}^{0}p_0} = [0.0, 0.0, 0.0]^T$です。
+	`pos_local[i]`は、第 $i-1$ 関節座標からみた第 $i$ 関節の座標の位置 $\boldsymbol{{}^{i-1}p_i}$ です。  
+	ただし、 $i = 0$ のときは $\boldsymbol{{}^{0}p_0} = [0.0, 0.0, 0.0]^T$ です。
 
 	今回の場合、脚の付け根から数えて2番目から3番目の関節の間に大腿があり、  
 	3番目から4番目の関節の間に下腿があります。  
-	大腿の長さは$\text{upper\_leg\_length} = 0.3$、  
-	下腿の長さは$\text{lower\_leg\_length} = 0.4$です。  
-	したがって、$\boldsymbol{{}^{2}p_3} = [0.0, 0.0, -\text{upper\_leg\_length}]^T$、  
-	$\boldsymbol{{}^{3}p_4} = [0.0, 0.0, -\text{lower\_leg\_length}]^T$となります。
+	大腿の長さは $\text{upper\_leg\_length} = 0.3$ 、  
+	下腿の長さは $\text{lower\_leg\_length} = 0.4$ です。  
+	したがって、 $\boldsymbol{{}^{2}p_3} = [0.0, 0.0, -\text{upper\_leg\_length}]^T$ 、  
+	$\boldsymbol{{}^{3}p_4} = [0.0, 0.0, -\text{lower\_leg\_length}]^T$ となります。
 
 	`axis_local[i]`は、第$i$関節の回転軸の方向で、  
 	ロール・ピッチ・ヨー(UnitX・UnitY・UnitZ)から選択できます。
 	
 	プログラム26行目から始まるfor文内で順運動学を解きます。  
-	ベースリンク基準の$i$番目リンクの座標位置$\boldsymbol{{}^{0}p_i}$(`pos` = `leg_pos`)は、  
+	ベースリンク基準の $i$ 番目リンクの座標位置 $\boldsymbol{{}^{0}p_i}$ (`pos` = `leg_pos`)は、  
 	次のように計算されます。  
 	$$\boldsymbol{{}^{0}p_i} = \boldsymbol{{}^{0}p_{i-1}} + \boldsymbol{{}^{0}Q_{i-1}} \cdot \boldsymbol{{}^{i-1}p_i} \cdot \boldsymbol{{}^{0}Q_{i-1}}^{-1}$$
 	
-	ベースリンク基準の$i$番目リンクの座標姿勢$\boldsymbol{{}^{0}Q_i}$(`ori` = `leg_ori`)は、  
+	ベースリンク基準の $i$ 番目リンクの座標姿勢 $\boldsymbol{{}^{0}Q_i}$ (`ori` = `leg_ori`)は、  
 	次のように計算されます。  
 	$$\boldsymbol{{}^{0}Q_{i}} = \boldsymbol{{}^{0}Q_{i-1}} \cdot \boldsymbol{{}^{i-1}Q_{i}}$$  
-	なお、四元数$\boldsymbol{{}^{i-1}Q_{i}}$はEigenのAngleAxisメソッドを使って、  
+	なお、四元数 $\boldsymbol{{}^{i-1}Q_{i}}$ はEigenのAngleAxisメソッドを使って、  
 	回転量`q[i]`と回転軸`axis_local[i]`から生成されます。
 	
 -	**足裏中心の位置、姿勢を計算(132~134行目)**
@@ -217,21 +217,22 @@ $x$, $y$, $z$軸周りの回転に対応します。
 	足の先端関節(くるぶし)までの位置・姿勢が計算できました。  
 	ここでは、それをワールド座標系から見た位置・姿勢に変換します。
 	
-	ワールド座標を基準とした足裏中心座標の位置を$\boldsymbol{{}^Wp_E}$(`foot[i].pos)`、  
-	姿勢を$\boldsymbol{{}^WQ_E}$`foot[i].angle`を計算します。
+	ワールド座標を基準とした足裏中心座標の位置を $\boldsymbol{{}^Wp_F}$ (`foot[i].pos)`、  
+	姿勢を $\boldsymbol{{}^WQ_F}$ (`foot[i].angle`)を計算します。
 	
-	ベースリンクから腰関節までのベクトルを`base_to_hip`、  
-	くるぶしから足裏中心までのベクトルを`ankle_to_foot`とします。  
-	$\boldsymbol{{}^Wp_E}$、$\boldsymbol{{}^WQ_E}$はそれぞれ次のように計算されます。
+	ベースリンクから腰関節までのベクトルを $\boldsymbol{{}^Bp_H}$ `base_to_hip`、  
+	くるぶしから足裏中心までのベクトルを $\boldsymbol{{}^Ap_F}$ `ankle_to_foot`とします。  
+	$\boldsymbol{{}^Wp_F}$、$\boldsymbol{{}^WQ_F}$はそれぞれ次のように計算されます。
 	
-	$$\boldsymbol{{}^Wp_E} = \boldsymbol{{}^Wp_0} + \boldsymbol{{}^WQ_0} \cdot (\boldsymbol{{}^0p_5} + \text{base\_to\_hip}) \cdot \boldsymbol{{}^WQ_0}^{-1} + \boldsymbol{{}^WQ_E} \cdot \text{ankle\_to\_foot} \cdot \boldsymbol{{}^WQ_E}^{-1}$$
+	$$\boldsymbol{{}^Wp_F} = \boldsymbol{{}^Wp_0} + \boldsymbol{{}^WQ_0} \cdot (\boldsymbol{{}^0p_5} + \boldsymbol{{}^Bp_H}) \cdot \boldsymbol{{}^WQ_0}^{-1} + \boldsymbol{{}^WQ_F} \cdot \boldsymbol{{}^Ap_F} \cdot \boldsymbol{{}^WQ_F}^{-1}$$
 	
-	$$\boldsymbol{{}^WQ_E} = \boldsymbol{{}^WQ_0} \cdot \boldsymbol{{}^0Q_5}$$
+	$$\boldsymbol{{}^WQ_F} = \boldsymbol{{}^WQ_B} \cdot \boldsymbol{{}^BQ_0} \cdot \boldsymbol{{}^0Q_5}$$
 	
 ---
 
 ## 例題1: 右足の先端位置を計算する
 
+---
 
 ## 例題2: 重心位置を計算する
 
