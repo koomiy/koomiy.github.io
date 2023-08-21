@@ -217,16 +217,16 @@ $x$ , $y$ , $z$ 軸周りの回転に対応します。
 	足の先端関節(くるぶし)までの位置・姿勢が計算できました。  
 	ここでは、それをワールド座標系から見た位置・姿勢に変換します。
 	
-	ワールド座標を基準とした足裏中心座標の位置を $\boldsymbol{{}^Wp_F}$ (`foot[i].pos)`、  
-	姿勢を $\boldsymbol{{}^WQ_F}$ (`foot[i].angle`)を計算します。
+	ワールド座標を基準とした足裏中心座標の位置を $\boldsymbol{{}^Wp_E}$ (`foot[i].pos)`、  
+	姿勢を $\boldsymbol{{}^WQ_E}$ (`foot[i].angle`)を計算します。
 	
-	ベースリンクから腰関節までのベクトルを $\boldsymbol{{}^Bp_H}$ `base_to_hip`、  
-	くるぶしから足裏中心までのベクトルを $\boldsymbol{{}^Ap_F}$ `ankle_to_foot`とします。  
-	$\boldsymbol{{}^Wp_F}$、$\boldsymbol{{}^WQ_F}$はそれぞれ次のように計算されます。
+	ベースリンクから腰関節までのベクトルを $\boldsymbol{{}^Bp_0}$ `base_to_hip`、  
+	くるぶしから足裏中心までのベクトルを $\boldsymbol{{}^5p_E}$ `ankle_to_foot`とします。  
+	$\boldsymbol{{}^Wp_E}$、$\boldsymbol{{}^WQ_E}$はそれぞれ次のように計算されます。
 	
-	$$\boldsymbol{{}^Wp_F} = \boldsymbol{{}^Wp_0} + \boldsymbol{{}^WQ_0} \cdot (\boldsymbol{{}^0p_5} + \boldsymbol{{}^Bp_H}) \cdot \boldsymbol{{}^WQ_0}^{-1} + \boldsymbol{{}^WQ_F} \cdot \boldsymbol{{}^Ap_F} \cdot \boldsymbol{{}^WQ_F}^{-1}$$
+	$$\boldsymbol{{}^Wp_E} = \boldsymbol{{}^Wp_0} + \boldsymbol{{}^WQ_0} \cdot (\boldsymbol{{}^0p_5} + \boldsymbol{{}^Bp_0}) \cdot \boldsymbol{{}^WQ_0}^{-1} + \boldsymbol{{}^WQ_E} \cdot \boldsymbol{{}^5p_E} \cdot \boldsymbol{{}^WQ_E}^{-1}$$
 	
-	$$\boldsymbol{{}^WQ_F} = \boldsymbol{{}^WQ_B} \cdot \boldsymbol{{}^BQ_0} \cdot \boldsymbol{{}^0Q_5}$$
+	$$\boldsymbol{{}^WQ_E} = \boldsymbol{{}^WQ_B} \cdot \boldsymbol{{}^BQ_0} \cdot \boldsymbol{{}^0Q_5}$$
 	
 ---
 
