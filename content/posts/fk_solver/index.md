@@ -119,8 +119,9 @@ $x$ , $y$ , $z$ 軸周りの回転に対応します。
 	脚関節のローカル座標の位置、回転姿勢、回転軸です。  
 	
 	なお回転姿勢については回転行列 $\boldsymbol{R}$ の代わりに四元数 $\boldsymbol{Q}$ で表現されます。  
-	四元数の詳細な説明に関しては、分かりやすくまとめられた記事がございますので、ぜひ[そちら](https://risalc.info/src/quaternion-rotation.html)をご参照ください。
-	四元数を[視覚的に表現する試み](https://eater.net/quaternions)もあるようです。
+	四元数の詳細な説明に関しては、分かりやすくまとめられた記事がございますので、  
+	ぜひ[そちら](https://risalc.info/src/quaternion-rotation.html)をご参照ください。  
+	また、四元数を[視覚的に表現する試み](https://eater.net/quaternions)もあるようです。
 
 -	**関節回転変位の読み込み(125~128行目)**
 
@@ -205,8 +206,8 @@ $x$ , $y$ , $z$ 軸周りの回転に対応します。
 	なお、四元数 $\boldsymbol{{}^{i-1}Q_{i}}$ はEigenのAngleAxisメソッドを使って、  
 	回転量`q[i]`と回転軸`axis_local[i]`から生成されます。
 	
-	上記二式を$i$が脚の先端id(右脚なら23, 左脚なら29)に到達するまで繰り返し用いることで、  
-	くるぶしまでの各関節の位置・姿勢を計算できます。
+	上記二式を$i$が脚の先端id(右脚なら23, 左脚なら29)に到達するまで  
+	繰り返し用いることで、くるぶしまでの各関節の位置・姿勢を計算できます。
 	
 -	**足裏中心の位置、姿勢を計算(132~134行目)**
 	
@@ -218,22 +219,28 @@ $x$ , $y$ , $z$ 軸周りの回転に対応します。
 	
 	前節で、脚の付け根座標を基準とした、  
 	脚の先端関節(くるぶし)までの各関節の位置・姿勢が計算できました。  
-	ここでは、それをワールド座標系から見た位置・姿勢に変換します。
+	くるぶしから足裏中心までの長さがわかっているので、  
+	脚の付け根を基準とした足裏中心の位置・姿勢を計算し、  
+	それをワールド座標系から見た位置・姿勢に変換します。
+	
+	ベースリンクを基準とした脚の付け根関節の位置を $\boldsymbol{{}^Bp_0}$ (`base_to_hip`)とします。  
+	また、脚の付け根関節を基準としたくるぶしの位置・姿勢を  
+	それぞれ $\boldsymbol{{}^0p_5}$、$\boldsymbol{{}^0Q_5}$ とします。
+	くるぶしから足裏中心までのベクトルを $\boldsymbol{{}^5p_E}$ (`ankle_to_foot`)とします。  
 	
 	ワールド座標を基準とした足裏中心座標の位置を $\boldsymbol{{}^Wp_E}$ (`foot[i].pos)`、  
-	姿勢を $\boldsymbol{{}^WQ_E}$ (`foot[i].angle`)を計算します。
-	
-	ベースリンクから脚の付け根関節までのベクトルを $\boldsymbol{{}^Bp_0}$ `base_to_hip`、  
-	くるぶしから足裏中心までのベクトルを $\boldsymbol{{}^5p_E}$ `ankle_to_foot`とします。  
-	$\boldsymbol{{}^Wp_E}$、$\boldsymbol{{}^WQ_E}$はそれぞれ次のように計算されます。
+	姿勢を $\boldsymbol{{}^WQ_E}$ (`foot[i].angle`)はそれぞれ次のように計算されます。
 	
 	$$\boldsymbol{{}^Wp_E} = \boldsymbol{{}^Wp_B} + \boldsymbol{{}^WQ_B} \cdot (\boldsymbol{{}^Bp_0} + \boldsymbol{{}^0p_5}) \cdot \boldsymbol{\overline{{}^WQ_B}} + \boldsymbol{{}^WQ_E} \cdot \boldsymbol{{}^5p_E} \cdot \boldsymbol{\overline{{}^WQ_E}}$$
 	
 	$$\boldsymbol{{}^WQ_E} = \boldsymbol{{}^WQ_B} (\cdot \boldsymbol{{}^BQ_0}) \cdot \boldsymbol{{}^0Q_5}$$
 	
+	なお、くるぶしから見て足裏中心は常に同じ位置にあるので、  
+	くるぶしと足裏中心の姿勢は常に等しくなり、 $\boldsymbol{{}^WQ_E} = \boldsymbol{{}^WQ_5}$ 
+	
 ---
 
-## 例題1: 右足の先端位置を計算する
+## 例題1: 右足の足裏中心位置を計算する
 
 ---
 
