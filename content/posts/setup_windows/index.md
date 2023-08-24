@@ -146,4 +146,4 @@ Choreonoidおよび、vnoidのインストールお疲れ様でした。
 ## まとめ・次回予告
 今回はHVACのWindows版の開発環境構築手順について解説しました。
 
-次回：環境構築(ubuntu版)
+次回： [003 - 開発環境の構築(ubuntu版)](https://koomiy.github.io/posts/setup_ubuntu/)

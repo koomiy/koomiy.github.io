@@ -206,8 +206,9 @@ $x$ , $y$ , $z$ 軸周りの回転に対応します。
 	なお、四元数 $\boldsymbol{{}^{i-1}Q_{i}}$ はEigenのAngleAxisメソッドを使って、  
 	回転量`q[i]`と回転軸`axis_local[i]`から生成されます。
 	
-	上記二式を$i$が脚の先端id(右脚なら23, 左脚なら29)に到達するまで  
-	繰り返し用いることで、くるぶしまでの各関節の位置・姿勢を計算できます。
+	上記二式を$i$が脚の先端idに到達するまで繰り返し用いることで、  
+	くるぶしまでの各関節の位置・姿勢を計算できます。  
+	なお、脚は6自由度なので先端idは5となります。
 	
 -	**足裏中心の位置、姿勢を計算(132~134行目)**
 	
@@ -224,11 +225,10 @@ $x$ , $y$ , $z$ 軸周りの回転に対応します。
 	それをワールド座標系から見た位置・姿勢に変換します。
 	
 	ベースリンクを基準とした脚の付け根関節の位置を $\boldsymbol{{}^Bp_0}$ (`base_to_hip`)とします。  
-	また、脚の付け根関節を基準としたくるぶしの位置・姿勢を  
-	それぞれ $\boldsymbol{{}^0p_5}$、$\boldsymbol{{}^0Q_5}$ とします。
-	くるぶしから足裏中心までのベクトルを $\boldsymbol{{}^5p_E}$ (`ankle_to_foot`)とします。  
+	脚の付け根関節を基準としたくるぶしの位置・姿勢をそれぞれ $\boldsymbol{{}^0p_5}$、$\boldsymbol{{}^0Q_5}$ とします。  
+	くるぶしから足裏中心までのベクトルを $\boldsymbol{{}^5p_E}$ (`ankle_to_foot`)とします。
 	
-	ワールド座標を基準とした足裏中心座標の位置を $\boldsymbol{{}^Wp_E}$ (`foot[i].pos)`、  
+	ワールド座標を基準とした足裏中心座標の位置を $\boldsymbol{{}^Wp_E}$ (`foot[i].pos`)、  
 	姿勢を $\boldsymbol{{}^WQ_E}$ (`foot[i].angle`)はそれぞれ次のように計算されます。
 	
 	$$\boldsymbol{{}^Wp_E} = \boldsymbol{{}^Wp_B} + \boldsymbol{{}^WQ_B} \cdot (\boldsymbol{{}^Bp_0} + \boldsymbol{{}^0p_5}) \cdot \boldsymbol{\overline{{}^WQ_B}} + \boldsymbol{{}^WQ_E} \cdot \boldsymbol{{}^5p_E} \cdot \boldsymbol{\overline{{}^WQ_E}}$$
@@ -236,21 +236,72 @@ $x$ , $y$ , $z$ 軸周りの回転に対応します。
 	$$\boldsymbol{{}^WQ_E} = \boldsymbol{{}^WQ_B} (\cdot \boldsymbol{{}^BQ_0}) \cdot \boldsymbol{{}^0Q_5}$$
 	
 	なお、くるぶしから見て足裏中心は常に同じ位置にあるので、  
-	くるぶしと足裏中心の姿勢は常に等しくなり、 $\boldsymbol{{}^WQ_E} = \boldsymbol{{}^WQ_5}$ 
+	くるぶしと足裏中心の姿勢は常に等しくなり、  
+	$\boldsymbol{{}^WQ_E} = \boldsymbol{{}^WQ_5}$ が成り立ちます。
 	
+	以上の順運動学計算により、  
+	ワールド座標系から見たロボットの足裏中心位置を特定することができます。  
+	プログラム136行目に次の文を追加すれば、  
+	右足の足裏中心位置を表示させることができます。
+	```cpp
+	printf("right foot pos: (%lf, %lf, %lf)\n", foot[0].pos.x(), foot[0].pos.y(), foot[0].pos.z());
+	```
+
 ---
 
-## 例題1: 右足の足裏中心位置を計算する
+## 応用: 重心位置を計算する
 
----
+各関節の位置・姿勢を特定できることを利用して、  
+ロボットの重心位置を計算してみましょう(プログラム137行目~)。
 
-## 例題2: 重心位置を計算する
+ここで、`total_mass`はロボットの総質量です。  
+はじめに141行目で腕、脚以外の胴体質量を足し、  
+続く146行目で腕の各パーツの質量を足し、  
+152行目で脚の各パーツの質量を足しています。
+
+また、`com`はロボットの重心(center of mass)です。  
+まず、(パーツの質量)×(パーツの重心位置)の総和をとります。  
+はじめに142行目で胴体に関して、  
+続く147行目で腕パーツに関して、  
+153行目で脚パーツに関して足しています。  
+最後に157行目で、得られた総和を総質量で割ると、ロボットの重心が計算できます。
+
+ただし、157行目までで計算される重心はベースリンクを基準としたものです。  
+ワールド座標系に変換したい場合は、159行目のように計算する必要があります。
+
+```cpp
+// comp center_of_mass
+double total_mass = 0.0;
+Vector3  com(0.0, 0.0, 0.0);
+
+total_mass += param.trunk_mass;
+com += param.trunk_mass * param.trunk_com;
+
+for(int i = 0; i < 2; i++){
+    for (int j = 0; j < 7; j++) {
+        total_mass += param.arm_mass[j];
+        com += param.arm_mass[j] * (param.base_to_shoulder[i] + arm_pos[i][j] + arm_ori[i][j] * param.arm_com[j]);
+    }
+}
+for(int i = 0; i < 2; i++){
+    for (int j = 0; j < 6; j++) {
+        total_mass += param.leg_mass[j];
+        com += param.leg_mass[j] * (param.base_to_hip[i] + leg_pos[i][j] + leg_ori[i][j] * param.leg_com[j]);
+    }
+}
+
+com /= total_mass;
+
+centroid.com_pos = base.pos + base.ori * com;
+```
 
 ---
 
 ## まとめ・次回予告
 
-今回はvnoidパッケージの順運動学ソルバーの理論と、  
-サンプルコードについて解説しました。
+今回はvnoidパッケージのfksolverについて解説しました。
+順運動学の理論に沿って、fksolverのサンプルコードを読み解きました。
 
-次回：歩行ステップ計画
+次回は、順運動学の逆、逆運動学について解説したいと思います。
+
+次回： [007 - 逆運動学](https://koomiy.github.io/posts/ik_solver/)

@@ -87,4 +87,6 @@ SP内に投影したZMPを修正ZMPとして、辻褄が合うようにDCM、重
 
 今回はvnoidパッケージの概要について説明しました。
 
+次回: [005 - 関節を動かしてみる](https://koomiy.github.io/posts/joint_planning/)
+
 次回：人型ロボットの運動学

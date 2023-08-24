@@ -79,4 +79,4 @@ Humanoid Virtual Athletics Challengeについて紹介しました。
 
 それではまた次回お会いしましょう！
 
-次回：開発環境の構築手順を解説
+次回： [002 - 開発環境の構築(Windows版)](https://koomiy.github.io/posts/setup_windows/)
