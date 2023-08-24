@@ -90,4 +90,4 @@ choreonoid
 ## まとめ・次回予告
 今回はHVACの開発環境の構築手順について解説しました。
 
-次回：vnoidライブラリの概要
+次回： [vnoidパッケージの概要](https://koomiy.github.io/posts/vnoid_abst/)
