@@ -53,7 +53,8 @@ vnoidというサンプルパッケージが用意されております。
 
 -	**脚の逆運動学(148~158行目、11~66行目)**
 	
-	
+	150行目で、脚の付け根関節基準のくるぶしの目標位置を計算します。  
+	$$ \boldsymbol{{}^0p_5^{ref}} = \boldsymbol{\overline{{}^WQ_B}} \cdot (\boldsymbol{{}^Wp_E^{ref}} - \boldsymbol{{}^WQ_E^{ref}} \cdot \boldsymbol{{}^5p_E} \cdot \boldsymbol{\overline{{}^WQ_E^{ref}}}) \cdot \boldsymbol{{}^WQ_B} - \boldsymbol{{}^Bp_0} $$
 
 -	**脚の関節トルクを計算する(200~229行目)**
 	
