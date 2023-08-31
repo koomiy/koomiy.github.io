@@ -52,29 +52,121 @@ vnoidというサンプルパッケージが用意されております。
 	この操作を繰り返し、誤差が無視できるほど小さくなる場合の解を採用します。
 
 -	**脚の逆運動学(148~158行目、11~66行目)**
+
+	```cpp
+	void IkSolver::Comp(const Param& param, const Base& base, const vector<Hand>& hand, const vector<Foot>& foot, vector<Joint>& joint){
+	    Vector3 pos_local;		// 腕や脚の付け根関節を基準とした手首・足首の目標位置
+	    Quaternion ori_local;	// 腕や脚の付け根関節を基準とした手首・足首の目標姿勢
+	    
+	    ...
+	    
+	    for(int i = 0; i < 2; i++){
+                pos_local = base.ori_ref.conjugate()*(foot[i].pos_ref - foot[i].ori_ref*param.ankle_to_foot[i] - base.pos_ref) - param.base_to_hip[i];
+                ori_local = base.ori_ref.conjugate()* foot[i].ori_ref;
+                
+                CompLegIk(pos_local, ori_local, param.upper_leg_length, param.lower_leg_length, q);
+                
+                for(int j = 0; j < 6; j++){
+                    joint[param.leg_joint_index[i] + j].q_ref = q[j];
+                }
+            }
+	}
+	```
 	
-	150行目で、脚の付け根関節基準のくるぶしの目標位置を計算します。  
+	150行目で、脚の付け根関節基準の足首の目標位置を計算します。  
 	$$ \boldsymbol{{}^0p_5^{ref}} = \boldsymbol{\overline{{}^WQ_B}} \cdot (\boldsymbol{{}^Wp_E^{ref}} - \boldsymbol{{}^WQ_E^{ref}} \cdot \boldsymbol{{}^5p_E} \cdot \boldsymbol{\overline{{}^WQ_E^{ref}}} - \boldsymbol{{}^Wp_B^{ref}}) \cdot \boldsymbol{{}^WQ_B} - \boldsymbol{{}^Bp_0} $$
+	続く151行目で、脚の付け根関節基準の足首の目標姿勢を計算します。  
+	$$ \boldsymbol{{}^0Q_5^{ref}} = \boldsymbol{\overline{{}^WQ_B^{ref}}} \cdot \boldsymbol{{}^WQ_E^{ref}} $$
 	
-	この式が成り立つ証明をしておきます。  
+	150行目の式が成り立つ証明をしておきます。  
 	右辺の $\boldsymbol{{}^Bp_0}$ を左辺へ移行すると、  
 	左辺はベースリンク基準のくるぶしの目標位置となります。  
 	$$ \boldsymbol{{}^Bp_5^{ref}} = \boldsymbol{\overline{{}^WQ_B}} \cdot (\boldsymbol{{}^Wp_E^{ref}} - \boldsymbol{{}^WQ_E^{ref}} \cdot \boldsymbol{{}^5p_E} \cdot \boldsymbol{\overline{{}^WQ_E^{ref}}} - \boldsymbol{{}^Wp_B^{ref}}) \cdot \boldsymbol{{}^WQ_B} $$
 	
 	続いて、右辺の $ \boldsymbol{{}^Wp_E^{ref}} - \boldsymbol{{}^WQ_E^{ref}} \cdot \boldsymbol{{}^5p_E} \cdot \boldsymbol{\overline{{}^WQ_E^{ref}}} $ についてですが、  
-	これはワールド座標基準のくるぶしの目標位置と等価なので  
-	(∵足はくるぶしに対して姿勢変化しないので、$ \boldsymbol{{}^WQ_E^{ref}} = \boldsymbol{{}^WQ_5^{ref}} $)、  
+	これはワールド座標基準の足首の目標位置と等価なので  
+	(∵足は足首に対して姿勢変化しないので、$ \boldsymbol{{}^WQ_E^{ref}} = \boldsymbol{{}^WQ_5^{ref}} $)、  
 	次のようにできます。  
 	$$ \boldsymbol{{}^Bp_5^{ref}} = \boldsymbol{\overline{{}^WQ_B}} \cdot (\boldsymbol{{}^Wp_5^{ref}} - \boldsymbol{{}^Wp_B^{ref}}) \cdot \boldsymbol{{}^WQ_B} $$
 	
 	最後に、右辺の $ \boldsymbol{{}^Wp_5^{ref}} - \boldsymbol{{}^Wp_B^{ref}} $ について、  
-	これはワールド座標基準のベースリンクからくるぶしまでの目標相対位置です。  
+	これはワールド座標基準のベースリンクから足首までの目標相対位置です。  
 	よって、 $ \boldsymbol{{}^WQ_B} $ を逆からかけ、  
 	ワールド座標からベースリンクに基準を変換することにより、次のようにできます。  
-	$$ \boldsymbol{{}^Bp_5^{ref}} = \boldsymbol{{}^Bp_5^{ref}} - \boldsymbol{{}^Bp_B^{ref}} = \boldsymbol{{}^Bp_5^{ref}} \Box $$
+	$$ \boldsymbol{{}^Bp_5^{ref}} = \boldsymbol{{}^Bp_5^{ref}} - \boldsymbol{{}^Bp_B^{ref}} = \boldsymbol{{}^Bp_5^{ref}} \qquad \Box $$
 	
-	続く151行目で、脚の付け根関節基準のくるぶしの目標姿勢を計算します。  
-	$$ \boldsymbol{{}^0Q_5^{ref}} = \boldsymbol{\overline{{}^WQ_B^{ref}}} \cdot \boldsymbol{{}^WQ_E^{ref}}
+	また、151行目の式が成り立つことも証明しておきます。  
+	両辺に $ \boldsymbol{{}^BQ_0} = [1.0, 0.0, 0.0, 0.0]^T $ をかけます。  
+	すると右辺には変化がありませんが、左辺はベースリンク基準の足首の目標姿勢という意味になります。  
+	$$ \boldsymbol{{}^BQ_5^{ref}} = \boldsymbol{\overline{{}^WQ_B^{ref}}} \cdot \boldsymbol{{}^WQ_E^{ref}} $$
+	
+	続いて、右辺についてですが、 $ \boldsymbol{\overline{{}^WQ_B^{ref}}} $ を逆からかけることにより、  
+	ワールド座標からベースリンク基準に変換します。  
+	また、上述したように $ \boldsymbol{{}^WQ_E^{ref}} = \boldsymbol{{}^WQ_5^{ref}} $ が成り立つので、  
+	右辺の意味はベースリンク基準の足首の目標姿勢となり、左辺と一致します。
+	
+	150,151行目で脚の付け根関節基準の足首の目標位置・姿勢が計算できました。  
+	この情報をCompLegIK関数に渡すことで逆運動学を解き、各関節の角度を計算します。
+	
+	```cpp
+	void IkSolver::CompLegIk(const Vector3& pos, const Quaternion& ori, double l1, double l2, double* q){
+        Vector3 angle = ToRollPitchYaw(ori);
+
+        // hip yaw is directly determined from foot yaw
+        q[0] = angle.z();
+
+        // ankle pos expressed in hip-yaw local
+        Vector3 pos_local = AngleAxis(-q[0], Vector3::UnitZ())*pos;
+
+        // hip roll
+        q[1] = atan2(pos_local.y(), -pos_local.z());
+
+        // ankle pos expressed in hip yaw and hip roll local
+        Vector3 pos_local2 = AngleAxis(-q[1], Vector3::UnitX())*pos_local;
+
+        double  alpha = -atan2(pos_local2.x(), -pos_local2.z());
+    
+        // hip pitch and knee pitch from trigonometrics
+        double d   = pos.norm();
+        double tmp = (l1*l1 + l2*l2 - d*d)/(2*l1*l2);
+        //  singularity: too close
+        if(tmp > 1.0){
+            q[3] = pi;
+            q[2] = alpha;
+        }
+        //  singularity: too far
+        else if(tmp < -1.0){
+            q[3] = 0.0;
+            q[2] = alpha;
+        }
+        //  nonsingular
+        else{
+            q[3] = pi - acos(tmp);
+            q[2] = alpha - asin((l2/d)*sin(q[3]));
+        }
+
+        Quaternion qzxyyy = AngleAxis(q[0],      Vector3::UnitZ())
+                           *AngleAxis(q[1],      Vector3::UnitX())
+                           *AngleAxis(q[2]+q[3], Vector3::UnitY());
+        Quaternion qrel = qzxyyy.conjugate()*ori;
+        Vector3 angle_rel = ToRollPitchYaw(qrel);
+
+        q[4] = angle_rel.y();
+        q[5] = angle_rel.x();
+
+        /*
+        // easy way, but not correct
+
+        // ankle pitch
+        q[4] = angle.y() - q[2] - q[3];
+
+        // ankle roll
+        q[5] = angle.x() - q[1];
+        */
+    
+	}
+	```
+	
 
 -	**脚の関節トルクを計算する(200~229行目)**
 	
