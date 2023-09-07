@@ -138,6 +138,23 @@ vnoidというサンプルパッケージが用意されております。
             q[3] = pi - acos(tmp);
             q[2] = alpha - asin((l2/d)*sin(q[3]));
         }
+void IkSolver::Comp(const Param& param, const Base& base, const vector<Hand>& hand, const vector<Foot>& foot, vector<Joint>& joint){
+    Vector3 pos_local;		// 腕や脚の付け根関節を基準とした手首・足首の目標位置
+    Quaternion ori_local;	// 腕や脚の付け根関節を基準とした手首・足首の目標姿勢
+
+    ...
+
+    for(int i = 0; i < 2; i++){
+            pos_local = base.ori_ref.conjugate()*(foot[i].pos_ref - foot[i].ori_ref*param.ankle_to_foot[i] - base.pos_ref) - param.base_to_hip[i];
+            ori_local = base.ori_ref.conjugate()* foot[i].ori_ref;
+
+            CompLegIk(pos_local, ori_local, param.upper_leg_length, param.lower_leg_length, q);
+
+            for(int j = 0; j < 6; j++){
+                joint[param.leg_joint_index[i] + j].q_ref = q[j];
+            }
+        }
+}
 
         Quaternion qzxyyy = AngleAxis(q[0],      Vector3::UnitZ())
                            *AngleAxis(q[1],      Vector3::UnitX())
@@ -164,8 +181,14 @@ vnoidというサンプルパッケージが用意されております。
 	150,151行目で脚の付け根関節基準の足首の目標位置・姿勢が計算できました。  
 	この情報をCompLegIK関数に渡すことで逆運動学を解き、各関節の角度を計算します。
 	
-	足のヨー角を決定するのが、脚の付け根関節しかないので、
-	15行目のように確定できます。
+	足のヨー・ロール角を決定するのが、脚の付け根関節しかないので、  
+	15、22行目のように関節角を決定できます。
+	
+	次に25行目で、上記のヨー・ロール角分だけ回転を戻した足首の位置 $\boldsymbol{p''}$ を計算します。  
+	そうすると、次の画像のように平面幾何として逆運動学を考えることができます。  
+	{{<figure src="./legik.png" class="center" alt="legik" width="50%">}}
+	
+	先程の回転の逆戻しで、脚はxz平面上にあります。  
 	
 	
 
