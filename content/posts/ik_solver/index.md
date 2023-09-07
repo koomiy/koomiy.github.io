@@ -186,7 +186,7 @@ void IkSolver::Comp(const Param& param, const Base& base, const vector<Hand>& ha
 	
 	次に25行目で、上記のヨー・ロール角分だけ回転を戻した足首の位置 $\boldsymbol{p''}$ を計算します。  
 	そうすると、次の画像のように平面幾何として逆運動学を考えることができます。  
-	{{<figure src="./legik.png" class="center" alt="legik" width="50%">}}
+
 	
 	先程の回転の逆戻しで、脚はxz平面上にあります。  
 	
