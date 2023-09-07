@@ -38,7 +38,7 @@ vnoidというサンプルパッケージが用意されております。
 -	**逆運動学のおおまかな流れ(127行目~)**
 	
 	事前に目標重心位置が与えられているとします。
-	
+
 	はじめは、ベースリンクの目標位置と重心の目標位置を一致させて逆運動学を解きます。  
 	そうして得られた関節角をもとに、fksolverを用いて重心位置を計算します。  
 	そうすると、重心と目標重心の位置に大なり小なり誤差が生じます。  
@@ -138,23 +138,6 @@ vnoidというサンプルパッケージが用意されております。
             q[3] = pi - acos(tmp);
             q[2] = alpha - asin((l2/d)*sin(q[3]));
         }
-void IkSolver::Comp(const Param& param, const Base& base, const vector<Hand>& hand, const vector<Foot>& foot, vector<Joint>& joint){
-    Vector3 pos_local;		// 腕や脚の付け根関節を基準とした手首・足首の目標位置
-    Quaternion ori_local;	// 腕や脚の付け根関節を基準とした手首・足首の目標姿勢
-
-    ...
-
-    for(int i = 0; i < 2; i++){
-            pos_local = base.ori_ref.conjugate()*(foot[i].pos_ref - foot[i].ori_ref*param.ankle_to_foot[i] - base.pos_ref) - param.base_to_hip[i];
-            ori_local = base.ori_ref.conjugate()* foot[i].ori_ref;
-
-            CompLegIk(pos_local, ori_local, param.upper_leg_length, param.lower_leg_length, q);
-
-            for(int j = 0; j < 6; j++){
-                joint[param.leg_joint_index[i] + j].q_ref = q[j];
-            }
-        }
-}
 
         Quaternion qzxyyy = AngleAxis(q[0],      Vector3::UnitZ())
                            *AngleAxis(q[1],      Vector3::UnitX())
