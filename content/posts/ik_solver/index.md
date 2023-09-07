@@ -175,16 +175,19 @@ vnoidというサンプルパッケージが用意されております。
 	
 	図中の $\alpha$ 、 $\beta$ 、 $\gamma$ の角度を次のように求めます。  
 	$$ \alpha = - \mathrm{atan2}(p''_x, -p''_z) $$  
-	$$ \beta = \mathrm{cos}\bigg(\frac{L_1^2 + L_2^2 - d^2}{2L_1L_2}) $$  
-	$$ \gamma = \mathrm{asin}\bigg(\frac{L_2\mathrm{sin}(\beta)}{d}) $$
+	$$ \beta = \mathrm{cos}\bigg(\frac{L_1^2 + L_2^2 - d^2}{2L_1L_2}\bigg) $$  
+	$$ \gamma = \mathrm{asin}\bigg(\frac{L_2\mathrm{sin}(\beta)}{d}\bigg) $$
 	
 	股関節のピッチ角 $\theta_2$ は、 $\theta_2 = \alpha - \gamma$ と求まります。  
 	膝関節の角度 $\theta_3$ は、 $\theta_3 = \pi - \beta$ と求まります。
 	
-	残りの足首関節のロール角 $\theta_4$ 、ピッチ角 $\theta_5$ は次のように計算します。  
-	$\theta_0$ 〜  $\theta_3$ 関節までの、股関節からの姿勢変化 $\boldsymbol{Q_{zxyy}}$ を計算します。  
-	そして、姿勢$\boldsymbol{Q_{zxyy}}$ から足首の目標姿勢に一致するのに必要な姿勢変化 $\boldsymbol{Q_{rel}}$ を計算します。  
-	
+	残りの足首関節のロール角 $\theta_4$ 、ピッチ角 $\theta_5$ は次のように計算します(47行目~)。  
+	まず、$\theta_0$ 〜  $\theta_3$ 関節までの、股関節からの姿勢変化 $\boldsymbol{Q_{zxyy}}$ を計算します。  
+	そして、姿勢$\boldsymbol{Q_{zxyy}}$ から足首の目標姿勢となるまでに  
+	必要な姿勢変化 $\boldsymbol{Q_{rel}}$ を計算します。  
+	$$ \boldsymbol{Q_{rel}} = \overline{\boldsymbol{Q_{zxyy}}} \cdot \boldsymbol{{}^0Q_5^{ref}} $$  
+	姿勢 $\boldsymbol{Q_{rel}}$ のピッチ成分が $\theta_4$ となり、  
+	ロール成分が $\theta_5$ となります。
 
 -	**脚の関節トルクを計算する(200~229行目)**
 	
