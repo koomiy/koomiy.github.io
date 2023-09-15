@@ -51,19 +51,13 @@ vnoidというサンプルパッケージが用意されております。
 
 	~ STEP 1 「股関節基準の足首の目標位置・姿勢を計算する」 ~
 
-	```cpp {.line-numbers .startFrom="132"}
+	```cpp {linenos=true}
 	void IkSolver::Comp(const Param& param, const Base& base, const vector<Hand>& hand, const vector<Foot>& foot, vector<Joint>& joint){
 	    Vector3 pos_local;		// 腕や脚の付け根関節を基準とした手首・足首の目標位置
 	    Quaternion ori_local;	// 腕や脚の付け根関節を基準とした手首・足首の目標姿勢
-	```
-
-	```cpp 
 
 	    ...
 
-	```
-
-	```{r, attr.output='.numberLines startFrom="150"', result='hold'}
 	    for(int i = 0; i < 2; i++){
                 pos_local = base.ori_ref.conjugate()*(foot[i].pos_ref - foot[i].ori_ref*param.ankle_to_foot[i] - base.pos_ref) - param.base_to_hip[i];
                 ori_local = base.ori_ref.conjugate()* foot[i].ori_ref;
