@@ -63,7 +63,7 @@ vnoidというサンプルパッケージが用意されております。
 
 	```
 
-	```{r, attr.output=".numberLines startFrom='150'", result='hold'}
+	```{r, attr.output='.numberLines startFrom="150"', result='hold'}
 	    for(int i = 0; i < 2; i++){
                 pos_local = base.ori_ref.conjugate()*(foot[i].pos_ref - foot[i].ori_ref*param.ankle_to_foot[i] - base.pos_ref) - param.base_to_hip[i];
                 ori_local = base.ori_ref.conjugate()* foot[i].ori_ref;
