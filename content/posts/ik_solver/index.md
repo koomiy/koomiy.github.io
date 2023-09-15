@@ -49,9 +49,9 @@ vnoidというサンプルパッケージが用意されております。
 
 -	**脚の逆運動学(148~158行目、11~66行目)**
 
-	~ STEP 1 「股関節基準の足首の目標位置・姿勢を計算する」 ~
+	**~ STEP 1 「股関節基準の足首の目標位置・姿勢を計算する」 ~**
 
-	```cpp {name="iksolver.cpp", linenos=inline}
+	```cpp {linenos=inline}
 	void IkSolver::Comp(const Param& param, const Base& base, const vector<Hand>& hand, const vector<Foot>& foot, vector<Joint>& joint){
 	    Vector3 pos_local;		// 腕や脚の付け根関節を基準とした手首・足首の目標位置
 	    Quaternion ori_local;	// 腕や脚の付け根関節を基準とした手首・足首の目標姿勢
@@ -103,8 +103,10 @@ vnoidというサンプルパッケージが用意されております。
 	ワールド座標からベースリンク基準に変換します。  
 	また、上述したように $ \boldsymbol{{}^WQ_E^{ref}} = \boldsymbol{{}^WQ_5^{ref}} $ が成り立つので、  
 	右辺の意味はベースリンク基準の足首の目標姿勢となり、左辺と一致します。
+
+	**~ STEP2 「逆運動学を解いて脚の関節角を計算する」 ~**
 	
-	```cpp
+	```cpp {linenos=inline}
 	void IkSolver::CompLegIk(const Vector3& pos, const Quaternion& ori, double l1, double l2, double* q){
         Vector3 angle = ToRollPitchYaw(ori);
 
@@ -166,10 +168,17 @@ vnoidというサンプルパッケージが用意されております。
 	150,151行目で脚の付け根関節基準の足首の目標位置・姿勢が計算できました。  
 	この情報をCompLegIK関数に渡すことで逆運動学を解き、各関節の角度を計算します。
 	
-	脚のヨー・ロール角を決定するのが股関節しかないので、  
-	15、22行目のように股関節のヨー角 $\theta_0$ 、 ロール角 $\theta_1$ を決定できます。
-	
-	次に25行目で、上記の股関節のヨー・ロール角の回転を戻した場合の  
+	まず、股関節のヨー角を求めます。
+	足首のヨー角を決定するのが脚の構造上股関節しかないので、  
+	15行目のように股関節のヨー角 $\theta_0$ を決定できます。
+
+	次に、股関節のロール角を求めます。  
+	上記のヨー角 $\theta_0$ 分だけ回転を戻したの足首の位置 $\boldsymbol{p'}$ を計算します。  
+	股関節から $\boldsymbol{p'}$ まで直線で結んだ線分をVLとします。  
+	このVLをy-z平面に転写したときの傾きが、股関節のロール角です。
+
+	次に、股関節のピッチ角と膝関節角度を計算します。  
+	25行目で、股関節のヨー・ロール角の回転を戻した場合の  
 	足首の位置 $\boldsymbol{p''}$ を計算します。  
 	なお、この操作により脚はxz平面上に存在します。  
 	よって次の図ように、平面幾何として逆運動学を考えることができます。  
