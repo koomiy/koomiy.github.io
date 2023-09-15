@@ -24,7 +24,7 @@ paginate = 20
     avatar = "img/scorpion.png"
 
 [Params]
-    customCSS = ["css/custom.css"]
+    customCSS = ["css/custom.css", "css/syntax.css"]
     copyright = "Author"
     readmore = true
     authorbox = true
