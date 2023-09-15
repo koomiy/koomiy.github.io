@@ -74,8 +74,7 @@ vnoidというサンプルパッケージが用意されております。
 	150行目で、脚の付け根関節基準の足首の目標位置を計算します。  
 	$$ \boldsymbol{{}^0p_5^{ref}} = \boldsymbol{\overline{{}^WQ_B}} \cdot (\boldsymbol{{}^Wp_E^{ref}} - \boldsymbol{{}^WQ_E^{ref}} \cdot \boldsymbol{{}^5p_E} \cdot \boldsymbol{\overline{{}^WQ_E^{ref}}} - \boldsymbol{{}^Wp_B^{ref}}) \cdot \boldsymbol{{}^WQ_B} - \boldsymbol{{}^Bp_0} $$
 
-	<blockquote>
-	150行目の式が成り立つ証明をしておきます。  
+	> 150行目の式が成り立つ証明をしておきます。  
 	右辺の $\boldsymbol{{}^Bp_0}$ を左辺へ移行すると、  
 	左辺はベースリンク基準のくるぶしの目標位置となります。  
 	$$ \boldsymbol{{}^Bp_5^{ref}} = \boldsymbol{\overline{{}^WQ_B}} \cdot (\boldsymbol{{}^Wp_E^{ref}} - \boldsymbol{{}^WQ_E^{ref}} \cdot \boldsymbol{{}^5p_E} \cdot \boldsymbol{\overline{{}^WQ_E^{ref}}} - \boldsymbol{{}^Wp_B^{ref}}) \cdot \boldsymbol{{}^WQ_B} $$
@@ -91,7 +90,6 @@ vnoidというサンプルパッケージが用意されております。
 	よって、 $ \boldsymbol{{}^WQ_B} $ を逆からかけ、  
 	ワールド座標からベースリンクに基準を変換することにより、次のようにできます。  
 	$$ \boldsymbol{{}^Bp_5^{ref}} = \boldsymbol{{}^Bp_5^{ref}} - \boldsymbol{{}^Bp_B^{ref}} = \boldsymbol{{}^Bp_5^{ref}} \qquad \Box $$
-	</blockquote>
 	
 	続く151行目で、脚の付け根関節基準の足首の目標姿勢を計算します。  
 	$$ \boldsymbol{{}^0Q_5^{ref}} = \boldsymbol{\overline{{}^WQ_B^{ref}}} \cdot \boldsymbol{{}^WQ_E^{ref}} $$
