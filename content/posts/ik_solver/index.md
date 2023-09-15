@@ -78,8 +78,8 @@ vnoidというサンプルパッケージが用意されております。
 	右辺の $\boldsymbol{{}^Bp_0}$ を左辺へ移行すると、  
 	左辺はベースリンク基準のくるぶしの目標位置となります。  
 	$$ \boldsymbol{{}^Bp_5^{ref}} = \boldsymbol{\overline{{}^WQ_B}} \cdot (\boldsymbol{{}^Wp_E^{ref}} - \boldsymbol{{}^WQ_E^{ref}} \cdot \boldsymbol{{}^5p_E} \cdot \boldsymbol{\overline{{}^WQ_E^{ref}}} - \boldsymbol{{}^Wp_B^{ref}}) \cdot \boldsymbol{{}^WQ_B} $$
-	
-	続いて、右辺の $ \boldsymbol{{}^Wp_E^{ref}} - \boldsymbol{{}^WQ_E^{ref}} \cdot \boldsymbol{{}^5p_E} \cdot \boldsymbol{\overline{{}^WQ_E^{ref}}} $ についてですが、  
+	> 
+	> 続いて、右辺の $ \boldsymbol{{}^Wp_E^{ref}} - \boldsymbol{{}^WQ_E^{ref}} \cdot \boldsymbol{{}^5p_E} \cdot \boldsymbol{\overline{{}^WQ_E^{ref}}} $ についてですが、  
 	これはワールド座標基準の足首の目標位置と等価なので  
 	(∵足は足首に対して姿勢変化しないので、$ \boldsymbol{{}^WQ_E^{ref}} = \boldsymbol{{}^WQ_5^{ref}} $)、  
 	次のようにできます。  
