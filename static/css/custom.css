@@ -17,3 +17,21 @@ figure.inline {
 figure.inline img {
     display: inline;
 }
+
+.codeblock--name {
+  width: fit-content;
+  margin: 1px;
+  padding: 1rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  border-top-left-radius: 8px; /* 角を丸める */
+  border-top-right-radius: 8px;
+  font-size: 0.8rem;
+  color: rgb(255, 255, 255);
+  background-color: #555555;
+}
+
+
+.codeblock--name + .codeblock--content {
+  margin-top: -15px;
+}
