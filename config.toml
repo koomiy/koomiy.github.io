@@ -24,24 +24,12 @@ paginate = 20
     avatar = "img/scorpion.png"
 
 [Params]
-    customCSS = ["css/custom.css", "css/syntax.css"]
+    customCSS = ["css/custom.css"]
     copyright = "Author"
     readmore = true
     authorbox = true
     post_meta = ["date", "categories"]
     twitter_cards = true
-
-[markup]
-  [markup.highlight]
-    codeFences = true
-    guessSyntax = false
-    hl_Lines = ""
-    lineNoStart = 1
-    lineNos = false
-    lineNumbersInTable = true
-    noClasses = true
-    style = "monokai"
-    tabWidth = 4
 
 # ページのテーマカラー
 [Params.style.vars]
