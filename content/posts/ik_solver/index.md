@@ -51,13 +51,17 @@ vnoidというサンプルパッケージが用意されております。
 
 	~ STEP 1 「股関節基準の足首の目標位置・姿勢を計算する」 ~
 
-	```cpp
+	```cpp{r, attr.source='.numberLines startFrom="132"'}
 	void IkSolver::Comp(const Param& param, const Base& base, const vector<Hand>& hand, const vector<Foot>& foot, vector<Joint>& joint){
 	    Vector3 pos_local;		// 腕や脚の付け根関節を基準とした手首・足首の目標位置
 	    Quaternion ori_local;	// 腕や脚の付け根関節を基準とした手首・足首の目標姿勢
-	    
+	```
+	```cpp 
+
 	    ...
-	    
+
+	```
+	```cpp{r, attr.source='.numberLines startFrom="150"'}
 	    for(int i = 0; i < 2; i++){
                 pos_local = base.ori_ref.conjugate()*(foot[i].pos_ref - foot[i].ori_ref*param.ankle_to_foot[i] - base.pos_ref) - param.base_to_hip[i];
                 ori_local = base.ori_ref.conjugate()* foot[i].ori_ref;
@@ -84,8 +88,8 @@ vnoidというサンプルパッケージが用意されております。
 	(∵足は足首に対して姿勢変化しないので、$ \boldsymbol{{}^WQ_E^{ref}} = \boldsymbol{{}^WQ_5^{ref}} $)、  
 	次のようにできます。  
 	$$ \boldsymbol{{}^Bp_5^{ref}} = \boldsymbol{\overline{{}^WQ_B}} \cdot (\boldsymbol{{}^Wp_5^{ref}} - \boldsymbol{{}^Wp_B^{ref}}) \cdot \boldsymbol{{}^WQ_B} $$
-	
-	最後に、右辺の $ \boldsymbol{{}^Wp_5^{ref}} - \boldsymbol{{}^Wp_B^{ref}} $ について、  
+	> 
+	> 最後に、右辺の $ \boldsymbol{{}^Wp_5^{ref}} - \boldsymbol{{}^Wp_B^{ref}} $ について、  
 	これはワールド座標基準のベースリンクから足首までの目標相対位置です。  
 	よって、 $ \boldsymbol{{}^WQ_B} $ を逆からかけ、  
 	ワールド座標からベースリンクに基準を変換することにより、次のようにできます。  
@@ -94,18 +98,15 @@ vnoidというサンプルパッケージが用意されております。
 	続く151行目で、脚の付け根関節基準の足首の目標姿勢を計算します。  
 	$$ \boldsymbol{{}^0Q_5^{ref}} = \boldsymbol{\overline{{}^WQ_B^{ref}}} \cdot \boldsymbol{{}^WQ_E^{ref}} $$
 	
-	
-	
-	また、151行目の式が成り立つことも証明しておきます。  
+	> 151行目の式が成り立つことを証明しておきます。  
 	両辺に $ \boldsymbol{{}^BQ_0} = [1.0, 0.0, 0.0, 0.0]^T $ をかけます。  
 	すると右辺には変化がありませんが、左辺はベースリンク基準の足首の目標姿勢という意味になります。  
 	$$ \boldsymbol{{}^BQ_5^{ref}} = \boldsymbol{\overline{{}^WQ_B^{ref}}} \cdot \boldsymbol{{}^WQ_E^{ref}} $$
-	
-	続いて、右辺についてですが、 $ \boldsymbol{\overline{{}^WQ_B^{ref}}} $ を逆からかけることにより、  
+	> 
+	> 続いて、右辺についてですが、 $ \boldsymbol{\overline{{}^WQ_B^{ref}}} $ を逆からかけることにより、  
 	ワールド座標からベースリンク基準に変換します。  
 	また、上述したように $ \boldsymbol{{}^WQ_E^{ref}} = \boldsymbol{{}^WQ_5^{ref}} $ が成り立つので、  
 	右辺の意味はベースリンク基準の足首の目標姿勢となり、左辺と一致します。
-	
 	
 	```cpp
 	void IkSolver::CompLegIk(const Vector3& pos, const Quaternion& ori, double l1, double l2, double* q){
