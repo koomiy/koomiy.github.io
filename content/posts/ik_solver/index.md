@@ -49,6 +49,8 @@ vnoidというサンプルパッケージが用意されております。
 
 -	**脚の逆運動学(148~158行目、11~66行目)**
 
+	~ STEP 1 「股関節基準の足首の目標位置・姿勢を計算する」 ~
+
 	```cpp
 	void IkSolver::Comp(const Param& param, const Base& base, const vector<Hand>& hand, const vector<Foot>& foot, vector<Joint>& joint){
 	    Vector3 pos_local;		// 腕や脚の付け根関節を基準とした手首・足首の目標位置
@@ -71,10 +73,9 @@ vnoidというサンプルパッケージが用意されております。
 	
 	150行目で、脚の付け根関節基準の足首の目標位置を計算します。  
 	$$ \boldsymbol{{}^0p_5^{ref}} = \boldsymbol{\overline{{}^WQ_B}} \cdot (\boldsymbol{{}^Wp_E^{ref}} - \boldsymbol{{}^WQ_E^{ref}} \cdot \boldsymbol{{}^5p_E} \cdot \boldsymbol{\overline{{}^WQ_E^{ref}}} - \boldsymbol{{}^Wp_B^{ref}}) \cdot \boldsymbol{{}^WQ_B} - \boldsymbol{{}^Bp_0} $$
-	続く151行目で、脚の付け根関節基準の足首の目標姿勢を計算します。  
-	$$ \boldsymbol{{}^0Q_5^{ref}} = \boldsymbol{\overline{{}^WQ_B^{ref}}} \cdot \boldsymbol{{}^WQ_E^{ref}} $$
-	
-	150行目の式が成り立つ証明をしておきます。  
+
+	<blockquote>
+	<p>150行目の式が成り立つ証明をしておきます。  
 	右辺の $\boldsymbol{{}^Bp_0}$ を左辺へ移行すると、  
 	左辺はベースリンク基準のくるぶしの目標位置となります。  
 	$$ \boldsymbol{{}^Bp_5^{ref}} = \boldsymbol{\overline{{}^WQ_B}} \cdot (\boldsymbol{{}^Wp_E^{ref}} - \boldsymbol{{}^WQ_E^{ref}} \cdot \boldsymbol{{}^5p_E} \cdot \boldsymbol{\overline{{}^WQ_E^{ref}}} - \boldsymbol{{}^Wp_B^{ref}}) \cdot \boldsymbol{{}^WQ_B} $$
@@ -89,7 +90,13 @@ vnoidというサンプルパッケージが用意されております。
 	これはワールド座標基準のベースリンクから足首までの目標相対位置です。  
 	よって、 $ \boldsymbol{{}^WQ_B} $ を逆からかけ、  
 	ワールド座標からベースリンクに基準を変換することにより、次のようにできます。  
-	$$ \boldsymbol{{}^Bp_5^{ref}} = \boldsymbol{{}^Bp_5^{ref}} - \boldsymbol{{}^Bp_B^{ref}} = \boldsymbol{{}^Bp_5^{ref}} \qquad \Box $$
+	$$ \boldsymbol{{}^Bp_5^{ref}} = \boldsymbol{{}^Bp_5^{ref}} - \boldsymbol{{}^Bp_B^{ref}} = \boldsymbol{{}^Bp_5^{ref}} \qquad \Box $$</p>
+	</blockquote>
+	
+	続く151行目で、脚の付け根関節基準の足首の目標姿勢を計算します。  
+	$$ \boldsymbol{{}^0Q_5^{ref}} = \boldsymbol{\overline{{}^WQ_B^{ref}}} \cdot \boldsymbol{{}^WQ_E^{ref}} $$
+	
+	
 	
 	また、151行目の式が成り立つことも証明しておきます。  
 	両辺に $ \boldsymbol{{}^BQ_0} = [1.0, 0.0, 0.0, 0.0]^T $ をかけます。  
