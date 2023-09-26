@@ -179,40 +179,19 @@ vnoidというサンプルパッケージが用意されております。
 	$$ \theta_3 = \pi - \beta $$
 	
 	(以降はまだ書きかけです)
-	足首のヨー角を決定するのが脚の構造上股関節しかないので、  
-	5行目のように股関節のヨー角 $\theta_0$ を決定できます。
-
-	次に、股関節のロール角を求めます。  
-	股関節から足首の目標位置までを直線で結んだ線分をLとします。  
-	{{<figure src="./leg_pure.png" class="center" alt="pure" width="50%">}}  
-	ヨー角 $\theta_0$ 分だけ股関節の回転を戻したときの足首の位置 $\boldsymbol{p'}$ を計算します。  
-	なお、線分Lもこの操作に応じて回転するものとします。  
-	{{<figure src="./leg_reyaw.png" class="center" alt="reyaw" width="50%">}}
-	この線分Lをy-z平面に転写したときの傾きが、股関節のロール角 $\theta_1$ です。
-	{{<figure src="./leg_reyaw_proj.png" class="center" alt="proj" width="50%">}}
-
-	次に、股関節のピッチ角と膝関節角度を計算します。  
-	25行目で、股関節のヨー・ロール角の回転を戻した場合の  
-	足首の位置 $\boldsymbol{p''}$ を計算します。  
-	なお、この操作により脚はxz平面上に存在します。  
-	よって次の図ように、平面幾何として逆運動学を考えることができます。  
-
-	
-	図中の $\alpha$ 、 $\beta$ 、 $\gamma$ の角度を次のように求めます。  
-	$$ \alpha = - \mathrm{atan2}(p''_x, -p''_z) $$  
-	$$ \beta = \mathrm{cos}\bigg(\frac{L_1^2 + L_2^2 - d^2}{2L_1L_2}\bigg) $$  
-	$$ \gamma = \mathrm{asin}\bigg(\frac{L_2\mathrm{sin}(\beta)}{d}\bigg) $$
-	
-	股関節のピッチ角 $\theta_2$ は、 $\theta_2 = \alpha - \gamma$ と求まります。  
-	膝関節の角度 $\theta_3$ は、 $\theta_3 = \pi - \beta$ と求まります。
-	
-	残りの足首関節のロール角 $\theta_4$ 、ピッチ角 $\theta_5$ は次のように計算します(47行目~)。  
-	まず、$\theta_0$ 〜  $\theta_3$ 関節までの、股関節からの姿勢変化 $\boldsymbol{Q_{zxyy}}$ を計算します。  
-	そして、姿勢$\boldsymbol{Q_{zxyy}}$ から足首の目標姿勢となるまでに  
-	必要な姿勢変化 $\boldsymbol{Q_{rel}}$ を計算します。  
-	$$ \boldsymbol{Q_{rel}} = \overline{\boldsymbol{Q_{zxyy}}} \cdot \boldsymbol{{}^0Q_5^{ref}} $$  
-	姿勢 $\boldsymbol{Q_{rel}}$ のピッチ成分が $\theta_4$ となり、  
-	ロール成分が $\theta_5$ となります。
+	次に、足首のピッチ角 $\theta_4$ とロール角 $\theta_5$ を計算します。  
+	そのために、足首を基準とした股関節の位置・姿勢について考えます。  
+	いま、足首を基準とした股関節は実際には $\boldsymbol{\hat{p}}$ に位置するとします。  
+	(phatの数式)  
+	足首がピッチ、ロール方向ともに回転しない場合において、  
+	足首基準の股関節の位置 $\boldsymbol{\hat{p}'}$ は下図のようになります。  
+	{{<figure src="./phatd.png" class="center" alt="phatd" width="50%">}}  
+	この状態から、足首をピッチ方向に $\theta_4$ だけ回転させたときの  
+	股関節の位置 $\boldsymbol{\hat{p}''}$ は下図のようになります。  
+	{{<figure src="./phatdd.png" class="center" alt="phatdd" width="50%">}}  
+	ここから更に足首をロール方向に $\theta_5$ だけ回転させると、  
+	股関節の位置は $\boldsymbol{\hat{p}}$ と一致します。  
+	{{<figure src="./phat.png" class="center" alt="phat" width="50%">}}  
 
 -	**脚の関節トルクを計算する(`~/iksolver.cpp`200~229行目)**
 	
