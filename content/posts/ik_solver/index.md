@@ -193,12 +193,12 @@ vnoidというサンプルパッケージが用意されております。
 	$\boldsymbol{\hat{p}}$ は、 $\boldsymbol{p}$ や $\boldsymbol{Q}$ と次のような関係があります。  
 	$$ \boldsymbol{\hat{p}} = \boldsymbol{\overline{Q}} \cdot \boldsymbol{p} \cdot \boldsymbol{Q} $$  
 	足首がピッチ、ロール方向ともに回転しない場合において、  
-	足首基準の股関節の位置 $\boldsymbol{\hat{p}'}$ は下図のようになります。  
+	足首基準の股関節は以下図のように $\boldsymbol{\hat{p}'}$ に位置します。  
 	{{<figure src="./phatd.png" class="center" alt="phatd" width="50%">}}  
-	この状態から、足首をピッチ方向に $\theta_4$ だけ回転させたときの  
-	股関節の位置 $\boldsymbol{\hat{p}''}$ は下図のようになります。  
+	この状態から、足首をピッチ方向に $\theta_4$ だけ回転させると、  
+	股関節は以下図のように位置 $\boldsymbol{\hat{p}''}$ に来ます。  
 	{{<figure src="./phatdd.png" class="center" alt="phatdd" width="50%">}}  
-	よって、 $\theta_4$ は $\alpha$ と $\gamma$ の角度が分かれば求めることができます。  
+	この図から分かるように、 $\theta_4$ は $\alpha$ と $\gamma$ の角度が分かれば求めることができます。  
 	$$ \theta_4 = -\alpha + \gamma $$  
 	ここで、図中の $\alpha$ の角度は次のように求められます。  
 	$$ \alpha = \mathrm{atan2}(\hat{p}_z, \hat{p}_x) $$  
@@ -206,11 +206,12 @@ vnoidというサンプルパッケージが用意されております。
 	先程の状態から更に足首をロール方向に $\theta_5$ だけ回転させると、  
 	股関節の位置は $\boldsymbol{\hat{p}}$ と一致します。  
 	{{<figure src="./phat.png" class="center" alt="phat" width="50%">}}  
-	zx平面でこれを見ると、以下図のようになり、  
+	xz平面でこれを見ると、以下図のようになり、  
 	$\boldsymbol{\hat{p}}$ と $\boldsymbol{\hat{p}''}$ のx座標が一致することがわかります。
 	{{<figure src="./gamma.png" class="center" alt="gamma" width="50%">}}  
 	このことを利用して、図中の $\gamma$ の角度を求めることができます。  
-	$$ \gamma = \mathrm{acos}(\frac{\hat{p}_x}{d}) $$
+	$$ \gamma = \mathrm{acos}(\frac{\hat{p}_x}{d}) $$  
+	以上により $\alpha$ と $\gamma$ が求まったので、 $\theta_4$ が決定します。
 	
 	　次に、足首のロール角 $\theta_5$ を計算します。  
 	以下図のように脚をyz平面に投影すると、ある角度だけ傾いた線分が得られます。  
@@ -218,6 +219,9 @@ vnoidというサンプルパッケージが用意されております。
 	このときの傾きが、足首のロール角 $\theta_5$ です。  
 	よって $\theta_5$ は次のように求まります。  
 	$$ \theta_5 = -\mathrm{atan2}(\hat{p}_z, \hat{p}_y) $$
+	
+	　最後に、股関節のヨー角 $\theta_0$ 、ピッチ角 $\theta_1$ 、ロール角 $\theta_2$ を計算します。  
+	(以降まだ書きかけです)  
 
 -	**脚の関節トルクを計算する(`~/iksolver.cpp`200~229行目)**
 	
