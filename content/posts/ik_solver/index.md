@@ -107,67 +107,76 @@ vnoidというサンプルパッケージが用意されております。
 	
 	```cpp {linenos=inline}
 	void IkSolver::CompLegIk(const Vector3& pos, const Quaternion& ori, double l1, double l2, double* q){
-        Vector3 angle = ToRollPitchYaw(ori);
-
-        // hip yaw is directly determined from foot yaw
-        q[0] = angle.z();
-
-        // ankle pos expressed in hip-yaw local
-        Vector3 pos_local = AngleAxis(-q[0], Vector3::UnitZ())*pos;
-
-        // hip roll
-        q[1] = atan2(pos_local.y(), -pos_local.z());
-
-        // ankle pos expressed in hip yaw and hip roll local
-        Vector3 pos_local2 = AngleAxis(-q[1], Vector3::UnitX())*pos_local;
-
-        double  alpha = -atan2(pos_local2.x(), -pos_local2.z());
+    	// hip pitch and knee pitch from trigonometrics
+    	double d = pos.norm();
+    	double c = (l1*l1 + l2*l2 - d*d)/(2*l1*l2);
+    	double beta;
     
-        // hip pitch and knee pitch from trigonometrics
-        double d   = pos.norm();
-        double tmp = (l1*l1 + l2*l2 - d*d)/(2*l1*l2);
-        //  singularity: too close
-        if(tmp > 1.0){
-            q[3] = pi;
-            q[2] = alpha;
-        }
-        //  singularity: too far
-        else if(tmp < -1.0){
-            q[3] = 0.0;
-            q[2] = alpha;
-        }
-        //  nonsingular
-        else{
-            q[3] = pi - acos(tmp);
-            q[2] = alpha - asin((l2/d)*sin(q[3]));
-        }
+    	//  singularity: too close
+    	if(c > 1.0){
+            beta     = 0.0;
+    	}
+    	//  singularity: too far
+    	else if(c < -1.0){
+            beta     = pi;
+    	}
+    	//  nonsingular
+    	else{
+            beta  = acos(c);
+    	}
 
-        Quaternion qzxyyy = AngleAxis(q[0],      Vector3::UnitZ())
-                           *AngleAxis(q[1],      Vector3::UnitX())
-                           *AngleAxis(q[2]+q[3], Vector3::UnitY());
-        Quaternion qrel = qzxyyy.conjugate()*ori;
-        Vector3 angle_rel = ToRollPitchYaw(qrel);
+    	q[3] = pi - beta;
 
-        q[4] = angle_rel.y();
-        q[5] = angle_rel.x();
+    	Quaternion qinv =   ori.conjugate();
+    	Vector3    phat = -(qinv*pos);
+    	Quaternion qhat =   qinv;
 
-        /*
-        // easy way, but not correct
+    	// ankle pitch
+    	Vector3 phatd(-l1*sin(q[3]), 0.0, l1*cos(q[3]) + l2);
+    	double  c2 = phat.x()/sqrt(phatd.x()*phatd.x() + phatd.z()*phatd.z());
+    	double  gamma;
+    	if(c2 > 1.0){
+            gamma = 0.0;
+    	}
+    	else if(c2 < -1.0){
+            gamma = pi;
+    	}
+    	else{
+            gamma = acos(c2);
+    	}
 
-        // ankle pitch
-        q[4] = angle.y() - q[2] - q[3];
-
-        // ankle roll
-        q[5] = angle.x() - q[1];
-        */
+    	double alpha = atan2(phatd.z(), phatd.x());
+    	q[4] = -alpha + gamma;
     
+    	// hip pos expressed in ankle pitch local
+    	Vector3 phatdd = AngleAxis(-q[4], Vector3::UnitY())*phatd;
+
+    	// ankle roll
+    	q[5] = -atan2(phat.z(), phat.y())
+              + atan2(phatdd.z(), phatdd.y());
+    	if(q[5] >  pi) q[5] -= 2.0*pi;
+    	if(q[5] < -pi) q[5] += 2.0*pi;
+
+    	// desired hip rotation
+    	Quaternion qyy(AngleAxis(q[3] + q[4], Vector3::UnitY()));
+    	Quaternion qyyx   = qyy*AngleAxis(q[5], Vector3::UnitX());
+    	Quaternion qhip   = ori*qyyx.conjugate();
+    	Quaternion qzquad(AngleAxis(pi/2.0, Vector3::UnitZ()));
+
+    	// convert it to roll-pitch-yaw
+    	Vector3 angle_hip = ToRollPitchYaw(qzquad*qhip*qzquad.conjugate());
+
+    	// then wrist angles are determined
+    	q[0] =  angle_hip.z();
+    	q[1] =  angle_hip.y();
+    	q[2] = -angle_hip.x();
 	}
 	```
 	
-	上記で求めた股関節基準の足首の目標位置 $\boldsymbol{p}$ ・姿勢 $\boldsymbol{Q}$ の情報を  
+	　上記で求めた股関節基準の足首の目標位置 $\boldsymbol{p}$ ・姿勢 $\boldsymbol{Q}$ の情報を  
 	CompLegIK関数に渡すことで逆運動学を解き、各関節の角度を計算します。
 	
-	まず、ひざ関節の角度 $\theta_3$ を計算します。  
+	　まず、ひざ関節の角度 $\theta_3$ を計算します。  
 	{{<figure src="./beta.png" class="center" alt="beta" width="50%">}}  
 	股関節から足首の目標位置までを直線で結んだ線分を $L$ とします。  
 	線分 $L$ の長さを $d$ とします。  
@@ -178,20 +187,37 @@ vnoidというサンプルパッケージが用意されております。
 	よって、膝関節の角度 $\theta_3$ は次のように求まります。  
 	$$ \theta_3 = \pi - \beta $$
 	
-	(以降はまだ書きかけです)
-	次に、足首のピッチ角 $\theta_4$ とロール角 $\theta_5$ を計算します。  
+	　次に、足首のピッチ角 $\theta_4$を計算します。  
 	そのために、足首を基準とした股関節の位置・姿勢について考えます。  
-	いま、足首を基準とした股関節は実際には $\boldsymbol{\hat{p}}$ に位置するとします。  
-	(phatの数式)  
+	いま、足首を基準とした股関節は実際には $\boldsymbol{\hat{p}}$ に位置します。  
+	$\boldsymbol{\hat{p}}$ は、 $\boldsymbol{p}$ や $\boldsymbol{Q}$ と次のような関係があります。  
+	$$ \boldsymbol{\hat{p}} = \boldsymbol{\overline{Q}} \cdot \boldsymbol{p} \cdot \boldsymbol{Q} $$  
 	足首がピッチ、ロール方向ともに回転しない場合において、  
 	足首基準の股関節の位置 $\boldsymbol{\hat{p}'}$ は下図のようになります。  
 	{{<figure src="./phatd.png" class="center" alt="phatd" width="50%">}}  
 	この状態から、足首をピッチ方向に $\theta_4$ だけ回転させたときの  
 	股関節の位置 $\boldsymbol{\hat{p}''}$ は下図のようになります。  
 	{{<figure src="./phatdd.png" class="center" alt="phatdd" width="50%">}}  
-	ここから更に足首をロール方向に $\theta_5$ だけ回転させると、  
+	よって、 $\theta_4$ は $\alpha$ と $\gamma$ の角度が分かれば求めることができます。  
+	$$ \theta_4 = -\alpha + \gamma $$  
+	ここで、図中の $\alpha$ の角度は次のように求められます。  
+	$$ \alpha = \mathrm{atan2}(\hat{p}_z, \hat{p}_x) $$  
+	さらに、 $\gamma$ の角度を求めていきます。  
+	先程の状態から更に足首をロール方向に $\theta_5$ だけ回転させると、  
 	股関節の位置は $\boldsymbol{\hat{p}}$ と一致します。  
 	{{<figure src="./phat.png" class="center" alt="phat" width="50%">}}  
+	zx平面でこれを見ると、以下図のようになり、  
+	$\boldsymbol{\hat{p}}$ と $\boldsymbol{\hat{p}''}$ のx座標が一致することがわかります。
+	{{<figure src="./gamma.png" class="center" alt="gamma" width="50%">}}  
+	このことを利用して、図中の $\gamma$ の角度を求めることができます。  
+	$$ \gamma = \mathrm{acos}(\frac{\hat{p}_x}{d}) $$
+	
+	　次に、足首のロール角 $\theta_5$ を計算します。  
+	以下図のように脚をyz平面に投影すると、ある角度だけ傾いた線分が得られます。  
+	{{<figure src="./theta5.png" class="center" alt="theta5" width="50%">}}  
+	このときの傾きが、足首のロール角 $\theta_5$ です。  
+	よって $\theta_5$ は次のように求まります。  
+	$$ \theta_5 = -\mathrm{atan2}(\hat{p}_z, \hat{p}_y) $$
 
 -	**脚の関節トルクを計算する(`~/iksolver.cpp`200~229行目)**
 	
