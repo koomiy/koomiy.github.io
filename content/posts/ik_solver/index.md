@@ -38,13 +38,14 @@ vnoidというサンプルパッケージが用意されております。
 	
 	事前に目標重心位置が与えられているとします。
 
-	はじめは、ベースリンクの目標位置と重心の目標位置を一致させて逆運動学を解きます。  
+	はじめはベースリンクの目標位置と重心の目標位置を一致させて、  
+	逆運動学を解きます。  
 	そうして得られた関節角をもとに、fksolverを用いて重心位置を計算します。  
 	そうすると、重心と目標重心の位置に大なり小なり誤差が生じます。  
-	その誤差をベースリンクの目標位置にフィードバックした上で、再度逆運動学を解きます。  
+	その誤差をベースリンクの目標位置にフィードバックした上で、  
+	再度逆運動学を解きます。
+	
 	この操作を繰り返し、誤差が無視できるほど小さくなる場合の解を採用します。
-
--	**腕の逆運動学(`~/iksolver.cpp`136~146行目、68~129行目)**
 
 -	**脚の逆運動学(`~/iksolver.cpp`148~158行目、11~66行目)**
 
@@ -87,7 +88,8 @@ vnoidというサンプルパッケージが用意されております。
 	> 最後に、右辺の $ \boldsymbol{{}^Wp_5^{ref}} - \boldsymbol{{}^Wp_B^{ref}} $ について、  
 	これはワールド座標基準のベースリンクから足首までの目標相対位置です。  
 	よって、 $ \boldsymbol{{}^WQ_B} $ を逆からかけ、  
-	ワールド座標からベースリンクに基準を変換することにより、次のようにできます。  
+	ワールド座標からベースリンクに基準を変換することにより、  
+	次のようにできます。  
 	$$ \boldsymbol{{}^Bp_5^{ref}} = \boldsymbol{{}^Bp_5^{ref}} - \boldsymbol{{}^Bp_B^{ref}} = \boldsymbol{{}^Bp_5^{ref}} \qquad \Box $$
 	
 	続く151行目で、脚の付け根関節基準の足首の目標姿勢を計算します。  
@@ -95,7 +97,8 @@ vnoidというサンプルパッケージが用意されております。
 	
 	> 151行目の式が成り立つことを証明しておきます。  
 	両辺に $ \boldsymbol{{}^BQ_0} = [1.0, 0.0, 0.0, 0.0]^T $ をかけます。  
-	すると右辺には変化がありませんが、左辺はベースリンク基準の足首の目標姿勢という意味になります。  
+	すると右辺には変化がありませんが、  
+	左辺はベースリンク基準の足首の目標姿勢という意味になります。  
 	$$ \boldsymbol{{}^BQ_5^{ref}} = \boldsymbol{\overline{{}^WQ_B^{ref}}} \cdot \boldsymbol{{}^WQ_E^{ref}} $$
 	> 
 	> 続いて、右辺についてですが、 $ \boldsymbol{\overline{{}^WQ_B^{ref}}} $ を逆からかけることにより、  
@@ -179,8 +182,7 @@ vnoidというサンプルパッケージが用意されております。
 	　まず、ひざ関節の角度 $\theta_3$ を計算します。  
 	{{<figure src="./beta.png" class="center" alt="beta" width="50%">}}  
 	股関節から足首の目標位置までを直線で結んだ線分を $L$ とします。  
-	線分 $L$ の長さを $d$ とします。  
-	このとき、 $d = ||\boldsymbol{p}||$ です。  
+	線分 $L$ の長さを $d$ とします。このとき、 $d = ||\boldsymbol{p}||$ です。  
 	線分 $L$ と大腿、下腿からなる三角形に注目します。  
 	この三角形の $\beta$ の角度は第二余弦定理より、次のように計算できます。  
 	$$ \beta = \mathrm{acos}(\frac{l_1^2 + l_2^2 - d^2}{2l_1l_2}) $$  
@@ -222,19 +224,22 @@ vnoidというサンプルパッケージが用意されております。
 	
 	　最後に、股関節のヨー角 $\theta_0$ 、ピッチ角 $\theta_1$ 、ロール角 $\theta_2$ を計算します。  
 	これらの回転角度をまとめて $\boldsymbol{\phi} = [\theta_0, \theta_1, \theta_2]^T$ とします。  
-	股関節を基準とした足首の姿勢 $\boldsymbol{Q}$ は、各関節の回転 $\boldsymbol{Q_i}$ によってもたらされるので、  
+	股関節を基準とした足首の姿勢 $\boldsymbol{Q}$ は、  
+	各関節の回転 $\boldsymbol{Q_i}$ によってもたらされるので、  
 	次のような関係が成立します。  
 	$$ \boldsymbol{Q} = \boldsymbol{Q_0} \cdot \boldsymbol{Q_1} \cdot \boldsymbol{Q_2} \cdot \boldsymbol{Q_3} \cdot \boldsymbol{Q_4} \cdot \boldsymbol{Q_5} $$  
 	よって、股関節における姿勢変化 $\boldsymbol{Q_{hip}}$ は次のように計算できます。  
 	$$ \boldsymbol{Q_{hip}} = \boldsymbol{Q_0} \cdot \boldsymbol{Q_1} \cdot \boldsymbol{Q_2} = \boldsymbol{Q} \cdot \overline{(\boldsymbol{Q_3} \cdot \boldsymbol{Q_4} \cdot \boldsymbol{Q_5})} $$  
-	姿勢の回転を表現する四元数から、回転角度に変換する関数`ToRollPitchYaw`を用いれば、  
+	姿勢の回転を表現する四元数から、  
+	回転角度に変換する関数`ToRollPitchYaw`を用いれば、  
 	$\boldsymbol{Q_{hip}}$ から $\boldsymbol{\phi}$ を求めることができます。  
 	ただし、このロボットの股関節はyaw, roll, pitchの順に並んでおり、  
-	`ToRollPitchYaw`関数の仕様に合わせるためにはyaw, pitch, rollの順に並べ替える必要があります。  
+	`ToRollPitchYaw`関数の仕様に合わせるためには、  
+	yaw, pitch, rollの順に並べ替える必要があります。  
 	並べ替える前は次のような関係が成り立っていますが、  
 	$$ \boldsymbol{Q_z(\theta_0)} \cdot \boldsymbol{Q_x(\theta_1)} \cdot \boldsymbol{Q_y(\theta_2)} = \boldsymbol{Q_{hip}} $$  
 	これをyaw, pitch, rollの順に並べ替えるには次のような操作をします。  
-	$$ \boldsymbol{Q_z(\theta_0)} \cdot \boldsymbol{Q_y(\theta_1)} \cdot \boldsymbol{Q_x(-\theta_2)} = \boldsymbol{Q_z(\pi/2)} \cdot \boldsymbol{Q_{hip}} /cdot \boldsymbol{Q_z(-\pi/2)} =: \boldsymbol{Q_{hip}'} $$  
+	$$ \boldsymbol{Q_z(\theta_0)} \cdot \boldsymbol{Q_y(\theta_1)} \cdot \boldsymbol{Q_x(-\theta_2)} = \boldsymbol{Q_z(\pi/2)} \cdot \boldsymbol{Q_{hip}} \cdot \boldsymbol{Q_z(-\pi/2)} =: \boldsymbol{Q_{hip}'} $$  
 	変換後の $\boldsymbol{Q_{hip}'}$ を`ToRollPitchYaw`関数に代入することで、  
 	股関節の角度リスト $\boldsymbol{\phi}$ を得ます。  
 	$$ \boldsymbol{\phi} = \mathrm{ToRollPitchYaw}(\boldsymbol{Q'_{hip}}) $$  
