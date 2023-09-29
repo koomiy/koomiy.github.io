@@ -227,12 +227,18 @@ vnoidというサンプルパッケージが用意されております。
 	$$ \boldsymbol{Q} = \boldsymbol{Q_0} \cdot \boldsymbol{Q_1} \cdot \boldsymbol{Q_2} \cdot \boldsymbol{Q_3} \cdot \boldsymbol{Q_4} \cdot \boldsymbol{Q_5} $$  
 	よって、股関節における姿勢変化 $\boldsymbol{Q_{hip}}$ は次のように計算できます。  
 	$$ \boldsymbol{Q_{hip}} = \boldsymbol{Q_0} \cdot \boldsymbol{Q_1} \cdot \boldsymbol{Q_2} = \boldsymbol{Q} \cdot \overline{(\boldsymbol{Q_3} \cdot \boldsymbol{Q_4} \cdot \boldsymbol{Q_5})} $$  
-	
 	姿勢の回転を表現する四元数から、回転角度に変換する関数`ToRollPitchYaw`を用いれば、  
-	$\boldsymbol{\phi}$ と $\boldsymbol{Q_{hip}}$ の間に次の関係式が成り立ちます。  
-	$$ \boldsymbol{\phi} = ToRollPitchYaw(\boldsymbol{Q_{hip}}) $$  
-	したがって、 $\theta_0 = \phi_z$ 、 $\theta_1 = \phi_y$ 、 $\theta_2 = \phi_x$ と求まります。
-	
+	$\boldsymbol{Q_{hip}}$ から $\boldsymbol{\phi}$ を求めることができます。  
+	ただし、このロボットの股関節はyaw, roll, pitchの順に並んでおり、  
+	`ToRollPitchYaw`関数の仕様に合わせるためにはyaw, pitch, rollの順に並べ替える必要があります。  
+	並べ替える前は次のような関係が成り立っていますが、  
+	$$ \boldsymbol{Q_z(\theta_0)} \cdot \boldsymbol{Q_x(\theta_1)} \cdot \boldsymbol{Q_y(\theta_2)} = \boldsymbol{Q_{hip}} $$  
+	これをyaw, pitch, rollの順に並べ替えるには次のような操作をします。  
+	$$ \boldsymbol{Q_z(\theta_0)} \cdot \boldsymbol{Q_y(\theta_1)} \cdot \boldsymbol{Q_x(-\theta_2)} = \boldsymbol{Q_z(\pi/2)} \cdot \boldsymbol{Q_{hip}} /cdot \boldsymbol{Q_z(-\pi/2)} =: \boldsymbol{Q'_{hip}} $$  
+	変換後の $\boldsymbol{Q'_{hip}}$ を`ToRollPitchYaw`関数に代入することで、  
+	股関節の角度リスト $\boldsymbol{\phi}$ を得ます。  
+	$$ \boldsymbol{\phi} = \mathrm{ToRollPitchYaw}(\boldsymbol{Q'_{hip}}) $$  
+	これにより、 $\theta_0 = \phi_z$ 、 $\theta_1 = \phi_y$ 、 $\theta_2 = -\phi_x$ と求まります。
 
 -	**脚の関節トルクを計算する(`~/iksolver.cpp`200~229行目)**
 	
