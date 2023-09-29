@@ -221,7 +221,18 @@ vnoidというサンプルパッケージが用意されております。
 	$$ \theta_5 = -\mathrm{atan2}(\hat{p}_z, \hat{p}_y) $$
 	
 	　最後に、股関節のヨー角 $\theta_0$ 、ピッチ角 $\theta_1$ 、ロール角 $\theta_2$ を計算します。  
-	(以降まだ書きかけです)  
+	これらの回転角度をまとめて $\boldsymbol{\phi} = [\theta_0, \theta_1, \theta_2]^T$ とします。  
+	股関節を基準とした足首の姿勢 $\boldsymbol{Q}$ は、各関節の回転 $\boldsymbol{Q_i}$ によってもたらされるので、  
+	次のような関係が成立します。  
+	$$ \boldsymbol{Q} = \boldsymbol{Q_0} \cdot \boldsymbol{Q_1} \cdot \boldsymbol{Q_2} \cdot \boldsymbol{Q_3} \cdot \boldsymbol{Q_4} \cdot \boldsymbol{Q_5} $$  
+	よって、股関節における姿勢変化 $\boldsymbol{Q_{hip}}$ は次のように計算できます。  
+	$$ \boldsymbol{Q_{hip}} = \boldsymbol{Q_0} \cdot \boldsymbol{Q_1} \cdot \boldsymbol{Q_2} = \boldsymbol{Q} \cdot \overline{(\boldsymbol{Q_3} \cdot \boldsymbol{Q_4} \cdot \boldsymbol{Q_5})} $$  
+	
+	姿勢の回転を表現する四元数から、回転角度に変換する関数`ToRollPitchYaw`を用いれば、  
+	$\boldsymbol{\phi}$ と $\boldsymbol{Q_{hip}}$ の間に次の関係式が成り立ちます。  
+	$$ \boldsymbol{\phi} = ToRollPitchYaw(\boldsymbol{Q_{hip}}) $$  
+	したがって、 $\theta_0 = \phi_z$ 、 $\theta_1 = \phi_y$ 、 $\theta_2 = \phi_x$ と求まります。
+	
 
 -	**脚の関節トルクを計算する(`~/iksolver.cpp`200~229行目)**
 	
