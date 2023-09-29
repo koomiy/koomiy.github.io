@@ -34,22 +34,7 @@ vnoidというサンプルパッケージが用意されております。
 
 `vnoid/src/iksolver.cpp`を、脚の逆運動学計算を例に解説します。
 
--	**逆運動学のおおまかな流れ(`~/iksolver.cpp`127行目~)**
-	
-	事前に目標重心位置が与えられているとします。
-
-	はじめはベースリンクの目標位置と重心の目標位置を一致させて、  
-	逆運動学を解きます。  
-	そうして得られた関節角をもとに、fksolverを用いて重心位置を計算します。  
-	そうすると、重心と目標重心の位置に大なり小なり誤差が生じます。  
-	その誤差をベースリンクの目標位置にフィードバックした上で、  
-	再度逆運動学を解きます。
-	
-	この操作を繰り返し、誤差が無視できるほど小さくなる場合の解を採用します。
-
--	**脚の逆運動学(`~/iksolver.cpp`148~158行目、11~66行目)**
-
-	**~ STEP 1 「股関節基準の足首の目標位置・姿勢を計算する」 ~**
+-	**股関節基準の足首の目標位置・姿勢を計算する(~/iksolver.cpp`148~158行目)**
 
 	```cpp {linenos=inline}
 	void IkSolver::Comp(const Param& param, const Base& base, const vector<Hand>& hand, const vector<Foot>& foot, vector<Joint>& joint){
@@ -106,7 +91,7 @@ vnoidというサンプルパッケージが用意されております。
 	また、上述したように $ \boldsymbol{{}^WQ_E^{ref}} = \boldsymbol{{}^WQ_5^{ref}} $ が成り立つので、  
 	右辺の意味はベースリンク基準の足首の目標姿勢となり、左辺と一致します。
 
-	**~ STEP2 「逆運動学を解いて脚の関節角を計算する」 ~**
+-	**脚の逆運動学(~/iksolver.cpp`11~66行目)**
 	
 	```cpp {linenos=inline}
 	void IkSolver::CompLegIk(const Vector3& pos, const Quaternion& ori, double l1, double l2, double* q){
@@ -244,16 +229,161 @@ vnoidというサンプルパッケージが用意されております。
 	股関節の角度リスト $\boldsymbol{\phi}$ を得ます。  
 	$$ \boldsymbol{\phi} = \mathrm{ToRollPitchYaw}(\boldsymbol{Q'_{hip}}) $$  
 	これにより、 $\theta_0 = \phi_z$ 、 $\theta_1 = \phi_y$ 、 $\theta_2 = -\phi_x$ と求まります。
+	
+	以上の計算により、股関節を基準とした足首の位置・姿勢情報から、  
+	脚の関節角度を逆算することができました。  
+	このような計算を逆運動学を解くといいます。
+	
+-	**[補足] 逆運動学で得られた重心を目標重心に一致させる(`~/iksolver.cpp`127行目~)**
 
--	**脚の関節トルクを計算する(`~/iksolver.cpp`200~229行目)**
+	人型ロボットの目標重心をせっかく計画しても、  
+	正確に追従できなければ意味がありません。  
+	しかし困ったことに手や足のモーションは  
+	重心を目標に一致させることを考えずに計画するので、  
+	逆運動学を解いた結果必ずしも重心は目標と一致しません。
 	
+	そこで本iksolverでは、  
+	目標手足位置・姿勢と目標重心を同時に満たすような  
+	関節角の解を求める工夫をしております。
 	
+	事前に目標重心位置が与えられているとします。
+
+	はじめはベースリンクの目標位置と重心の目標位置を一致させて、  
+	逆運動学を解きます。  
+	そうして得られた関節角をもとに、fksolverを用いて重心位置を計算します。  
+	そうすると、重心と目標重心の位置に大なり小なり誤差が生じます。  
+	その誤差をベースリンクの目標位置にフィードバックした上で、  
+	再度逆運動学を解きます。
+	
+	この操作を繰り返し、誤差が無視できるほど小さくなる場合の解を採用します。  
+	これにより最終的には重心が目標重心に一致することになります。
 
 ---
 
 ## 例題: ヨガのポーズ
 
+以前投稿した[005 - 関節を動かしてみる](https://koomiy.github.io/posts/footstep_planning/)  
+のヨガのポーズをiksolverを使って再現してみます。
 
+今回の例題は、[005 - 関節を動かしてみる](https://koomiy.github.io/posts/footstep_planning/)の記事を一通り終えたところからの続きです。
+前回は、関節の目標角度を与えてポーズを取らせていましたが、  
+今回は、手足の目標位置・姿勢および目標重心を与えてポーズを取らせてみましょう。
+
+そのためにはヨガのポーズをとっているときの  
+手足の位置・姿勢および重心を確認する必要があります。  
+そこで、fksolverを使ってポーズ中の手足の位置・姿勢および重心を計算し、  
+その情報を出力します。  
+
+fksolverのコメントアウトを外し、  
+その後ろに以下のプログラムを記述すると、  
+ヨガのポーズをとっているときの手足の位置・姿勢および重心を確認できます。
+
+```cpp {linenos=inline}
+void MyRobot::Control(){
+
+    ...
+    
+    // calc FK
+    fk_solver.Comp(param, joint, base, centroid, hand, foot);
+    
+    // check hand
+    printf("right hand_pos: %lf, %lf, %lf\n",
+           hand[0].pos.x(),
+           hand[0].pos.y(),
+           hand[0].pos.z());
+    printf("right hand_ori: %lf, %lf, %lf, %lf\n",
+           hand[0].ori.w(),
+           hand[0].ori.x(),
+           hand[0].ori.y(),
+           hand[0].ori.z());
+    printf("left hand_pos: %lf, %lf, %lf\n",
+           hand[1].pos.x(),
+           hand[1].pos.y(),
+           hand[1].pos.z());
+    printf("left hand_ori: %lf, %lf, %lf, %lf\n",
+           hand[1].ori.w(),
+           hand[1].ori.x(),
+           hand[1].ori.y(),
+           hand[1].ori.z());
+
+    // check foot
+    printf("right foot_pos: %lf, %lf, %lf\n",
+           foot[0].pos.x(),
+           foot[0].pos.y(),
+           foot[0].pos.z());
+    printf("right foot_ori: %lf, %lf, %lf, %lf\n",
+           foot[0].ori.w(),
+           foot[0].ori.x(),
+           foot[0].ori.y(),
+           foot[0].ori.z());
+    printf("left foot_pos: %lf, %lf, %lf\n",
+           foot[1].pos.x(),
+           foot[1].pos.y(),
+           foot[1].pos.z());
+    printf("left foot_ori: %lf, %lf, %lf, %lf\n",
+           foot[1].ori.w(),
+           foot[1].ori.x(),
+           foot[1].ori.y(),
+           foot[1].ori.z());
+    
+    // check com
+    printf("com: %lf, %lf, %lf\n", centroid.com_pos.x(), centroid.com_pos.y(), centroid.com_pos.z());
+    
+    ...
+    
+}   
+```
+
+choreonoidを実行すると、以下のように出力が返ってくるはずです。  
+
+```
+right hand_pos: 0.122560, 0.000257, 1.276572
+right hand_ori: 0.002227, -0.000196, -0.999997, 0.001291
+left hand_pos: 0.122560, -0.000257, 1.276572
+left hand_ori: 0.002227, 0.000196, -0.999997, -0.001291
+right foot_pos: -0.000000, 0.036232, 0.547969
+right foot_ori: 0.500898, 0.499100, 0.499100, -0.500898
+left foot_pos: -0.000000, 0.100000, 0.150000
+left foot_ori: 1.000000, 0.000000, -0.000000, 0.000000
+com: 0.017037, -0.005541, 1.056449
+```
+
+これで、ポーズ中の手足の位置・姿勢および重心が分かりました。  
+いよいよ関節目標角の設定部分を消去し、  
+以下のように目標手足位置・姿勢および重心を設定してみます。
+
+```cpp
+void MyRobot::Control(){
+
+    ...
+    
+    // set hand
+    hand[0].pos_ref = Vector3(0.122560, 0.000257, 1.276572);
+    hand[0].ori_ref = Quaternion(0.002227, -0.000196, -0.999997, 0.001291);
+    hand[1].pos_ref = Vector3(0.122560, -0.000257, 1.276572);
+    hand[1].ori_ref = Quaternion(0.002227, 0.000196, -0.999997, -0.001291);
+
+    // set foot
+    foot[0].pos_ref = Vector3(-0.000000, 0.036232, 0.547969);
+    foot[0].ori_ref = Quaternion(0.500898, 0.499100, 0.499100, -0.500898);
+    foot[1].pos_ref = Vector3(-0.000000, 0.100000, 0.150000);
+    foot[1].ori_ref = Quaternion(1.000000, 0.000000, -0.000000, 0.000000);
+    
+    // set com
+    centroid.com_pos_ref = Vector3(0.017037, -0.005541, 1.056449);
+    
+    // calc CoM IK
+    ik_solver.Comp(&fk_solver, param, centroid, base, hand, foot, joint);
+    
+    ...
+    
+}
+```
+
+choreonoidを実行してみると、以下のように動きます。  
+{{<figure src="./yoga.gif" class="center" alt="yoga" width="50%">}}  
+現状、なぜか腕がありえないほどにねじれていきますが、  
+脚の方はいい感じにヨガのポーズを再現できていますね！
 
 ---
 
