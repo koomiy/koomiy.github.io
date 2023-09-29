@@ -184,7 +184,7 @@ vnoidというサンプルパッケージが用意されております。
 	{{<figure src="./phatd.png" class="center" alt="phatd" width="50%">}}  
 	この状態から、足首をピッチ方向に $\theta_4$ だけ回転させると、  
 	股関節は以下図のように位置 $\boldsymbol{\hat{p}''}$ に来ます。  
-	{{<figure src="./phatdd.png" class="center" alt="phatdd" width="50%">}}  
+	{{<figure src="./phatdd.png" class="center" alt="phatdd" width="60%">}}  
 	この図から分かるように、 $\theta_4$ は $\alpha$ と $\gamma$ の角度が分かれば求めることができます。  
 	$$ \theta_4 = -\alpha + \gamma $$  
 	ここで、図中の $\alpha$ の角度は次のように求められます。  
@@ -192,17 +192,17 @@ vnoidというサンプルパッケージが用意されております。
 	さらに、 $\gamma$ の角度を求めていきます。  
 	先程の状態から更に足首をロール方向に $\theta_5$ だけ回転させると、  
 	股関節の位置は $\boldsymbol{\hat{p}}$ と一致します。  
-	{{<figure src="./phat.png" class="center" alt="phat" width="50%">}}  
+	{{<figure src="./phat.png" class="center" alt="phat" width="45%">}}  
 	xz平面でこれを見ると、以下図のようになり、  
 	$\boldsymbol{\hat{p}}$ と $\boldsymbol{\hat{p}''}$ のx座標が一致することがわかります。
-	{{<figure src="./gamma.png" class="center" alt="gamma" width="50%">}}  
+	{{<figure src="./gamma.png" class="center" alt="gamma" width="40%">}}  
 	このことを利用して、図中の $\gamma$ の角度を求めることができます。  
 	$$ \gamma = \mathrm{acos}(\frac{\hat{p}_x}{d}) $$  
 	以上により $\alpha$ と $\gamma$ が求まったので、 $\theta_4$ が決定します。
 	
 	　次に、足首のロール角 $\theta_5$ を計算します。  
 	以下図のように脚をyz平面に投影すると、ある角度だけ傾いた線分が得られます。  
-	{{<figure src="./theta5.png" class="center" alt="theta5" width="50%">}}  
+	{{<figure src="./theta5.png" class="center" alt="theta5" width="40%">}}  
 	このときの傾きが、足首のロール角 $\theta_5$ です。  
 	よって $\theta_5$ は次のように求まります。  
 	$$ \theta_5 = -\mathrm{atan2}(\hat{p}_z, \hat{p}_y) $$
@@ -265,7 +265,7 @@ vnoidというサンプルパッケージが用意されております。
 以前投稿した[005 - 関節を動かしてみる](https://koomiy.github.io/posts/footstep_planning/)  
 のヨガのポーズをiksolverを使って再現してみます。
 
-今回の例題は、[005 - 関節を動かしてみる](https://koomiy.github.io/posts/footstep_planning/)の記事を一通り終えたところからの続きです。
+今回の例題は、[005 - 関節を動かしてみる](https://koomiy.github.io/posts/footstep_planning/)の記事を一通り終えたところからの続きです。  
 前回は、関節の目標角度を与えてポーズを取らせていましたが、  
 今回は、手足の目標位置・姿勢および目標重心を与えてポーズを取らせてみましょう。
 
@@ -382,8 +382,10 @@ void MyRobot::Control(){
 
 choreonoidを実行してみると、以下のように動きます。  
 {{<figure src="./yoga.gif" class="center" alt="yoga" width="50%">}}  
-現状、なぜか腕がありえないほどにねじれていきますが、  
+現状、なぜか腕の関節がありえない角度にねじれていきますが、  
 脚の方はいい感じにヨガのポーズを再現できていますね！
+
+(この腕の関節がおかしくなる減少については後日対処する予定です。)
 
 ---
 
