@@ -234,8 +234,8 @@ vnoidというサンプルパッケージが用意されております。
 	並べ替える前は次のような関係が成り立っていますが、  
 	$$ \boldsymbol{Q_z(\theta_0)} \cdot \boldsymbol{Q_x(\theta_1)} \cdot \boldsymbol{Q_y(\theta_2)} = \boldsymbol{Q_{hip}} $$  
 	これをyaw, pitch, rollの順に並べ替えるには次のような操作をします。  
-	$$ \boldsymbol{Q_z(\theta_0)} \cdot \boldsymbol{Q_y(\theta_1)} \cdot \boldsymbol{Q_x(-\theta_2)} = \boldsymbol{Q_z(\pi/2)} \cdot \boldsymbol{Q_{hip}} /cdot \boldsymbol{Q_z(-\pi/2)} =: \boldsymbol{Q'_{hip}} $$  
-	変換後の $\boldsymbol{Q'_{hip}}$ を`ToRollPitchYaw`関数に代入することで、  
+	$$ \boldsymbol{Q_z(\theta_0)} \cdot \boldsymbol{Q_y(\theta_1)} \cdot \boldsymbol{Q_x(-\theta_2)} = \boldsymbol{Q_z(\pi/2)} \cdot \boldsymbol{Q_{hip}} /cdot \boldsymbol{Q_z(-\pi/2)} =: \boldsymbol{Q_{hip}'} $$  
+	変換後の $\boldsymbol{Q_{hip}'}$ を`ToRollPitchYaw`関数に代入することで、  
 	股関節の角度リスト $\boldsymbol{\phi}$ を得ます。  
 	$$ \boldsymbol{\phi} = \mathrm{ToRollPitchYaw}(\boldsymbol{Q'_{hip}}) $$  
 	これにより、 $\theta_0 = \phi_z$ 、 $\theta_1 = \phi_y$ 、 $\theta_2 = -\phi_x$ と求まります。
