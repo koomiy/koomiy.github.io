@@ -5,8 +5,6 @@ categories: ["vnoidベースの開発"]
 menu: main
 ---
 
-(こちらは制作中の記事です)
-
 ---
 
 ## 今回の内容
@@ -395,4 +393,4 @@ choreonoidを実行してみると、以下のように動きます。
 
 次回は歩行パターン計画について解説しようと思います。
 
-次回： [008 - 歩行パターン計画](https://koomiy.github.io/posts/footstep_planning/)
+次回： [008 - 歩行パターン計画](https://koomiy.github.io/posts/footstep_planner/)
