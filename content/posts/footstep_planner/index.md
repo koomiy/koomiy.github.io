@@ -35,7 +35,7 @@ DCMについては後ほど説明します。
 
 -	**歩行パラメータの入力(`myrobot.cpp`192行目~)**
 	
-	cpp```
+	```cpp {linenos=inline}
 	if(timer.count % 10 == 0){
 	    // read joystick
 	    joystick.readCurrentState();
@@ -74,7 +74,7 @@ DCMについては後ほど説明します。
 
 -	**着地位置・姿勢計画(`footstep_plenner`16行目~)**
 	
-	cpp```
+	```cpp {linenos=inline}
 	void FootstepPlanner::Plan(const Param& param, Footstep& footstep){
     
     	    // we assume that foot placement, support foot flag, and dcm of step[0] are specified from outside

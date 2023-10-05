@@ -389,8 +389,8 @@ choreonoidを実行してみると、以下のように動きます。
 
 ## まとめ・次回予告
 
-今回はvnoidパッケージのiksolverについて解説しました。
+今回はvnoidパッケージの逆運動学ソルバー、iksolverについて解説しました。
 
-次回は歩行パターン計画について解説しようと思います。
+次回はステップ計画について解説しようと思います。
 
-次回： [008 - 歩行パターン計画](https://koomiy.github.io/posts/footstep_planner/)
+次回： [008 - ステップ計画](https://koomiy.github.io/posts/footstep_planner/)
