@@ -153,10 +153,12 @@ DCMについては後ほど説明します。
 	回転量$\Delta\theta$を$\Delta\theta = turn$とします。  
 	また、両足間の初期幅$w$は、以下のようにします。  
 	$$ 
+	\[
 	w = \begin{cases}
-		spacing & (\text{右足が支持側}) \
+		spacing & (\text{右足が支持側}) \\
 		-spacing & (\text{左足が支持側}) 
 	\end{cases}
+	\]
 	$$
 	
 	現在の支持足から、次の着地点までの相対位置を$\Delta p_{rel}$とします。  
