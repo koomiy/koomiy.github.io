@@ -158,7 +158,8 @@ DCMについては後ほど説明します。
 	足が回転しない場合、$\Delta p_{rel}$は次のように計算できます。  
 	$$ \Delta p_{rel} = [l, w + d, dz]^T $$  
 	足が回転する場合は次のように計算します。  
-	$$  \Delta p_{rel} = [(r - \frac{w}{2} - d)\mathrm{sin}\Delta\theta, (r + \frac{w}{2}) - (r - \frac{w}{2} - d)\mathrm{cos}\Delta\theta, dz]^T  $$  
+	$$  \Delta p_{rel} = [(r - \frac{w}{2} - d)\mathrm{sin}\Delta\theta, (r + \frac{w}{2}) - (r - \frac{w}{2} - d)\mathrm{cos}\Delta\theta, dz]^T \\
+	r = \frac{l}{\Delta\theta}  $$  
 	
 	
 	(以降書きかけです)
