@@ -2,6 +2,9 @@ hugoにおけるlatex記法のチートシート
 hugoにmathjaxをインストールして、
 すべてのページで読み込むことでlatexをサポートさせている
 
+●現状のバージョン
+https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML
+
 ●bmについて
 mathjaxではbmパッケージをサポートしていない(v2.7.7の場合)
 (もしかしたらバージョンアップさせたら使えるようになるのかも)
@@ -16,3 +19,5 @@ mathjaxではbmパッケージをサポートしていない(v2.7.7の場合)
 2023.07.06現在だと、最新バージョンは3にアップグレードしてるようだ。
 下記リンクを参考にしながらバージョンアップさせてもいいかもしれない。
 https://kkawazoe.github.io/blog/2020/05/23/insert-formula-into-hugo-part2/
+
+
