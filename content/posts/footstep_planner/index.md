@@ -61,7 +61,15 @@ DCMについては後ほど説明します。
 	```
 	
 	歩行パラメータとは、歩幅や旋回量、歩行期間などといった、  
-	一歩進むのに欠かせない情報のことです。  
+	一歩進むのに欠かせない情報のことです。
+	
+	歩行パラメータには、正面方向への歩幅`stride`や横方向への歩幅`sway`、  
+	両足間の初期幅`spacing`、旋回量`turn`、高低差`climb`歩行期間`duration`、  
+	支持脚か遊脚かの判定フラグ`side`が含まれます。  
+	各パラメータは視覚的には次の画像のような意味を持ちます。
+	{{<figure src="./footstep_overall.png" class="center" alt="footstep_overall" width="50%">}}  
+	{{<figure src="./footstep.png" class="center" alt="footstep" width="50%">}}
+	
 	歩行パラメータは、`Step`クラスのオブジェクト  
 	`step`のメンバ変数に代入されます。
 	
@@ -71,12 +79,14 @@ DCMについては後ほど説明します。
 	デフォルトでは`footstep.steps`に、0.2mの左右足間隔で、  
 	まっすぐ0.1mだけ0.5sで歩行するパラメータを持つ`step`を3歩分、  
 	その場で停止するパラメータを持つ`step`を1歩分追加します。
+	
+	
 
 -	**着地位置・姿勢計画(`footstep_plenner`16行目~)**
 	
 	```cpp {linenos=inline}
 	void FootstepPlanner::Plan(const Param& param, Footstep& footstep){
-    
+
     	    // we assume that foot placement, support foot flag, and dcm of step[0] are specified from outside
 
     	    // determine foot placement and support foot flag of remaining steps
@@ -105,7 +115,7 @@ DCMについては後ほど説明します。
 	                (r + w/2.0) - (r - w/2.0 - d)*cos(dtheta),
 	                dz);
 	        }
-	    
+	        
 	        // support foot exchange
 	        st1.side = !st0.side;
 
@@ -136,6 +146,10 @@ DCMについては後ほど説明します。
 	そのために`sup`と`swg`変数を用意します。
 	`sup`が支持足であることを意味し、  
 	`swg`が振り足であることを意味します。
+	
+	上記プログラムの14行目より、  
+	代入された歩行パラメータをもとに次の着地ポーズを計画します。
+	
 	
 	(以降書きかけです)
 	
