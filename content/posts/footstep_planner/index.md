@@ -152,14 +152,19 @@ DCMについては後ほど説明します。
 	現在と次の着地点との高低差$dz$を$dz = climb$、  
 	回転量$\Delta\theta$を$\Delta\theta = turn$とします。  
 	また、両足間の初期幅$w$は、以下のようにします。  
-	$$ w = \begin{cases} spacing & (\text{右足が支持側}) \\ -spacing & (\text{左足が支持側}) $$
+	$$ 
+	w = \begin{cases} 
+		spacing & (\text{右足が支持側}) \\ 
+		-spacing & (\text{左足が支持側}) 
+	\end{cases} 
+	$$
 	
 	現在の支持足から、次の着地点までの相対位置を$\Delta p_{rel}$とします。  
 	足が回転しない場合、$\Delta p_{rel}$は次のように計算できます。  
 	$$ \Delta p_{rel} = [l, w + d, dz]^T $$  
 	足が回転する場合は次のように計算します。  
-	$$  \Delta p_{rel} = [(r - \frac{w}{2} - d)\mathrm{sin}\Delta\theta, (r + \frac{w}{2}) - (r - \frac{w}{2} - d)\mathrm{cos}\Delta\theta, dz]^T \\
-	r = \frac{l}{\Delta\theta}  $$  
+	$$  \Delta p_{rel} = [(r - \frac{w}{2} - d)\mathrm{sin}\Delta\theta, (r + \frac{w}{2}) - (r - \frac{w}{2} - d)\mathrm{cos}\Delta\theta, dz]^T  $$
+	$$  r = \frac{l}{\Delta\theta}  $$  
 	
 	
 	(以降書きかけです)
