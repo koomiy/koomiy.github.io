@@ -2,16 +2,12 @@ hugoにおけるlatex記法のチートシート
 hugoにmathjaxをインストールして、
 すべてのページで読み込むことでlatexをサポートさせている
 
-●現状のバージョン
+●バージョン
+以前まで以下を使っていた
 https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML
-<script type="text/x-mathjax-config">
- MathJax.Hub.Config({
- tex2jax: {
- inlineMath: [['$', '$'] ],
- displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
- }
- });
-</script>
+最新バージョンは次の通りで、現在使っているものである
+https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
 
 ●bmについて
 mathjaxではbmパッケージをサポートしていない(v2.7.7の場合)
