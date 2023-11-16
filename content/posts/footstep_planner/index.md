@@ -64,7 +64,7 @@ DCMについては後ほど説明します。
 	一歩進むのに欠かせない情報のことです。
 	
 	歩行パラメータには、前後方向への歩幅$stride$や横方向への歩幅$sway$、  
-	両足間の初期幅$spacing$、足の鉛直軸周りの回転量$turn$、高低差$climb$、  
+	両足間の初期幅$spacing$、支持足を基準とした着地足の旋回量(鉛直軸周り)$turn$、高低差$climb$、  
 	歩行期間$duration$、右足か左足かの判定フラグ$side$があります。  
 	$side$は、右足なら0の値を持ち、左足なら1の値を持ちます。  
 	
@@ -160,7 +160,7 @@ DCMについては後ほど説明します。
 	$$
 	
 	現在の支持足から、次の着地点までの相対位置を$\Delta p_{rel}$とします。  
-	旋回しない場合、$\Delta p_{rel}$は次のように計算できます。  
+	旋回しない($\Delta\theta = 0$)場合、$\Delta p_{rel}$は次のように計算できます。  
 	$$ \Delta p_{rel} = [l, w + d, dz]^T $$  
 	このとき、各パラメータは視覚的には次の画像のような意味となります。  
 	{{<figure src="./footstep_diag.png" class="center" alt="footstep_diag" width="50%">}}
@@ -170,7 +170,7 @@ DCMについては後ほど説明します。
 	$$  r = \frac{l}{\Delta\theta}  $$  
 	このとき、各パラメータの視覚的な意味は特にありません。  
 	しかし、次の画像に示すような曲線上に、次の着地位置が決まります。  
-	{{<figure src="./footstep_turning.png" class="center" alt="footstep_turning" width="100%">}}
+	{{<figure src="./footstep_turning.png" class="center" alt="footstep_turning" width="150%">}}
 	
 	
 	
