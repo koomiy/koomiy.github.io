@@ -170,9 +170,21 @@ DCMについては後ほど説明します。
 	$$  r = \frac{l}{\Delta\theta}  $$  
 	このとき、各パラメータの視覚的な意味は特にありません。  
 	しかし、次の画像に示すような曲線上に、次の着地位置が決まります。  
-	{{<figure src="./footstep_turning.png" class="center" alt="footstep_turning" width="50%">}}
-	
-	
+	{{<figure src="./footstep_turning.png" class="center" alt="footstep_turning" width="50%">}}  
+	この曲線は、固定歩幅$l$、$d$に対して、  
+	旋回量$\Delta\theta$を$[-\pi, 0) || (0, \pi]$の区間で変化させたプロットです。  
+	この曲線の特徴として、以下のことが言えます。  
+	$l = 0$のとき、曲線は$(0, \frac{w}{2})$を中心とする半径$\frac{w}{2} + d$の円となります。  
+	この円が曲線の基本となります。  
+	$d$が増えると、円の半径が大きくなります。  
+	{{<figure src="./curve_stride0.gif" class="center" alt="curve_stride0" width="50%">}}  
+	また、$l$が増えるごとに曲線が前方向に伸びて円が開いていきます。  
+	{{<figure src="./curve_strideup.gif" class="center" alt="curve_strideup" width="50%">}}  
+	さらに、歩幅$l$、$d$を固定としたとき、旋回量$\Delta\theta$が増えるにつれて  
+	支持足、着地足間の距離が次第に短くなります。  
+	{{<figure src="./deprel_vs_turn.png" class="center" alt="dprel_vs_turn" width="50%">}}  
+	これらの特徴から、指定した歩幅の情報を反映しながらも、  
+	旋回によって脚の長さを超えないように着地できるように曲線が設計されていると考えられます。
 	
 	(以降書きかけです)
 	
