@@ -170,7 +170,7 @@ DCMについては後ほど説明します。
 	$$  r = \frac{l}{\Delta\theta}  $$  
 	このとき、各パラメータの視覚的な意味は特にありません。  
 	しかし、次の画像に示すような曲線上に、次の着地位置が決まります。  
-	{{<figure src="./footstep_turning.png" class="center" alt="footstep_turning" width="150%">}}
+	{{<figure src="./footstep_turning.png" class="center" alt="footstep_turning" width="200%">}}
 	
 	
 	
