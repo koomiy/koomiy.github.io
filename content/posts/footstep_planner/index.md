@@ -133,6 +133,9 @@ DCMについては後ほど説明します。
 	ここでは入力された`footstep.steps`の情報を用いて、  
 	先頭から順に着地位置・姿勢を計画します。  
 	for文内の処理につき1歩分の計画をします。
+	次の画像は結果的に得られる支持と離地、着地について、  
+	おおよその関係をまとめたものです。
+	{{<figure src="./footstep_overall.png" class="center" alt="footstep_overall" width="50%">}}
 	
 	参照変数として`st0`、`st1`を定義します。  
 	これにより例えば、`st0`の内容を変更すれば、  
@@ -160,15 +163,15 @@ DCMについては後ほど説明します。
 	旋回しない場合、$\Delta p_{rel}$は次のように計算できます。  
 	$$ \Delta p_{rel} = [l, w + d, dz]^T $$  
 	このとき、各パラメータは視覚的には次の画像のような意味となります。  
-	{{<figure src="./footstep_overall.png" class="center" alt="footstep_overall" width="50%">}}  
 	{{<figure src="./footstep_diag.png" class="center" alt="footstep_diag" width="50%">}}
 	
 	旋回歩行する場合は次のように計算します。  
 	$$  \Delta p_{rel} = [(r - \frac{w}{2} - d)\mathrm{sin}\Delta\theta, (r + \frac{w}{2}) - (r - \frac{w}{2} - d)\mathrm{cos}\Delta\theta, dz]^T  $$
 	$$  r = \frac{l}{\Delta\theta}  $$  
 	このとき、各パラメータの視覚的な意味は特にありません。  
-	しかし、次の画像に示すような曲線上に次の着地位置が来ます。  
+	しかし、次の画像に示すような曲線上に、次の着地位置が決まります。  
 	{{<figure src="./footstep_turning.png" class="center" alt="footstep_turning" width="100%">}}
+	
 	
 	
 	(以降書きかけです)
