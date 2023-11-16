@@ -132,9 +132,9 @@ DCMについては後ほど説明します。
 	
 	ここでは入力された`footstep.steps`の情報を用いて、  
 	先頭から順に着地位置・姿勢を計画します。  
-	for文内の処理につき1歩分の計画をします。
-	次の画像は結果的に得られる支持と離地、着地について、  
-	おおよその関係をまとめたものです。
+	for文内の処理につき1歩分の計画をします。  
+	この処理により得られる支持と離地、着地について、  
+	おおよその関係をまとめた図を次に示します。
 	{{<figure src="./footstep_overall.png" class="center" alt="footstep_overall" width="50%">}}
 	
 	参照変数として`st0`、`st1`を定義します。  
@@ -150,7 +150,7 @@ DCMについては後ほど説明します。
 	
 	前後方向への歩幅$l$を$l = stride$、横方向への歩幅$d$を$d = sway$、  
 	現在と次の着地点との高低差$dz$を$dz = climb$、  
-	回転量$\Delta\theta$を$\Delta\theta = turn$とします。  
+	旋回量$\Delta\theta$を$\Delta\theta = turn$とします。  
 	また、両足間の初期幅$w$は、以下のようにします。  
 	$$ 
 	w = \begin{cases}
@@ -166,16 +166,15 @@ DCMについては後ほど説明します。
 	{{<figure src="./footstep_diag.png" class="center" alt="footstep_diag" width="50%">}}
 	
 	旋回歩行する場合は次のように計算します。  
-	$$  \Delta p_{rel} = [(r - \frac{w}{2} - d)\mathrm{sin}\Delta\theta, (r + \frac{w}{2}) - (r - \frac{w}{2} - d)\mathrm{cos}\Delta\theta, dz]^T  $$
+	$$  \Delta p_{rel} = \begin{bmatrix}(r - \frac{w}{2} - d)\mathrm{sin}\Delta\theta \\\\\\ (r + \frac{w}{2}) - (r - \frac{w}{2} - d)\mathrm{cos}\Delta\theta \\\\\\ dz\end{bmatrix}  $$
 	$$  r = \frac{l}{\Delta\theta}  $$  
-	このとき、各パラメータの視覚的な意味は特にありませんが、  
+	このとき、各パラメータの視覚的な意味を考えるのは難しいですが、  
 	次の画像に示すような曲線上に、次の着地位置が決まります。  
 	{{<figure src="./footstep_turning.png" class="center" alt="footstep_turning" width="50%">}}  
-	この曲線は、固定歩幅$l$、$d$に対して、  
+	この曲線は、固定歩幅$l$、$d$に対して  
 	旋回量$\Delta\theta$を$[-\pi, 0) || (0, \pi]$の区間で変化させたプロットです。  
-	この曲線の特徴として、以下のことが言えます。  
+	この曲線の特徴として、以下の性質を持ちます。  
 	$l = 0$のとき、曲線は$(0, \frac{w}{2})$を中心とする半径$\frac{w}{2} + d$の円となります。  
-	この円が曲線の基本となります。  
 	$d$が増えると、円の半径が大きくなります。  
 	{{<figure src="./curve_stride0.gif" class="center" alt="curve_stride0" width="50%">}}  
 	また、$l$が増えるごとに曲線が前方向に伸びて円が開いていきます。  
@@ -183,8 +182,9 @@ DCMについては後ほど説明します。
 	さらに、歩幅$l$、$d$を固定としたとき、旋回量$\Delta\theta$が増えるにつれて  
 	支持足、着地足間の距離が次第に短くなります。  
 	{{<figure src="./dprel_vs_turn.png" class="center" alt="dprel_vs_turn" width="50%">}}  
-	これらの特徴から、指定した歩幅の情報を反映しながらも、  
-	旋回によって脚の長さを超えないように着地できるように曲線が設計されていると考えられます。
+	これらの性質から、指定した歩幅の情報を反映しながらも、  
+	旋回によって脚の長さを超えて着地しないように  
+	曲線が設計されていることが分かります。
 	
 	(以降書きかけです)
 	
