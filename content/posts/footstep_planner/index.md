@@ -67,9 +67,6 @@ DCMについては後ほど説明します。
 	両足間の初期幅`spacing`、足の鉛直軸周りの回転量`turn`、高低差`climb`、  
 	歩行期間`duration`、右足か左足かの判定フラグ`side`があります。  
 	`side`は、右足なら0の値を持ち、左足なら1の値を持ちます。  
-	各パラメータは視覚的には次の画像のような意味を持ちます。  
-	{{<figure src="./footstep_overall.png" class="center" alt="footstep_overall" width="50%">}}  
-	{{<figure src="./footstep.png" class="center" alt="footstep" width="50%">}}
 	
 	歩行パラメータは、`Step`クラスのオブジェクト  
 	`step`のメンバ変数に代入されます。
@@ -160,11 +157,18 @@ DCMについては後ほど説明します。
 	$$
 	
 	現在の支持足から、次の着地点までの相対位置を$\Delta p_{rel}$とします。  
-	足が回転しない場合、$\Delta p_{rel}$は次のように計算できます。  
+	旋回しない場合、$\Delta p_{rel}$は次のように計算できます。  
 	$$ \Delta p_{rel} = [l, w + d, dz]^T $$  
-	足が回転する場合は次のように計算します。  
+	このとき、各パラメータは視覚的には次の画像のような意味となります。  
+	{{<figure src="./footstep_overall.png" class="center" alt="footstep_overall" width="50%">}}  
+	{{<figure src="./footstep_diag.png" class="center" alt="footstep_diag" width="50%">}}
+	
+	旋回歩行する場合は次のように計算します。  
 	$$  \Delta p_{rel} = [(r - \frac{w}{2} - d)\mathrm{sin}\Delta\theta, (r + \frac{w}{2}) - (r - \frac{w}{2} - d)\mathrm{cos}\Delta\theta, dz]^T  $$
 	$$  r = \frac{l}{\Delta\theta}  $$  
+	このとき、各パラメータの視覚的な意味は特にありません。  
+	しかし、次の画像に示すような曲線上に次の着地位置が来ます。  
+	{{<figure src="./footstep_turning.png" class="center" alt="footstep_turning" width="50%">}}
 	
 	
 	(以降書きかけです)
