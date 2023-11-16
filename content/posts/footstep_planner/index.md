@@ -182,7 +182,7 @@ DCMについては後ほど説明します。
 	{{<figure src="./curve_strideup.gif" class="center" alt="curve_strideup" width="50%">}}  
 	さらに、歩幅$l$、$d$を固定としたとき、旋回量$\Delta\theta$が増えるにつれて  
 	支持足、着地足間の距離が次第に短くなります。  
-	{{<figure src="./deprel_vs_turn.png" class="center" alt="dprel_vs_turn" width="50%">}}  
+	{{<figure src="./dprel_vs_turn.png" class="center" alt="dprel_vs_turn" width="50%">}}  
 	これらの特徴から、指定した歩幅の情報を反映しながらも、  
 	旋回によって脚の長さを超えないように着地できるように曲線が設計されていると考えられます。
 	
