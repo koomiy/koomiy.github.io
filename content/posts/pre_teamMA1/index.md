@@ -65,7 +65,7 @@ vnoidのロボットモデルは、
 [ChoreonoidのBodyファイルチュートリアル](https://choreonoid.org/ja/manuals/latest/handling-models/modelfile/modelfile-newformat.html)を参考に、  
 以下のようにロボットの頭リンク(HEAD_P)に深度カメラ(CameraBody)を搭載しました。
 
-'''
+'''yaml
   -
     name: HEAD_P
     parent: HEAD_Y
@@ -226,7 +226,8 @@ CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(VnoidSampleController)
 ## 深度カメラ視野内の平面検出
 
 PCLを使って、取得した三次元点群のうち、平面を構成している点集合を抽出します。  
-'vnoid/src/mycamera.cpp'を次のように作成しました。  
+'vnoid/src/mycamera.cpp'を次のように作成しました。
+
 '''cpp {linenos=inline}
 #include "mycamera.h"
 
