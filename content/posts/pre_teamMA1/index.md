@@ -1,7 +1,7 @@
 ---
-title: "011 - vnoidベースの開発例"
+title: "011 - vnoidベースの開発例その１"
 date: 2023-1-25
-categories: ["過去のイベント結果 & レビュー"]
+categories: ["vnoidベースの開発"]
 menu: main
 ---
 
@@ -352,11 +352,6 @@ void MyCamera::GroundScan() {
         point.y = e(1);
         point.z = e(2);
 
-        // color(R, G, B)
-        //point.r = pixels[3 * i + 0];
-        //point.g = pixels[3 * i + 1];
-        //point.b = pixels[3 * i + 2];
-
         point.r = 255;
         point.g = 255;
         point.b = 255;
@@ -410,6 +405,27 @@ void MyCamera::GroundScan() {
 }  // namespace vnoid
 }  // namespace cnoid
 ```
+
+`mycamera.cpp`のプログラム概要を説明します。  
+まず、Init関数で、bodyファイルにおいて定義した台数分だけ  
+カメラデバイス(cameras)を認識させます。  
+今回一つの深度カメラのみを用いるので、  
+45行目でRangeCameraのオブジェクト(camera)を、
+cameras[0]に設定します。
+
+48行目でカメラのシャッターを切ります。
+
+54~57行目で、画像の幅や高さ、ピクセル数などを取得します。  
+これには、bodyファイルにて設定したパラメータが反映されます。
+
+61行目で、pcl::PointCloud<pcl::PointXYZRGB>::Ptr型として、  
+cloudオブジェクトを生成します。  
+これは、色つき三次元点群を格納するためのオブジェクトです。  
+63~66行目で、cloudにも撮影画像のサイズ情報を与えます。
+
+68行目~89行目で、cloudに色つき三次元点群を格納します。  
+camera->constPoints()は、深度マップを三次元点群に変換して返す関数で、  
+その点を格子点ごとにcloud->points[i]に格納します。
 
 
 
