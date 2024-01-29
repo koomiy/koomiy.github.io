@@ -131,7 +131,8 @@ vnoidのロボットモデルは、
 視点座標基準の床面の三次元点群を抽出することができます。  
 この三次元点群を処理するためのライブラリとして、  
 PCL(Point Clound Library)を導入します。  
-Ubuntu環境であれば、以下のコマンドをターミナル上で入力することでインストールできます。  
+Ubuntu環境であれば、以下のコマンドをターミナル上で入力することでインストールできます。
+
 '''
 sudo apt install libpcl-dev
 sudo apt install pcl-tools
@@ -142,7 +143,7 @@ sudo apt install pcl-tools
 ## コントローラの枠組み
 
 私たちは、下図のように人型ロボットのコントローラを拡張しました。  
-{{<figure src="./class_structure.png" class="center" alt="beta" width="50%">}}
+{{<figure src="./class_structure.png" class="center" alt="beta" width="100%">}}
 
 VnoidSampleControllerは、Choreonoidのサンプル用に設計された[SimpleController](https://choreonoid.org/ja/manuals/1.5/simulation/howto-implement-controller.html)  
 を継承したクラスです。
@@ -154,7 +155,8 @@ MyCameraから床面の着地可能領域が返ってくるという設計にし
 床面上の着地可能領域内に着地足が収まるように着地位置が計画され、  
 それを追従できるような歩行安定化制御をします。
 
-'vnoid/controller/sample_controller/main.cpp'の中身は以下のように変更しました。  
+'vnoid/controller/sample_controller/main.cpp'の中身は以下のように変更しました。
+
 '''cpp {linenos=inline}
 #include <cnoid/SimpleController>
 #include <cnoid/Body>
@@ -216,6 +218,7 @@ public:
 
 CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(VnoidSampleController)
 '''
+
 現状はジョイスティックのAボタンを押してMyCameraのGroundScan()を呼び出す仕様となっています。
 
 ---
