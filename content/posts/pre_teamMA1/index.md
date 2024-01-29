@@ -419,8 +419,7 @@ void MyCamera::GroundScan() {
 
 PCLにより視点座標系における検出平面上の三次元点群$\boldsymbol{{}^Cp_G}$が得られました。  
 これらをすべて視点座標系から支持足座標系へ変換します。  
-これには[順運動学計算](https://koomiy.github.io/posts/fk_solver/)を用いるので、  
-リンク先の解説と合わせて読んでいただければと思います。
+これには[順運動学計算](https://koomiy.github.io/posts/fk_solver/)を用いるので、リンク先の解説と合わせて読んでいただければと思います。
 
 まず、視点座標系における検出平面の三次元点群を、ベースリンク座標系に変換します。  
 $$ \boldsymbol{{}^Bp_G} = \boldsymbol{{}^Bp_H} + \boldsymbol{{}^BR_H} (\boldsymbol{{}^Hp_C} + \boldsymbol{{}^HR_C} \boldsymbol{{}^Cp_G}) $$
@@ -428,7 +427,7 @@ $$ \boldsymbol{{}^Bp_G} = \boldsymbol{{}^Bp_H} + \boldsymbol{{}^BR_H} (\boldsymb
 $C$はカメラ視点座標、$G$は床の平面上の各点座標を意味します。  
 頭リンクから見たカメラ視点の位置$\boldsymbol{{}^Hp_C}$や姿勢$\boldsymbol{{}^HR_C}$は搭載時に自ら設定するので既知です。  
 また、ベースリンクから頭リンクまでの関節は歩行中にほとんど回転しないので、  
-$\boldsymbol{{}^Bp_H} = \boldsymbol{I}}$として、上式は次のように簡単に書けます。  
+$\boldsymbol{{}^Bp_H} = \boldsymbol{I}$として、上式は次のように簡単に書けます。  
 $$ \boldsymbol{{}^Bp_G} = \boldsymbol{{}^Bp_H} + \boldsymbol{{}^Hp_C} + \boldsymbol{{}^HR_C} \boldsymbol{{}^Cp_G} $$
 
 求めたい足座標系における検出平面上の三次元点群$\boldsymbol{{}^Fp_G}$を用いると、  
@@ -440,16 +439,15 @@ vnoidには、ロボットの関節角から、
 順運動学計算器(CompLegFK)が`vnoid/src/fksolver.cpp`に用意されています。  
 よって、上式において、$\boldsymbol{{}^Bp_A}$や$\boldsymbol{{}^BR_A}$は既知です。  
 また、$\boldsymbol{{}^Ap_F}$は足首から足裏中心までの相対位置ですが、  
-単にz軸方向に足の厚み分だけオフセットすることを表現するので既知です。
+単にz軸方向に足の厚み分だけオフセットすることを表現するので既知です。  
 さらに、足首リンク座標と足裏中心座標の姿勢は一致するので、  
-$\boldsymbol{{}^AR_F} = $\boldsymbol{I}$とできます。
+$\boldsymbol{{}^AR_F} = \boldsymbol{I}$とできます。
 よって、上式は次のように簡単に書き直せます。
 $$ \boldsymbol{{}^Bp_G} = \boldsymbol{{}^Bp_A} + \boldsymbol{{}^BR_A} (\boldsymbol{{}^Ap_F} + \boldsymbol{{}^Fp_G}) $$
 
 
 以上の簡単化した二式を用いて、  
 視点座標における検出平面上の三次元点群を足座標系に変換します。  
-$\boldsymbol{{}^BR_F} = \boldsymbol{{}^BR_A}$として、次のように簡単に書けます。  
 $$ \boldsymbol{{}^Fp_G} = \boldsymbol{{}^BR_A}{}^T (\boldsymbol{{}^Bp_H} + \boldsymbol{{}^Hp_C} + \boldsymbol{{}^HR_C \boldsymbol{{}^Cp_G}} - \boldsymbol{{}^Bp_A}) - \boldsymbol{{}^Ap_F} $$
 
 支持側の足で以上の計算をすることで、  
@@ -459,18 +457,21 @@ $$ \boldsymbol{{}^Fp_G} = \boldsymbol{{}^BR_A}{}^T (\boldsymbol{{}^Bp_H} + \bold
 
 ## 着地可能領域の検出
 
-支持足座標系における検出平面上の三次元点群が得られました。
+支持足座標系における検出平面上の三次元点群が得られました。  
 着地可能領域を、これら点群の[凹包](https://postgis.net/docs/manual-3.4/ja/ST_ConcaveHull.html)として定義します。
 
-PCLの[ConcaveHullクラス](https://pointclouds.org/documentation/classpcl_1_1_concave_hull.html)を用いて、  
+現在は、PCLの[ConcaveHullクラス](https://pointclouds.org/documentation/classpcl_1_1_concave_hull.html)を用いて、  
 凹包の頂点の集合を抽出できないかを模索している段階です。
 
 ---
 
 ## 着地可能領域内で着地位置を計画
 
-着地可能領域外を踏めば、壁にぶつかったり、  
-床を踏み外したりといったことが確実に起こります。  
+着地可能領域に含まれる支持足基準の高低差情報を用いて、  
+自動的に階段の昇降が可能となるように着地高さの計画を行います。
+
+また、着地可能領域外を踏めば、壁にぶつかったり、  
+床を踏み外したりといったことが起こり得ます。  
 そこで、操縦者の入力により領域外に出てしまうなら、  
 その入力は受け付けないという危険防止装置を組み込みます。
 
