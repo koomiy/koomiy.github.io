@@ -20,11 +20,13 @@ vnoidベースの開発例として、あくまでご参考までに見ていた
 
 ## teamMA1の戦略
 
-私たちは、本年度より改装されたアスレチックコースのうち、まずは低難度コースの踏破を目指します。  
+私たちは、本年度より改装されたアスレチックコースのうち、  
+まずは低難度コースの踏破を目指します。  
 低難度コースは不整地、S字路、階段の３つのエリアに分かれており、  
 私たちはジョイスティックで人型ロボットを遠隔操作することでこれらの踏破を目指します。
 
-不整地やS字路に関しては配布されているvnoidを用いれば、苦戦しつつもなんとか踏破できます。  
+不整地やS字路に関しては配布されているvnoidを用いれば、  
+苦戦しつつもなんとか踏破できます。  
 しかし階段を歩かせるには独自に改良が必要です。  
 階段は不整地のようなちょっとした凹凸ではなく、明確な床面の高低差があります。  
 よって、人型ロボットはその高低差を意識的に昇り降りしなければいけません。  
@@ -44,12 +46,12 @@ vnoidベースの開発例として、あくまでご参考までに見ていた
 
 ---
 
-## LiDARを搭載する
+## 深度カメラを搭載する
 
 まずは、床面の情報をロボットに伝えるために深度カメラを搭載します。  
 深度カメラとは、通常のカメラで撮影される二次元画像に加えて、  
 その画像に対応する深度マップ(画像内の物体表面までの視点からの距離を格納したもの)  
-を取得するカメラです。
+を取得するカメラです。  
 なお、距離センサでも代用可能だと思います。
 
 Choreonoidでは[深度カメラのデバイス型](https://choreonoid.org/ja/manuals/latest/simulation/vision-simulation.html)がRangeCameraとして定義されております。  
@@ -60,8 +62,8 @@ Choreonoidでは[深度カメラのデバイス型](https://choreonoid.org/ja/ma
 
 ロボットに深度カメラを搭載する方法について説明します。  
 vnoidのロボットモデルは、  
-'vnoid/model/sample_robot/sample_robot_ver2.body'  
-に記述されています。
+`vnoid/model/sample_robot/sample_robot_ver2.body`  
+に記述されています。  
 [ChoreonoidのBodyファイルチュートリアル](https://choreonoid.org/ja/manuals/latest/handling-models/modelfile/modelfile-newformat.html)を参考に、  
 以下のようにロボットの頭リンク(HEAD_P)に深度カメラ(CameraBody)を搭載しました。
 
@@ -127,11 +129,14 @@ vnoidのロボットモデルは、
 
 ## PCL(Point Clound Library)の導入
 
-撮影した床面の深度マップ付きの二次元画像から、  
-視点座標基準の床面の三次元点群を抽出することができます。  
+Choreonoidでは、撮影した床面の深度マップ付きの二次元画像から、  
+視点座標基準の床面の三次元点群を抽出することができます。
+
 この三次元点群を処理するためのライブラリとして、  
-PCL(Point Clound Library)を導入します。  
-Ubuntu環境であれば、以下のコマンドをターミナル上で入力することでインストールできます。
+PCL(Point Clound Library)を導入します。
+
+Ubuntu環境であれば、  
+以下のコマンドをターミナル上で入力することでインストールできます。
 
 ```
 sudo apt install libpcl-dev
@@ -145,15 +150,15 @@ sudo apt install pcl-tools
 私たちは、下図のように人型ロボットのコントローラを拡張しました。  
 {{<figure src="./class_structure.png" class="center" alt="beta" width="100%">}}
 
-VnoidSampleControllerは、Choreonoidのサンプル用に設計された[SimpleController](https://choreonoid.org/ja/manuals/1.5/simulation/howto-implement-controller.html)  
-を継承したクラスです。
+VnoidSampleControllerはChoreonoidのサンプル用に設計された  
+[SimpleController](https://choreonoid.org/ja/manuals/1.5/simulation/howto-implement-controller.html)を継承したクラスです。
 
 VnoidSampleControllerからMyCameraにスキャン指令(GoundScan)を送ると、  
 MyCameraから床面の着地可能領域が返ってくるという設計にしました。
 
 また、VnoidSampleControllerからMyRobotに制御指令(control)を送ると、  
 床面上の着地可能領域内に着地足が収まるように着地位置が計画され、  
-それを追従できるような歩行安定化制御をします。
+それを追従できるような歩行安定化制御をするように設計します。
 
 `vnoid/controller/sample_controller/main.cpp`の中身は以下のように変更しました。
 
@@ -205,7 +210,6 @@ public:
         bool ButtonState = joystick.getButtonState(Joystick::A_BUTTON);
         if (ButtonState && !PreButtonState) {
             printf("push A_BUTTON\n");
-            #endif
             camera->GroundScan();
         }
         PreButtonState = ButtonState;
@@ -219,14 +223,15 @@ public:
 CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(VnoidSampleController)
 ```
 
-現状はジョイスティックのAボタンを押してMyCameraのGroundScan()を呼び出す仕様となっています。
+現状はジョイスティックのAボタンを押して、  
+MyCameraのGroundScan()を呼び出す仕様となっています。
 
 ---
 
 ## 深度カメラ視野内の平面検出
 
-PCLを使って、取得した三次元点群のうち、平面を構成している点集合を抽出します。  
-`vnoid/src/mycamera.cpp`を次のように作成しました。
+PCLを使って、取得した三次元点群のうち、平面を構成している点群を抽出します。  
+そのために`vnoid/src/mycamera.cpp`を次のように作成しました。
 
 ```cpp {linenos=inline}
 #include "mycamera.h"
@@ -234,20 +239,12 @@ PCLを使って、取得した三次元点群のうち、平面を構成して�
 void viewerOneOff(pcl::visualization::PCLVisualizer& viewer)
 {
     viewer.setBackgroundColor(0.2, 0.2, 0.2);
-    #ifdef _WIN64
-    cnoid::vnoid::Debug::Out("viewerOneOff\n");
-    #else
     printf("viewerOneOff\n");
-    #endif
 }
 
 void viewerPsycho(pcl::visualization::PCLVisualizer& viewer)
 {
-    #ifdef _WIN64
-    cnoid::vnoid::Debug::Out("viewerPsyco\n");
-    #else
     printf("viewerPsyco\n");
-    #endif
 }
 
 namespace cnoid {
@@ -264,16 +261,9 @@ void MyCamera::Init(SimpleControllerIO* io) {
         Device* camera = cameras[i];
         io->enableInput(camera);
         
-        #ifdef _WIN64
-        OPD("Device type: %s, ", camera->typeName());
-        OPD("id: %s, ", camera->id());
-        OPD("name: %s.\n", camera->name());
-        #else
         printf("Device type: %s, ", camera->typeName());
         printf("id: %d, ", camera->id());
         printf("name: %s.\n", camera->name());
-        #endif
-
     }
 
     timeCounter = 0.0;
@@ -385,6 +375,8 @@ void MyCamera::GroundScan() {
 }  // namespace cnoid
 ```
 
+
+
 ---
 
 ## 平面を構成する三次元点群を視点座標系から支持足基準座標系に変換する
@@ -396,6 +388,14 @@ void MyCamera::GroundScan() {
 ---
 
 ## 着地可能領域の検出
+
+支持足座標系における検出平面上の三次元点群が得られました。
+着地可能領域とは、これら点群の
+
+
+---
+
+## 着地可能領域内で着地位置を計画する
 
 支持足座標系における検出平面上の三次元点群が得られました。
 着地可能領域とは、これら点群の
