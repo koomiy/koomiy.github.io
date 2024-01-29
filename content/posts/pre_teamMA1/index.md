@@ -5,8 +5,6 @@ categories: ["vnoidベースの開発"]
 menu: main
 ---
 
-(この記事は制作途中です)
-
 ---
 
 ## 今回の内容
@@ -60,11 +58,11 @@ Choreonoidでは[深度カメラのデバイス型](https://choreonoid.org/ja/ma
 そのため、ロボットモデルに深度カメラを取りつけさえすれば、  
 すぐにシミュレーションで深度カメラを試すことができます。
 
-ロボットに深度カメラを搭載する方法について説明します。  
+ロボットへの深度カメラの搭載例を紹介します。  
 vnoidのロボットモデルは、  
 `vnoid/model/sample_robot/sample_robot_ver2.body`  
 に記述されています。  
-[ChoreonoidのBodyファイルチュートリアル](https://choreonoid.org/ja/manuals/latest/handling-models/modelfile/modelfile-newformat.html)を参考に、  
+私たちは、[ChoreonoidのBodyファイルチュートリアル](https://choreonoid.org/ja/manuals/latest/handling-models/modelfile/modelfile-newformat.html)を参考に、  
 以下のようにロボットの頭リンク(HEAD_P)に深度カメラ(CameraBody)を搭載しました。
 
 ```yaml
@@ -133,7 +131,7 @@ vnoidのロボットモデルは、
 ## PCL(Point Clound Library)の導入
 
 Choreonoidでは、撮影した床面の深度マップ付きの二次元画像から、  
-視点座標基準の床面の三次元点群を抽出することができます。
+視点座標系における床面の三次元点群を抽出することができます。
 
 この三次元点群を処理するためのライブラリとして、  
 PCL(Point Clound Library)を導入します。
@@ -226,8 +224,8 @@ public:
 CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(VnoidSampleController)
 ```
 
-現状はジョイスティックのAボタンを押して、  
-MyCameraのGroundScan()を呼び出す仕様となっています。
+現状、ジョイスティックのAボタンを押すと、  
+MyCameraのGroundScan()が呼び出される仕様となっています。
 
 ---
 
@@ -421,7 +419,7 @@ cameras[0]に設定します。
 54~57行目で、画像の幅や高さ、ピクセル数などを取得します。  
 これには、bodyファイルにて設定したパラメータが反映されます。
 
-61行目で、pcl::PointCloud<pcl::PointXYZRGB>::Ptr型として、  
+61行目で、pcl::PointCloud \< pcl::PointXYZRGB \> ::Ptr型として、  
 cloudオブジェクトを生成します。  
 これは、色つき三次元点群を格納するためのオブジェクトです。  
 63~66行目で、cloudにも撮影画像のサイズ情報を与えます。
