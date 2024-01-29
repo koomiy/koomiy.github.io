@@ -231,7 +231,47 @@ MyCameraのGroundScan()を呼び出す仕様となっています。
 ## 深度カメラ視野内の平面検出
 
 PCLを使って、取得した三次元点群のうち、平面を構成している点群を抽出します。  
-そのために`vnoid/src/mycamera.cpp`を次のように作成しました。
+そのために`vnoid/src/mycamera.cpp, mycamera.h`を次のように作成しました。
+
+```cpp {linenos=inline}
+#pragma once
+
+#include <cnoid/SimpleController>
+#include <cnoid/EigenTypes>
+#include <cnoid/RangeCamera>
+
+#include <iostream>
+#include <pcl/ModelCoefficients.h>
+#include <pcl/io/pcd_io.h>
+#include <pcl/point_types.h>
+#include <pcl/sample_consensus/method_types.h>
+#include <pcl/sample_consensus/model_types.h>
+#include <pcl/segmentation/sac_segmentation.h>
+#include <pcl/visualization/cloud_viewer.h>
+
+using namespace std;
+
+namespace cnoid {
+namespace vnoid {
+
+class MyCamera : RangeCamera
+{
+public: 
+    DeviceList<RangeCamera> cameras;
+    double timeCounter;
+    double timeStep;
+
+public: 
+    virtual void Init(SimpleControllerIO* io);
+    virtual void GroundScan();
+
+    MyCamera();
+
+};
+
+}  // namespace vnoid
+}  // namespace cnoid
+```
 
 ```cpp {linenos=inline}
 #include "mycamera.h"
@@ -284,11 +324,7 @@ void MyCamera::GroundScan() {
     const Image& RangeImage = camera->constImage();
     // Save an image of current scene
     RangeImage.save("pointcloud.png");
-    #ifdef _WIN64
-    OPD("save image.\n");
-    #else
     printf("save image.\n");
-    #endif
     
     // width and height of this image
     const int width = RangeImage.width();
@@ -379,32 +415,78 @@ void MyCamera::GroundScan() {
 
 ---
 
-## 平面を構成する三次元点群を視点座標系から支持足基準座標系に変換する
+## 平面上の三次元点群を支持足基準座標系に変換
 
-検出された平面上の三次元点群が得られました。
-これらをすべて視点座標系から支持足座標系へ変換します。
+PCLにより視点座標系における検出平面上の三次元点群$\boldsymbol{{}^Cp_G}$が得られました。  
+これらをすべて視点座標系から支持足座標系へ変換します。  
+これには[順運動学計算](https://koomiy.github.io/posts/fk_solver/)を用いるので、  
+リンク先の解説と合わせて読んでいただければと思います。
 
+まず、視点座標系における検出平面の三次元点群を、ベースリンク座標系に変換します。  
+$$ \boldsymbol{{}^Bp_G} = \boldsymbol{{}^Bp_H} + \boldsymbol{{}^BR_H} (\boldsymbol{{}^Hp_C} + \boldsymbol{{}^HR_C} \boldsymbol{{}^Cp_G}) $$
+ここで、$B$はベースリンク座標、$H$は頭リンク座標、  
+$C$はカメラ視点座標、$G$は床の平面上の各点座標を意味します。  
+頭リンクから見たカメラ視点の位置$\boldsymbol{{}^Hp_C}$や姿勢$\boldsymbol{{}^HR_C}$は搭載時に自ら設定するので既知です。  
+また、ベースリンクから頭リンクまでの関節は歩行中にほとんど回転しないので、  
+$\boldsymbol{{}^Bp_H} = \boldsymbol{I}}$として、上式は次のように簡単に書けます。  
+$$ \boldsymbol{{}^Bp_G} = \boldsymbol{{}^Bp_H} + \boldsymbol{{}^Hp_C} + \boldsymbol{{}^HR_C} \boldsymbol{{}^Cp_G} $$
+
+求めたい足座標系における検出平面上の三次元点群$\boldsymbol{{}^Fp_G}$を用いると、  
+ベースリンク座標系における検出平面上の三次元点群$\boldsymbol{{}^Bp_G}$は次のようにも書けます。
+$$ \boldsymbol{{}^Bp_G} = \boldsymbol{{}^Bp_A} + \boldsymbol{{}^BR_A} (\boldsymbol{{}^Ap_F} + \boldsymbol{{}^AR_F} \boldsymbol{{}^Fp_G}) $$
+ここで、$A$は足首リンク座標、$F$は足裏中心座標を意味します。  
+vnoidには、ロボットの関節角から、  
+ベースリンク座標系における足首の位置$\boldsymbol{{}^Bp_A}$・姿勢$\boldsymbol{{}^BR_A}$を計算する  
+順運動学計算器(CompLegFK)が`vnoid/src/fksolver.cpp`に用意されています。  
+よって、上式において、$\boldsymbol{{}^Bp_A}$や$\boldsymbol{{}^BR_A}$は既知です。  
+また、$\boldsymbol{{}^Ap_F}$は足首から足裏中心までの相対位置ですが、  
+単にz軸方向に足の厚み分だけオフセットすることを表現するので既知です。
+さらに、足首リンク座標と足裏中心座標の姿勢は一致するので、  
+$\boldsymbol{{}^AR_F} = $\boldsymbol{I}$とできます。
+よって、上式は次のように簡単に書き直せます。
+$$ \boldsymbol{{}^Bp_G} = \boldsymbol{{}^Bp_A} + \boldsymbol{{}^BR_A} (\boldsymbol{{}^Ap_F} + \boldsymbol{{}^Fp_G}) $$
+
+
+以上の簡単化した二式を用いて、  
+視点座標における検出平面上の三次元点群を足座標系に変換します。  
+$\boldsymbol{{}^BR_F} = \boldsymbol{{}^BR_A}$として、次のように簡単に書けます。  
+$$ \boldsymbol{{}^Fp_G} = \boldsymbol{{}^BR_A}{}^T (\boldsymbol{{}^Bp_H} + \boldsymbol{{}^Hp_C} + \boldsymbol{{}^HR_C \boldsymbol{{}^Cp_G}} - \boldsymbol{{}^Bp_A}) - \boldsymbol{{}^Ap_F} $$
+
+支持側の足で以上の計算をすることで、  
+支持足を基準とした検出平面上の三次元点群$\boldsymbol{{}^Fp_G}$が得られます。
 
 ---
 
 ## 着地可能領域の検出
 
 支持足座標系における検出平面上の三次元点群が得られました。
-着地可能領域とは、これら点群の
+着地可能領域を、これら点群の[凹包](https://postgis.net/docs/manual-3.4/ja/ST_ConcaveHull.html)として定義します。
 
+PCLの[ConcaveHullクラス](https://pointclouds.org/documentation/classpcl_1_1_concave_hull.html)を用いて、  
+凹包の頂点の集合を抽出できないかを模索している段階です。
 
 ---
 
-## 着地可能領域内で着地位置を計画する
+## 着地可能領域内で着地位置を計画
 
-支持足座標系における検出平面上の三次元点群が得られました。
-着地可能領域とは、これら点群の
+着地可能領域外を踏めば、壁にぶつかったり、  
+床を踏み外したりといったことが確実に起こります。  
+そこで、操縦者の入力により領域外に出てしまうなら、  
+その入力は受け付けないという危険防止装置を組み込みます。
 
+こうすることで、着地可能領域内であれば  
+操縦者が自由に着地位置を計画できるようなシステムを構築できます。
+
+領域の内外判定には[Crossing Number Algorithm](https://www.nttpc.co.jp/technology/number_algorithm.html)を用いる予定です。
 
 ---
 
 ## まとめ・次回予告
 
+今回は、私たちのチームの開発内容を紹介しました。  
+私たちは、深度カメラを用いて着地できる床上の領域を検出し、  
+その中での歩行を遠隔操作で実現できるようなシステムを開発しております。
 
+vnoidベースの開発の一例として見ていただけたなら幸いです。
 
 次回： [012 - 歩行制御器](https://koomiy.github.io/posts/stepping_controller/)
