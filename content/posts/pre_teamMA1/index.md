@@ -126,7 +126,7 @@ vnoidのロボットモデルは、
 ```
 
 このようにすると、次の画像のように深度カメラが取り付けられます。  
-{{<figure src="./camera.png" class="center" alt="beta" width="100%">}}
+{{<figure src="./camera.png" class="center" alt="beta" width="60%">}}
 
 ---
 
@@ -459,7 +459,7 @@ camera->constPoints()は、深度マップを三次元点群に変換して返�
 
 実際にプログラムを実行すると、  
 ビューワーが起動して次のような画像が表示されます。  
-{{<figure src="./scanned_ground.png" class="center" alt="beta" width="100%">}}  
+{{<figure src="./scanned_ground.png" class="center" alt="beta" width="80%">}}  
 期待通り、平面として検出された三次元点群のみ赤色で表示されています。
 
 ---
