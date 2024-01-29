@@ -63,13 +63,14 @@ vnoidのロボットモデルは、
 'vnoid/model/sample_robot/sample_robot_ver2.body'  
 に記述されています。
 [ChoreonoidのBodyファイルチュートリアル](https://choreonoid.org/ja/manuals/latest/handling-models/modelfile/modelfile-newformat.html)を参考に、  
-以下のようにロボットの頭リンク(HEAD_P)に深度カメラ(CameraBody)を搭載しました。  
+以下のようにロボットの頭リンク(HEAD_P)に深度カメラ(CameraBody)を搭載しました。
+
 '''
   -
     name: HEAD_P
     parent: HEAD_Y
     
-    (省略)
+    ...
 
   -
     name: CameraBody
