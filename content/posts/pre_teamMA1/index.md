@@ -419,7 +419,7 @@ cameras[0]に設定します。
 54~57行目で、画像の幅や高さ、ピクセル数などを取得します。  
 これには、bodyファイルにて設定したパラメータが反映されます。
 
-61行目で、pcl::PointCloud \< pcl::PointXYZRGB \> ::Ptr型として、  
+61行目で、pcl::PointCloud\< pcl::PointXYZRGB \>::Ptr型として、  
 cloudオブジェクトを生成します。  
 これは、色つき三次元点群を格納するためのオブジェクトです。  
 63~66行目で、cloudにも撮影画像のサイズ情報を与えます。
@@ -452,7 +452,7 @@ camera->constPoints()は、深度マップを三次元点群に変換して返�
 110~114行目で、インライア判定された三次元点群のみを赤色に塗ります。  
 こうすることで、平面として検出された三次元点群のみ赤色で表示されます。
 
-117~125行目は、PointCloudViewerを呼び出して、
+117~125行目は、PointCloudViewerを呼び出して、  
 三次元点群を表示するためのプログラムです。
 
 実際にプログラムを実行すると、  
@@ -466,7 +466,8 @@ camera->constPoints()は、深度マップを三次元点群に変換して返�
 
 PCLにより視点座標系における検出平面上の三次元点群$\boldsymbol{{}^Cp_G}$が得られました。  
 これらをすべて視点座標系から支持足座標系へ変換します。  
-これには[順運動学計算](https://koomiy.github.io/posts/fk_solver/)を用いるので、リンク先の解説と合わせて読んでいただければと思います。
+これには[順運動学計算](https://koomiy.github.io/posts/fk_solver/)を用いるので、  
+リンク先の解説と合わせて読んでいただければと思います。
 
 まず、視点座標系における検出平面の三次元点群を、ベースリンク座標系に変換します。  
 $$ \boldsymbol{{}^Bp_G} = \boldsymbol{{}^Bp_H} + \boldsymbol{{}^BR_H} (\boldsymbol{{}^Hp_C} + \boldsymbol{{}^HR_C} \boldsymbol{{}^Cp_G}) $$
