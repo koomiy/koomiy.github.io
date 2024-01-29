@@ -231,7 +231,7 @@ MyCameraのGroundScan()を呼び出す仕様となっています。
 ## 深度カメラ視野内の平面検出
 
 PCLを使って、取得した三次元点群のうち、平面を構成している点群を抽出します。  
-そのために`vnoid/src/mycamera.cpp, mycamera.h`を次のように作成しました。
+そのために`vnoid/src/mycamera.h, mycamera.cpp`を次のように作成しました。
 
 ```cpp {linenos=inline}
 #pragma once
