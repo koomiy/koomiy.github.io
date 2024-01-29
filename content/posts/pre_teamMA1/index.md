@@ -65,7 +65,7 @@ vnoidのロボットモデルは、
 [ChoreonoidのBodyファイルチュートリアル](https://choreonoid.org/ja/manuals/latest/handling-models/modelfile/modelfile-newformat.html)を参考に、  
 以下のようにロボットの頭リンク(HEAD_P)に深度カメラ(CameraBody)を搭載しました。
 
-'''yaml
+```yaml
   -
     name: HEAD_P
     parent: HEAD_Y
@@ -121,7 +121,7 @@ vnoidのロボットモデルは、
             near_clip_distance: 0.4
             far_clip_distance: 4.5
             frame_rate: 30
-'''
+```
 
 ---
 
@@ -133,10 +133,10 @@ vnoidのロボットモデルは、
 PCL(Point Clound Library)を導入します。  
 Ubuntu環境であれば、以下のコマンドをターミナル上で入力することでインストールできます。
 
-'''
+```
 sudo apt install libpcl-dev
 sudo apt install pcl-tools
-'''
+```
 
 ---
 
@@ -155,9 +155,9 @@ MyCameraから床面の着地可能領域が返ってくるという設計にし
 床面上の着地可能領域内に着地足が収まるように着地位置が計画され、  
 それを追従できるような歩行安定化制御をします。
 
-'vnoid/controller/sample_controller/main.cpp'の中身は以下のように変更しました。
+`vnoid/controller/sample_controller/main.cpp`の中身は以下のように変更しました。
 
-'''cpp {linenos=inline}
+```cpp {linenos=inline}
 #include <cnoid/SimpleController>
 #include <cnoid/Body>
 #include <cnoid/Camera>
@@ -217,7 +217,7 @@ public:
 };
 
 CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(VnoidSampleController)
-'''
+```
 
 現状はジョイスティックのAボタンを押してMyCameraのGroundScan()を呼び出す仕様となっています。
 
@@ -226,9 +226,9 @@ CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(VnoidSampleController)
 ## 深度カメラ視野内の平面検出
 
 PCLを使って、取得した三次元点群のうち、平面を構成している点集合を抽出します。  
-'vnoid/src/mycamera.cpp'を次のように作成しました。
+`vnoid/src/mycamera.cpp`を次のように作成しました。
 
-'''cpp {linenos=inline}
+```cpp {linenos=inline}
 #include "mycamera.h"
 
 void viewerOneOff(pcl::visualization::PCLVisualizer& viewer)
@@ -383,7 +383,7 @@ void MyCamera::GroundScan() {
 
 }  // namespace vnoid
 }  // namespace cnoid
-'''
+```
 
 ---
 
