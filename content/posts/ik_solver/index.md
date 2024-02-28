@@ -1,7 +1,7 @@
 ---
 title: "007 - 逆運動学"
 date: 2023-08-24
-categories: ["vnoidベースの開発"]
+categories: ["vnoidの解説"]
 menu: main
 ---
 

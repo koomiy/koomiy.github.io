@@ -1,7 +1,7 @@
 ---
 title: "006 - 順運動学"
 date: 2023-07-28
-categories: ["vnoidベースの開発"]
+categories: ["vnoidの解説"]
 menu: main
 ---
 

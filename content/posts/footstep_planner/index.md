@@ -1,7 +1,7 @@
 ---
 title: "008 - ステップ計画"
 date: 2023-10-05
-categories: ["vnoidベースの開発"]
+categories: ["vnoidの解説"]
 menu: main
 ---
 

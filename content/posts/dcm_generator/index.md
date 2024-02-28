@@ -1,7 +1,7 @@
 ---
 title: "009 - 目標ZMP・DCM計画"
 date: 2023-11-30
-categories: ["vnoidベースの開発"]
+categories: ["vnoidの解説"]
 menu: main
 ---
 

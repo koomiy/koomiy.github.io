@@ -1,7 +1,7 @@
 ---
 title: "004 - vnoidの概要"
 date: 2023-06-22
-categories: ["vnoidベースの開発"]
+categories: ["vnoidの解説"]
 menu: main
 ---
 
