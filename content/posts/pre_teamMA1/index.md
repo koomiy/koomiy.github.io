@@ -1,6 +1,6 @@
 ---
 title: "011 - vnoidベースの開発例その１"
-date: 2024-1-25
+date: 2024-01-25
 categories: ["vnoidベースの開発"]
 menu: main
 ---
