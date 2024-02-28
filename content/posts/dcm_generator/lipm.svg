@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="lipm.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.96630985"
+     inkscape:cx="338.9182"
+     inkscape:cy="472.41576"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="TriangleOutS"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="TriangleOutS"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.2)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt"
+         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
+         id="path13700" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="TriangleOutM"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="TriangleOutM"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.4)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt"
+         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
+         id="path13697" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="marker68530"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.6) rotate(180) translate(0,0)"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         style="stroke:context-stroke;fill-rule:evenodd;fill:context-stroke;stroke-width:0.62500000;stroke-linejoin:round;"
+         id="path68528" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mstart"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mstart"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.6) translate(0,0)"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         style="stroke:context-stroke;fill-rule:evenodd;fill:context-stroke;stroke-width:0.62500000;stroke-linejoin:round"
+         id="path64378" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="marker68512"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.6) rotate(180) translate(0,0)"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         style="stroke:context-stroke;fill-rule:evenodd;fill:context-stroke;stroke-width:0.62500000;stroke-linejoin:round;"
+         id="path68510" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="Arrow2Mend"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.6) rotate(180) translate(0,0)"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         style="stroke:context-stroke;fill-rule:evenodd;fill:context-stroke;stroke-width:0.62500000;stroke-linejoin:round;"
+         id="path64381" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="Arrow2Lend"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(1.1) rotate(180) translate(1,0)"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         style="stroke:context-stroke;fill-rule:evenodd;fill:context-stroke;stroke-width:0.62500000;stroke-linejoin:round;"
+         id="path64375" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;opacity:0.6"
+       id="rect86"
+       width="22.682636"
+       height="6.3490968"
+       x="71.365868"
+       y="175.1416"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;opacity:0.6"
+       id="rect86-8"
+       width="22.682636"
+       height="6.3490968"
+       x="111.79558"
+       y="161.78244"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;opacity:0.6"
+       id="path1285"
+       cx="82.478485"
+       cy="171.34615"
+       r="3.6786184"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;opacity:0.6"
+       id="path1285-1"
+       cx="122.74968"
+       cy="157.98697"
+       r="3.6786184"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;opacity:0.6"
+       id="path1285-12"
+       cx="90.803787"
+       cy="149.08084"
+       r="3.6786184"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;opacity:0.6"
+       id="path1285-5"
+       cx="112.8755"
+       cy="134.75359"
+       r="3.6786184"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;opacity:0.6"
+       id="path1285-2"
+       cx="88.674057"
+       cy="118.103"
+       r="3.6786184"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;opacity:0.6"
+       id="path1285-2-3"
+       cx="84.743561"
+       cy="76.118614"
+       r="3.6786184"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;opacity:0.6"
+       id="path1285-2-3-6"
+       cx="75.023384"
+       cy="92.957802"
+       r="3.6786184"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;opacity:0.6"
+       id="path1285-2-3-6-7"
+       cx="77.727234"
+       cy="110.94358"
+       r="3.2940423"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;opacity:0.6"
+       id="path1285-2-3-6-7-4"
+       cx="113.2196"
+       cy="103.20849"
+       r="3.2940423"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path1285-9"
+       cx="91.079262"
+       cy="99.121704"
+       r="5.3451147"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:0.6"
+       d="m 84.995437,119.07106 2.129724,30.78422 -8.518904,20.71643"
+       id="path1736"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:0.6"
+       d="m 92.546283,117.71577 2.129726,31.17145 -8.712515,24.58866"
+       id="path1738"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:0.6"
+       d="m 88.674053,121.97523 21.878097,15.48891 8.71252,21.49088"
+       id="path1740"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:0.6"
+       d="m 90.513362,114.7148 24.685468,17.03781 11.32627,25.07268"
+       id="path1742"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path2085"
+       cx="76.487556"
+       cy="181.91931"
+       r="3.1487916"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 84.220029,125.64144 -2.536543,14.39884"
+       id="path2510"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 88.811761,126.26916 -2.634896,14.53673"
+       id="path2512"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 81.102652,140.4033 5.476368,0.95876"
+       id="path2627"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 78.007071,175.52944 5.705877,-34.19461"
+       id="path3400"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 85.768922,128.95703 5.27885,-29.581231"
+       id="path3515"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:8.46667px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="49.184803"
+       y="155.67763"
+       id="text7473"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan7471"
+         style="font-size:8.46667px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+         x="49.184803"
+         y="155.67763">床反力</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:8.46667px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="84.04126"
+       y="91.39682"
+       id="text25463"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan25461"
+         style="font-size:8.46667px;stroke-width:0.264583"
+         x="84.04126"
+         y="91.39682">重心</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:8.46667px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="50.193687"
+       y="179.8904"
+       id="text51481"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         id="tspan51479"
+         style="font-size:8.46667px;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+         x="50.193687"
+         y="179.8904"
+         sodipodi:role="line">ZMP</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutM)"
+       d="m 76.948831,178.51092 4.951647,-27.33914"
+       id="path64352"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 85.72148,99.322685 10.551824,0.145209"
+       id="path67979"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 90.997391,93.901563 0.06051,10.624427"
+       id="path67981"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path68085"
+       sodipodi:type="arc"
+       sodipodi:cx="-96.660484"
+       sodipodi:cy="93.708916"
+       sodipodi:rx="3.3944879"
+       sodipodi:ry="3.3944879"
+       sodipodi:start="0"
+       sodipodi:end="1.573941"
+       sodipodi:arc-type="slice"
+       d="m -93.265996,93.708916 a 3.3944879,3.3944879 0 0 1 -0.998,2.404036 3.3944879,3.3944879 0 0 1 -2.407163,0.990435 l 0.01068,-3.394471 z"
+       transform="rotate(-88.989522)"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path68085-0"
+       sodipodi:type="arc"
+       sodipodi:cx="101.18667"
+       sodipodi:cy="-89.009995"
+       sodipodi:rx="3.3944879"
+       sodipodi:ry="3.3944879"
+       sodipodi:start="0"
+       sodipodi:end="1.573941"
+       sodipodi:arc-type="slice"
+       transform="rotate(89.417535)"
+       d="m 104.58116,-89.009995 a 3.3944879,3.3944879 0 0 1 -0.998,2.404037 3.3944879,3.3944879 0 0 1 -2.40717,0.990435 l 0.0107,-3.394472 z"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="opacity:0.4;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.428571;stroke-linejoin:round;stroke-dasharray:0.857143, 0.857143;paint-order:stroke fill markers"
+       id="rect13355"
+       width="62.730114"
+       height="6.9700131"
+       x="58.083443"
+       y="182.382"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 58.083441,182.382 H 120.81355"
+       id="path13470"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <ellipse
+       style="opacity:0.6;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.259782;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="path13850"
+       cx="90.074516"
+       cy="91.036301"
+       rx="13.395018"
+       ry="23.623207"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="opacity:0.6;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="path14512"
+       cx="90.356628"
+       cy="57.773476"
+       r="9.8570862"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:0.6"
+       d="M 81.86858,73.517436 71.793721,90.967604"
+       id="path14627"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:0.6"
+       d="M 88.206599,77.661329 78.13174,95.111497"
+       id="path14627-2"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:0.6"
+       d="M 71.190069,94.053034 74.338862,110.0708"
+       id="path15194"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.214103px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:0.6"
+       d="m 77.559358,95.791148 2.548031,12.961722"
+       id="path15194-8"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:0.6"
+       d="m 102.40418,100.76133 8.00265,4.62033"
+       id="path15353"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;opacity:0.6"
+       d="m 103.40497,94.952027 8.62165,4.977714"
+       id="path15353-6"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\dcm_generator\lipm.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+  </g>
+</svg>
