@@ -47,7 +47,7 @@ void SteppingController::Update(const Timer& timer, const Param& param, Footstep
         buffer_ready = false;
     }
 
-	・・・
+	...
 
 }
 ```
@@ -79,7 +79,7 @@ void SteppingController::Update(const Timer& timer, const Param& param, Footstep
 ```cpp {linenos=inline}
 void SteppingController::Update(const Timer& timer, const Param& param, Footstep& footstep, Footstep& footstep_buffer, Centroid& centroid, Base& base, vector<Foot>& foot){
 
-	・・・
+	...
 
     Step& st0  = footstep.steps[0];
     Step& st1  = footstep.steps[1];
@@ -131,6 +131,30 @@ void SteppingController::Update(const Timer& timer, const Param& param, Footstep
     if(footstep.steps.size() < 2){
 		return;
 	}
+
+	...
+
+}
+```
+
+このブロックでは、空の歩行ステップ情報を埋める処理が行われます。  
+この処理は、各歩行ステップにつき最初の一度だけ行われます。
+
+まずは、以降のプログラムで用いる変数について説明しておきます。  
+`st0`や`st1`は、`footstep`オブジェクトの0番目と1番目の要素です。  
+`stb0`や`stb1`は、`footstep_buffer`オブジェクトの0番目と1番目の要素です。  
+`sup`はその足が支持側の足であることを示すフラグであり、  
+`swg`はその足が遊脚側の足であることを示すフラグです。  
+`T`は LIPM の重心運動の時定数です。  
+`offset`は、三次元空間上のDCM と水平面上の ZMP の次元を  
+揃えるために用いる高さ方向のオフセットです。
+
+
+
+```cpp {linenos=inline}
+void SteppingController::Update(const Timer& timer, const Param& param, Footstep& footstep, Footstep& footstep_buffer, Centroid& centroid, Base& base, vector<Foot>& foot){
+
+	...
 
     // time to landing
     double ttl = stb0.tbegin + stb0.duration - timer.time;
@@ -204,14 +228,7 @@ void SteppingController::Update(const Timer& timer, const Param& param, Footstep
         foot[swg].angle_ref = ToRollPitchYaw(foot[swg].ori_ref);
 
     }	
-}
 ```
-
-このブロックから、本格的に足の制御を行います。  
-`st0`や`st1`は、`footstep`オブジェクトの0番目と1番目の要素です。  
-また、`stb0`や`stb1`は、`footstep_buffer`オブジェクトの0番目と1番目の要素です。  
-
-
 
 ---
 
