@@ -113,7 +113,7 @@ DCM の安定を保てるように ZMP が DCM を追いかけていく状態が
 
 ## サンプルコードの解説
 
-```cpp {lineous=inline}
+```cpp {linenos=inline}
 void FootstepPlanner::GenerateDCM(const Param& param, Footstep& footstep){
     // generate reference dcm and zmp 
 	// dcm of step[0] should be already specified
