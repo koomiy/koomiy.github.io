@@ -113,9 +113,75 @@ DCM の安定を保てるように ZMP が DCM を追いかけていく状態が
 
 ## サンプルコードの解説
 
-簡単のために、片足支持中はZMPが一定であると仮定します。
-この仮定の下では、ZMPとDCMの間に次の漸化式が成立します。
-$$ \boldsymbol{\xi_{i+1}} = e^{\omega \tau}\boldsymbol{\xi_i} + (1 - e^{\omega \tau})\boldsymbol{p_i}	\label{analytical solution of CP} $$
+```cpp {lineous=inline}
+void FootstepPlanner::GenerateDCM(const Param& param, Footstep& footstep){
+    // generate reference dcm and zmp 
+	// dcm of step[0] should be already specified
+
+    int nstep = footstep.steps.size();
+		
+	// set final step's state
+	int i = nstep-1;
+	// ZMP is in the middle of feet
+	footstep.steps[i].zmp = (footstep.steps[i].foot_pos[0] + footstep.steps[i].foot_pos[1])/2.0;
+
+	// DCM is com_height above ZMP
+	footstep.steps[i].dcm = (footstep.steps[i].foot_pos[0] + footstep.steps[i].foot_pos[1])/2.0
+		                  + Vector3(0.0, 0.0, param.com_height);
+	i--;
+
+	// calc N-1 to 0 step's state
+	for( ; i >= 0; i--) {
+		Step& st0 = footstep.steps[i+0];
+		Step& st1 = footstep.steps[i+1];
+			
+		int sup =  st0.side;
+		int swg = !st0.side;
+		
+		double a = exp(-st0.duration/param.T);
+		// for initial step, the dcm is specified from outside. determine zmp accordingly
+		if(i == 0){
+			st0.zmp = (st0.dcm - a*st1.dcm)/(1.0 - a) - Vector3(0.0, 0.0, param.com_height);
+		}
+		// for other steps
+		else{
+			const double eps = 1.0e-3;
+			// if swing foot position is not changing, treated as double support and set zmp to the middle of feet
+			if( (st0.foot_pos  [swg] - st1.foot_pos  [swg]).norm() < eps &&
+				(st0.foot_angle[swg] - st1.foot_angle[swg]).norm() < eps ){
+				st0.zmp = (st0.foot_pos[sup] + st0.foot_pos[swg])/2.0;
+			}
+			// otherwise, set zmp to support foot
+			else{
+				st0.zmp = st0.foot_pos[sup];
+			}
+
+			// determine dcm from zmp
+			st0.dcm = (1.0 - a)*(st0.zmp + Vector3(0.0, 0.0, param.com_height)) + a*st1.dcm;
+		}
+
+		// set stepping flag based on whether swing foot position is chanching or not
+		if( (st0.foot_pos  [swg] - st1.foot_pos  [swg]).norm() < eps &&
+			(st0.foot_angle[swg] - st1.foot_angle[swg]).norm() < eps ){
+			st0.stepping = false;
+		}
+		else{
+			st0.stepping = true;
+		}
+
+	}
+}
+```
+
+簡単のために、片足支持中はZMPが一定であると仮定します。  
+この仮定の下では、ZMPとDCMの間に次の漸化式が成立します。  
+$$ \boldsymbol{\xi_{i+1}} = e^{\omega \tau}\boldsymbol{\xi_i} + (1 - e^{\omega \tau})\boldsymbol{p_i} $$  
+ここで，$\boldsymbol{p_i}$, $\boldsymbol{\xi_i}$ はそれぞれ、  
+$i$ステップ目の初期時刻における ZMP と DCM です．  
+この漸化式に歩行の開始と終了時の目標 ZMP および DCM を設定することで、  
+その間の目標 ZMP と DCM が求まります。
+
+
 
 ---
 
