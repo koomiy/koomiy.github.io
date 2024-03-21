@@ -31,7 +31,7 @@ vnoidというサンプルパッケージが用意されております。
 
 ## サンプルコードの解説
 
--   **直近２ステップの更新**
+-   **歩行ステップの更新**
 
 ```cpp {linenos=inline}
 void SteppingController::Update(const Timer& timer, const Param& param, Footstep& footstep, Footstep& footstep_buffer, Centroid& centroid, Base& base, vector<Foot>& foot){
@@ -185,7 +185,7 @@ stabilizer側で更新された目標 DCM `centroid.dcm_ref`とします(29行�
 
 (今一度、歩行ステップとは何か、一歩を歩行ステップでどのように表現するのか、footとかcentroidの中のposと、footstepのposの扱いの違いについて説明した方がいい気がする)
 
--   **歩行制御**
+-   **遊脚軌道の更新**
 
 ```cpp {linenos=inline}
 void SteppingController::Update(const Timer& timer, const Param& param, Footstep& footstep, Footstep& footstep_buffer, Centroid& centroid, Base& base, vector<Foot>& foot){
@@ -268,6 +268,100 @@ void SteppingController::Update(const Timer& timer, const Param& param, Footstep
 
 このブロックから、本格的に歩行制御が行われます。
 
+歩行は、両足支持期から片足支持期へ移行する流れを繰り返すものとします。  
+浮遊足の離地から着地までの期間が片足支持期です。  
+両足支持期の場合は、支持足はそのまま変化しないように(24~28行目)、  
+もう一方の支持足は離地の位置・姿勢を保持するように(31~37行目)制御します。  
+片足支持期の場合は、支持足はそのまま変化しないように(24~28行目)、  
+浮遊足は、サイクロイド曲線をベースに更新されるように(61~62行目)制御します。
+
+以下、片足支持期における浮遊足の位置・姿勢の更新方法について説明します。  
+離地足と着地足をつなぐ軌道を、遊脚軌道と言います。
+
+離地、着地瞬間の浮遊足の状態は、それぞれ  
+`stb0.foot_pos[swg]`と`stb1.foot_pos[swg]`にあらかじめ計画されています。  
+そのうち着地に関しては、歩行間にロボットがバランスを崩した際に、  
+安定化のために修正しなければならない場合があります。  
+そこで、11~14行目でDCM力学に基づいた着地位置修正を実装しています。  
+この安定化方法については、[012 - 安定化制御](https://koomiy.github.io/posts/stepping_controller/)の記事で取り扱います。
+
+安定化制御に伴い目標DCMは修正されます。  
+修正前の現在時刻における目標DCM`stb0.dcm`は、  
+事前に計画しておいた着地瞬間の目標DCMに安定収束するように計算されます(9行目)。  
+ここで、`alpha`は、現在時刻から着地予定時刻までの区間で、  
+DCMの運動方程式を離散化して得られる係数です。  
+修正後の目標DCMは`centroid.dcm_ref`です。
+
+遊脚軌道$\boldsymbol{p^{swg}}$は、  
+離地位置を$\boldsymbol{p^{lift}}$、  
+着地位置を$\boldsymbol{p^{land}}$として、  
+次式のように表される(61~62行目)。  
+$$ \bm{p^{swg}} = \bm{p^{lift}} + \tilde{c}_h(\phi(t_{ssp})) (\bm{p^{land}} - \bm{p^{lift}}) + \tilde{c}_v(\phi(t_{ssp})) h_{swg} $$
+ここで、$h_{swg}$は足を上げる高さです。  
+また、$\tilde{c}_h$、$\tilde{c}_v$はそれぞれ、  
+正規化されたサイクロイドの横変位と縦変位で、次式で表されます。  
+$$ \tilde{c}_h(\phi) = \frac{c_h(\phi) - c_h(\phi_0)}{c_h(\phi_1) - c_h(\phi_0)} = \frac{\phi - \mathrm{sin}\phi}{2\pi} \\
+\tilde{c}_v(\phi) = \frac{c_v(\phi) - c_v(\phi_0)}{c_v(\phi_1) - c_v(\phi_0)} = \frac{1 - \mathrm{cos}\phi}{2} \\
+c_h(\phi) = \phi - \mathrm{sin}\phi \\
+c_v(\phi) = 1 - \mathrm{cos}\phi \\
+\phi = 2\pi s \nonumber \\
+\phi_0 = 0 \nonumber \\
+\phi_1 = 2\pi \nonumber \\
+s = \frac{t_{ssp}}{\tau_{ssp}} \in [0, 1] $$
+
+
+
+## 以下だらっと書いたやつ
+
+6行目で、着地予定時刻までの期間`ttl`を決めます。  
+ここで、`stb0.tbegin`は現在の歩行ステップの開始時刻、  
+`stb0.duration`は現在の歩行ステップの歩行期間、  
+`timer.time`は現在時刻です。
+
+7~9行目で、現在時刻における目標DCMを計算します。  
+その際、[離地から着地までの区間で離散化したDCMの運動方程式](https://koomiy.github.io/posts/dcm_generator/)を用います。  
+
+11~14行目では、DCM力学に基づいた着地位置修正をします。  
+`land_rel`は、現在の支持足を基準とした、相対的な目標着地位置です。  
+`stabilizer`では、歩行を安定化させるために目標DCMの修正を行うのですが、  
+その修正量を目標着地位置にも反映させることで、安定化を実現します。  
+(目標DCMの修正については、[012 - 安定化制御](https://koomiy.github.io/posts/stepping_controller/)の記事で取り扱います。)
+
+16~22行目では、ベースリンクのヨー方向の目標姿勢を設定します。  
+これは、両足の角度の中間角度に設定されます。  
+
+24~28行目では、支持足の目標位置・姿勢を設定します。
+
+30~76行目では、遊脚側の足の目標位置・姿勢を計算します。
+
+31~37行目は、両足支持期のときのみ実行されます。  
+歩行の流れとしては、先に両足支持期が来たのちに片足支持期に移行します。  
+したがって、遊脚側の足の目標位置・姿勢は、計画離地位置・姿勢と一致させます。
+
+38~76行目は、続く片足支持期に実行されます。  
+ここで、`ts`は、片足支持期の開始時刻からの経過時間です。  
+`tauv`は、片足支持期間で、足の高さ方向の移動にかける期間として使用します。  
+`dsp_duration`は、両足支持期間です。  
+`tauh`は、足の水平移動にかける期間です。  
+`descend_duration`は、足を下ろす期間ですが、標準では0に設定されています。  
+したがって、標準では`tauv = tauh`となります。
+
+`sv`、`sh`は、正規化した片足支持期の開始時刻からの経過時間です。  
+`thetav`、`thetah`は、サイクロイドの回転角です。  
+`cv`、`ch`はそれぞれ、正規化されたサイクロイドの縦変位と横変位です。  
+これらは、`tauv`と`tauh`が異なる場合にも対応できるようになっています。
+
+53~59, 63~64行目では、足の目標回転角度を計算します。  
+足をヨー・ピッチ方向に旋回するように着地計画をしている場合は、  
+離地瞬間からゆるやかに着地瞬間の足の角度になるように計画します。
+
+61~62行目でサイクロイド曲線をベースにした浮遊足の目標位置を計算します。  
+
+67~74行目では、ベースリンク姿勢の目標誤差に合わせて浮遊足の目標位置・姿勢を修正します。  
+足の目標位置については、支持足の目標ZMPを中心にロボットが傾いたと想定し、  
+その傾きを考慮した着地位置に修正します。  
+足の目標姿勢については、そのままベースリンク姿勢の傾きを足します。
+
 ---
 
 ## まとめ・次回予告
@@ -277,4 +371,4 @@ void SteppingController::Update(const Timer& timer, const Param& param, Footstep
 
 次回は歩行制御(stepping_controller)について解説しようと思います。
 
-次回： [012 - 歩行制御](https://koomiy.github.io/posts/stepping_controller/)
+次回： [013 - 歩行安定化制御](https://koomiy.github.io/posts/stepping_controller/)
