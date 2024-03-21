@@ -299,14 +299,6 @@ $$ \boldsymbol{p^{swg}} = \boldsymbol{p^{lift}} + \tilde{c}_h(\phi(t_{ssp})) (\b
 ここで、$h_{swg}$は足を上げる高さです。  
 また、$\tilde{c}_h$、$\tilde{c}_v$はそれぞれ、  
 正規化されたサイクロイドの横変位と縦変位で、次式で表されます(39~48行目)。  
-$$ \tilde{c}_h(\phi) = \frac{c_h(\phi) - c_h(\phi_0)}{c_h(\phi_1) - c_h(\phi_0)} = \frac{\phi - \mathrm{sin}\phi}{2\pi} \\
-\tilde{c}_v(\phi) = \frac{c_v(\phi) - c_v(\phi_0)}{c_v(\phi_1) - c_v(\phi_0)} = \frac{1 - \mathrm{cos}\phi}{2} \\
-c_h(\phi) = \phi - \mathrm{sin}\phi \\
-c_v(\phi) = 1 - \mathrm{cos}\phi \\
-\phi = 2\pi s \nonumber \\
-\phi_0 = 0 \nonumber \\
-\phi_1 = 2\pi \nonumber \\
-s = \frac{t_{ssp}}{\tau_{ssp}} \in [0, 1] $$
 
 
 
