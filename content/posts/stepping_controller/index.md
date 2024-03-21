@@ -31,6 +31,8 @@ vnoidというサンプルパッケージが用意されております。
 
 ## サンプルコードの解説
 
+-   **直近２ステップの更新**
+
 ```cpp {linenos=inline}
 void SteppingController::Update(const Timer& timer, const Param& param, Footstep& footstep, Footstep& footstep_buffer, Centroid& centroid, Base& base, vector<Foot>& foot){
     if(CheckLanding(timer, footstep_buffer.steps[0], foot)){
@@ -60,7 +62,7 @@ void SteppingController::Update(const Timer& timer, const Param& param, Footstep
 ここで、`footstep_buffer`は直近1歩分の歩行ステップを格納するためのバッファです。  
 バッファを用意するのは、前の歩行ステップの情報が必要になる場合があるからです。  
 このバッファには、常に2つの歩行ステップが格納されるようになっていますが、  
-この2つを合わせて1歩分の情報を表現します。
+この2つを合わせて1歩分の情報を表現します。  
 バッファの0番目の要素が現在の歩行ステップの情報です。  
 現在時刻が、現在の歩行ステップの終了予定時刻を過ぎたとき、  
 着地完了のフラグが立ちます。  
@@ -182,6 +184,8 @@ stabilizer側で更新された目標 DCM `centroid.dcm_ref`とします(29行�
 `buffer_ready = true`とします。
 
 (今一度、歩行ステップとは何か、一歩を歩行ステップでどのように表現するのか、footとかcentroidの中のposと、footstepのposの扱いの違いについて説明した方がいい気がする)
+
+-   **歩行制御**
 
 ```cpp {linenos=inline}
 void SteppingController::Update(const Timer& timer, const Param& param, Footstep& footstep, Footstep& footstep_buffer, Centroid& centroid, Base& base, vector<Foot>& foot){
