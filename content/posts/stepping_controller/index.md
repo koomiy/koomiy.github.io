@@ -304,9 +304,9 @@ $$ c_h(\phi) = \frac{C_h(\phi) - C_h(\phi_0)}{C_h(\phi_1) - C_h(\phi_0)} = \frac
 $$ c_v(\phi) = \frac{C_v(\phi) - C_v(\phi_0)}{C_v(\phi_1) - C_v(\phi_0)} = \frac{1 - \mathrm{cos}\phi}{2} $$
 $$ C_h(\phi) = \phi - \mathrm{sin}\phi $$
 $$ C_v(\phi) = 1 - \mathrm{cos}\phi $$
-$$ \phi = 2\pi s \nonumber $$
-$$ \phi_0 = 0 \nonumber $$
-$$ \phi_1 = 2\pi \nonumber $$
+$$ \phi = 2\pi s $$
+$$ \phi_0 = 0 $$
+$$ \phi_1 = 2\pi $$
 $$ s = \frac{t_{ssp}}{\tau_{ssp}} \in [0, 1] $$
 
 他にも、歩行制御ではベースリンクのヨー方向姿勢を両足の中間角度に設定したり、  
