@@ -293,14 +293,25 @@ DCMの運動方程式を離散化して得られる係数です。
 修正後の目標DCMは`centroid.dcm_ref`です。
 
 遊脚軌道$\boldsymbol{p^{swg}}$は、離地位置を$\boldsymbol{p^{lift}}$、着地位置を$\boldsymbol{p^{land}}$として、  
-次式のように表される(61~62行目)。
-$$ \boldsymbol{p^{swg}} = \boldsymbol{p^{lift}} + \tilde{c}_h(\phi(t_{ssp})) (\boldsymbol{p^{land}} - \boldsymbol{p^{lift}}) + \tilde{c}_v(\phi(t_{ssp})) \boldsymbol{h_{swg}} $$  
+次式のように表される(61~62行目)。  
+$$ \boldsymbol{p^{swg}} = \boldsymbol{p^{lift}} + \tilde{c}_h (\phi(t_{ssp})) (\boldsymbol{p^{land}} - \boldsymbol{p^{lift}}) + \tilde{c}_v (\phi(t_{ssp})) \boldsymbol{h_{swg}} $$
 
 ここで、$h_{swg}$は足を上げる高さです。  
 また、$\tilde{c}_h$、$\tilde{c}_v$はそれぞれ、  
 正規化されたサイクロイドの横変位と縦変位で、次式で表されます(39~48行目)。  
+$$ \tilde{c}_h(\phi) = \frac{c_h(\phi) - c_h(\phi_0)}{c_h(\phi_1) - c_h(\phi_0)} = \frac{\phi - \mathrm{sin}\phi}{2\pi} \\
+\tilde{c}_v(\phi) = \frac{c_v(\phi) - c_v(\phi_0)}{c_v(\phi_1) - c_v(\phi_0)} = \frac{1 - \mathrm{cos}\phi}{2} \\
+c_h(\phi) = \phi - \mathrm{sin}\phi \\
+c_v(\phi) = 1 - \mathrm{cos}\phi \\
+\phi = 2\pi s \nonumber \\
+\phi_0 = 0 \nonumber \\
+\phi_1 = 2\pi \nonumber \\
+s = \frac{t_{ssp}}{\tau_{ssp}} \in [0, 1] $$
 
+他にも、歩行制御ではベースリンクのヨー方向姿勢を両足の中間角度に設定したり、  
+片足支持期における浮遊足のヨー・ピッチ方向の姿勢を
 
+(これはまだpushしていない)
 
 ## 以下だらっと書いたやつ
 
