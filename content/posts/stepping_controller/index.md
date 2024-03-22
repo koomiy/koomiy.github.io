@@ -300,14 +300,14 @@ $$ \boldsymbol{p^{swg}} = \boldsymbol{p^{lift}} + c_h (\phi(t_{ssp})) (\boldsymb
 また、$c_h$、$c_v$はそれぞれ、  
 正規化されたサイクロイドの横変位と縦変位で、次式で表されます(39~48行目)。
 
-$$ c_h(\phi) = \frac{C_h(\phi) - C_h(\phi_0)}{C_h(\phi_1) - C_h(\phi_0)} = \frac{\phi - \mathrm{sin}\phi}{2\pi} \\
-c_v(\phi) = \frac{C_v(\phi) - C_v(\phi_0)}{C_v(\phi_1) - C_v(\phi_0)} = \frac{1 - \mathrm{cos}\phi}{2} \\
-C_h(\phi) = \phi - \mathrm{sin}\phi \\
-C_v(\phi) = 1 - \mathrm{cos}\phi \\
-\phi = 2\pi s \nonumber \\
-\phi_0 = 0 \nonumber \\
-\phi_1 = 2\pi \nonumber \\
-s = \frac{t_{ssp}}{\tau_{ssp}} \in [0, 1] $$
+$$ c_h(\phi) = \frac{C_h(\phi) - C_h(\phi_0)}{C_h(\phi_1) - C_h(\phi_0)} = \frac{\phi - \mathrm{sin}\phi}{2\pi} $$
+$$ c_v(\phi) = \frac{C_v(\phi) - C_v(\phi_0)}{C_v(\phi_1) - C_v(\phi_0)} = \frac{1 - \mathrm{cos}\phi}{2} $$
+$$ C_h(\phi) = \phi - \mathrm{sin}\phi $$
+$$ C_v(\phi) = 1 - \mathrm{cos}\phi $$
+$$ \phi = 2\pi s \nonumber $$
+$$ \phi_0 = 0 \nonumber $$
+$$ \phi_1 = 2\pi \nonumber $$
+$$ s = \frac{t_{ssp}}{\tau_{ssp}} \in [0, 1] $$
 
 他にも、歩行制御ではベースリンクのヨー方向姿勢を両足の中間角度に設定したり、  
 片足支持期における浮遊足のヨー・ピッチ方向の姿勢を
