@@ -294,7 +294,7 @@ DCMの運動方程式を離散化して得られる係数です。
 
 遊脚軌道$\boldsymbol{p^{swg}}$は、離地位置を$\boldsymbol{p^{lift}}$、着地位置を$\boldsymbol{p^{land}}$として、  
 次式のように表される(61~62行目)。  
-$$ \boldsymbol{p^{swg}} = \boldsymbol{p^{lift}} + \tilde{c}_h (\phi(t_{ssp})) (\boldsymbol{p^{land}} - \boldsymbol{p^{lift}}) + \tilde{c}_v (\phi(t_{ssp})) \boldsymbol{h_{swg}} $$
+$$ \boldsymbol{p^{swg}} = \boldsymbol{p^{lift}} + h (\phi(t_{ssp})) (\boldsymbol{p^{land}} - \boldsymbol{p^{lift}}) + v (\phi(t_{ssp})) \boldsymbol{h_{swg}} $$
 
 ここで、$h_{swg}$は足を上げる高さです。  
 また、$\tilde{c}_h$、$\tilde{c}_v$はそれぞれ、  
