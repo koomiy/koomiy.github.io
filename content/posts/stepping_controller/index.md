@@ -60,7 +60,7 @@ void SteppingController::Update(const Timer& timer, const Param& param, Footstep
 
 SteppingControllerでは、直近一歩の歩行制御を行います。  
 そのため、一歩が完了するたびに歩行ステップを更新します。  
-その際、`footstep_buffer`というバッファを用います。
+その際、`footstep_buffer`というバッファを用います。  
 これは、直近1歩分を表す2つの歩行ステップを格納するバッファです。  
 
 まず2行目の`CheckLanding`で、着地が完了したかを判定します。  
