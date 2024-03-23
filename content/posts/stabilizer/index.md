@@ -61,7 +61,9 @@ void SteppingController::Update(const Timer& timer, const Param& param, Footstep
 SteppingControllerでは、直近一歩の歩行制御を行います。  
 そのため、一歩が完了するたびに歩行ステップを更新します。  
 その際、`footstep_buffer`というバッファを用います。  
-これは、直近1歩分を表す2つの歩行ステップを格納するバッファです。
+これは、直近1歩分を表す2つの歩行ステップを格納するバッファです(下図参照)。
+
+{{<figure src="./step_buffer.png" class="center" alt="step_buffer" width="75%">}}
 
 2行目の`CheckLanding`で、着地が完了したかを判定します。  
 着地が完了した場合は、バッファを次の1歩分の歩行ステップに更新します(3~17行目)。
@@ -145,9 +147,7 @@ void SteppingController::Update(const Timer& timer, const Param& param, Footstep
 `st0`や`st1`は、`footstep`オブジェクトの0番目と1番目の要素です。  
 `stb0`や`stb1`は、`footstep_buffer`オブジェクトの0番目と1番目の要素です。  
 `sup`はその足が支持側の足であることを、  
-`swg`はその足が遊脚側の足であることを示すフラグです。
-
-{{<figure src="./step_buffer.png" class="center" alt="step_buffer" width="75%">}}
+`swg`はその足が遊脚側の足であることを示すフラグです。  
 
 0番目の歩行ステップの`sup`には、現在時刻における支持足の位置・姿勢を、  
 `swg`には、現在時刻における離地足の位置・姿勢を設定します(23~28行目)。
