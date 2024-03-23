@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="dsp_ssp.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.0381216"
+     inkscape:cx="434.92015"
+     inkscape:cy="306.80414"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible;"
+       id="Arrow2Mend"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.6) rotate(180) translate(0,0)"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         style="stroke:context-stroke;fill-rule:evenodd;fill:context-stroke;stroke-width:0.62500000;stroke-linejoin:round;"
+         id="path1402" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend)"
+       d="M 45.618683,131.55947 H 159.77225"
+       id="path857"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 50.461163,131.55947 c 4.016738,-3.0426 9.114084,-4.69924 9.114084,-4.69924"
+       id="path1147"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 79.404838,131.45012 c -4.016738,-3.0426 -9.114084,-4.69924 -9.114084,-4.69924"
+       id="path1147-9"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 79.404838,131.45012 c 4.016738,-3.0426 9.114084,-4.69924 9.114084,-4.69924"
+       id="path1147-4"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 151.74393,131.55947 c -4.01674,-3.0426 -9.11408,-4.69924 -9.11408,-4.69924"
+       id="path1147-4-2"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.76111px;line-height:1.25;font-family:sans-serif;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none"
+       x="162.50621"
+       y="134.03197"
+       id="text2525"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan2523"
+         style="font-size:7.76111px;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none"
+         x="162.50621"
+         y="134.03197">t</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:7.76111px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="109.08324"
+       y="124.63014"
+       id="text4707"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan4705"
+         style="font-size:7.76111px;stroke-width:0.264583"
+         x="109.08324"
+         y="124.63014">τ<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan8447">ssp</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:7.76111px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="60.403568"
+       y="122.97349"
+       id="text5569"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan5567"
+         style="font-size:7.76111px;stroke-width:0.264583"
+         x="60.403568"
+         y="122.97349">τ<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan9817">dsp</tspan></tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 50.461163,127.4816 v 4.07787"
+       id="path10702"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 50.461163,131.55947 v 4.07787"
+       id="path10702-6"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 79.404838,131.45012 v 4.07787"
+       id="path10702-6-4"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 79.404838,127.37225 v 4.07787"
+       id="path10702-6-4-5"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 151.74393,131.55947 v 4.07787"
+       id="path10702-6-4-7"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 79.40484,151.2476 v 4.07787"
+       id="path10702-6-4-72"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 79.40484,147.16973 v 4.07787"
+       id="path10702-6-4-72-7"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 151.74393,151.35695 v 4.07787"
+       id="path10702-6-4-7-2"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 151.74393,147.27908 v 4.07787"
+       id="path10702-6-4-7-2-1"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 151.74393,127.4816 v 4.07787"
+       id="path10702-6-4-7-4"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.76111px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="155.21423"
+       y="153.93991"
+       id="text13446"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan13444"
+         style="font-size:7.76111px;stroke-width:0.264583"
+         x="155.21423"
+         y="153.93991">t<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan34349">ssp</tspan></tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 50.461163,131.55947 c 8.030898,-29.23022 36.448611,-30.24969 40.90879,-30.24969"
+       id="path28160"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 151.74393,131.55947 c -8.03091,-29.23022 -36.44862,-30.24969 -40.9088,-30.24969"
+       id="path28160-6"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.76111px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="99.015976"
+       y="103.85845"
+       id="text29585"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan29583"
+         style="font-size:7.76111px;stroke-width:0.264583"
+         x="99.015976"
+         y="103.85845">τ</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend)"
+       d="m 79.411482,151.24789 70.218308,0.10828"
+       id="path35349"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.499999;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.3;paint-order:stroke fill markers"
+       id="path35497"
+       cx="79.453804"
+       cy="151.24834"
+       r="1.17142"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.499999;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.3;paint-order:stroke fill markers"
+       id="path35497-1"
+       cx="151.72141"
+       cy="151.27084"
+       r="1.17142"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458299;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:0.79374896,0.79374896;stroke-dashoffset:0"
+       d="m 79.404836,135.52799 3e-6,11.64174"
+       id="path35766"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458299;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:0.79374896,0.79374896;stroke-dashoffset:0"
+       d="m 151.74393,135.63734 v 11.64174"
+       id="path35768"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-size:5.64444px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="77.85437"
+       y="161.65594"
+       id="text37370"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan37368"
+         style="stroke-width:0.264583"
+         x="77.85437"
+         y="161.65594">0</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458299;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:0.79374896,0.79374896;stroke-dashoffset:0"
+       d="M 50.461163,127.4816 V 77.133494"
+       id="path42163"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458299;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:0.79374896,0.79374896;stroke-dashoffset:0"
+       d="M 79.404838,127.37225 V 77.024144"
+       id="path42163-9"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458299;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:0.79374896,0.79374896;stroke-dashoffset:0"
+       d="M 151.74393,127.4816 V 77.133494"
+       id="path42163-9-3"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.265;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect42393"
+       width="4.7969537"
+       height="1.4629128"
+       x="58.681126"
+       y="78.687408"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.265;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect42393-1"
+       width="4.7969537"
+       height="1.4629128"
+       x="67.182251"
+       y="78.687408"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 55.815954,80.408408 H 74.038969"
+       id="path42602"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#000000;fill-opacity:0.3;stroke:none;stroke-width:0.270987;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect42706"
+       width="18.223017"
+       height="3.695586"
+       x="55.815956"
+       y="80.408409"
+       ry="0"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 106.84736,80.408407 h 18.22312"
+       id="path42602-5"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#000000;fill-opacity:0.3;stroke:none;stroke-width:0.270987;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect42706-4"
+       width="18.223017"
+       height="3.695586"
+       x="106.84731"
+       y="80.408409"
+       ry="0"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 83.861899,80.408405 H 102.08499"
+       id="path42602-5-1"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#000000;fill-opacity:0.3;stroke:none;stroke-width:0.270987;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect42706-4-0"
+       width="18.223017"
+       height="3.695586"
+       x="83.861847"
+       y="80.408409"
+       ry="0"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 129.8329,80.408402 h 18.22309"
+       id="path42602-5-1-2"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#000000;fill-opacity:0.3;stroke:none;stroke-width:0.270987;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect42706-4-0-4"
+       width="18.223017"
+       height="3.695586"
+       x="129.83281"
+       y="80.408409"
+       ry="0"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;fill-opacity:0.3;stroke:#000000;stroke-width:0.265;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="path43078"
+       cx="65.171494"
+       cy="58.534286"
+       r="2.1851487"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;fill-opacity:0.3;stroke:#000000;stroke-width:0.146514;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="path43078-8"
+       cx="65.115402"
+       cy="69.279808"
+       r="1.2081354"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 65.148967,60.854596 -0.04505,8.560374"
+       id="path43870"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 65.103917,69.41497 4.550513,4.054917"
+       id="path43872"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 69.65443,73.469887 -0.135165,5.18128"
+       id="path43874"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 65.103917,69.41497 -1.757133,5.361501"
+       id="path43989"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 63.346784,74.776471 -2.432949,3.874696"
+       id="path43991"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 65.148967,60.854596 -1.982401,4.50546"
+       id="path44186"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 63.166566,65.360056 62.44569,70.045737"
+       id="path44188"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 65.148967,60.854596 2.072513,5.406552"
+       id="path44190"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 67.22148,66.261148 2.523059,2.432949"
+       id="path44192"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.265;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect42393-7"
+       width="4.7969537"
+       height="1.4629128"
+       x="87.441086"
+       y="77.188255"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.265;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect42393-1-4"
+       width="4.7969537"
+       height="1.4629128"
+       x="93.709503"
+       y="78.687408"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;fill-opacity:0.3;stroke:#000000;stroke-width:0.265;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="path43078-9"
+       cx="93.737686"
+       cy="58.534286"
+       r="2.1851487"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;fill-opacity:0.3;stroke:#000000;stroke-width:0.265;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="path43078-8-3"
+       cx="93.759323"
+       cy="69.279816"
+       r="1.2081354"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 93.715157,60.854597 -0.04505,8.560374"
+       id="path43870-2"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 93.715157,60.854597 -1.982401,4.50546"
+       id="path44186-9"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 91.732756,65.360057 91.01188,70.045738"
+       id="path44188-0"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 93.715157,60.854597 2.072513,5.406552"
+       id="path44190-9"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 95.78767,66.261149 2.523059,2.432949"
+       id="path44192-6"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.265;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect42393-7-5"
+       width="4.7969537"
+       height="1.4629128"
+       x="112.81693"
+       y="76.18824"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.265;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect42393-1-4-0"
+       width="4.7969537"
+       height="1.4629128"
+       x="113.35758"
+       y="78.687408"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;fill-opacity:0.3;stroke:#000000;stroke-width:0.265;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="path43078-9-3"
+       cx="116.10933"
+       cy="58.53429"
+       r="2.1851487"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;fill-opacity:0.3;stroke:#000000;stroke-width:0.265;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="path43078-8-3-2"
+       cx="116.05325"
+       cy="69.279816"
+       r="1.2081354"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 116.08686,60.854601 -0.0451,8.560374"
+       id="path43870-2-1"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 116.08686,60.854601 -1.9824,4.50546"
+       id="path44186-9-3"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 114.10446,65.360061 -0.72087,4.685681"
+       id="path44188-0-9"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 116.08686,60.854601 2.07252,5.406552"
+       id="path44190-9-2"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 118.15938,66.261153 2.52305,2.432949"
+       id="path44192-6-0"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.265;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect42393-7-5-7"
+       width="4.7969537"
+       height="1.4629128"
+       x="141.08467"
+       y="77.33577"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.265;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect42393-1-4-0-2"
+       width="4.7969537"
+       height="1.4629128"
+       x="133.0056"
+       y="78.687408"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;fill-opacity:0.3;stroke:#000000;stroke-width:0.265;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="path43078-9-3-4"
+       cx="139.46141"
+       cy="58.534286"
+       r="2.1851487"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:none;fill-opacity:0.3;stroke:#000000;stroke-width:0.265;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="path43078-8-3-2-5"
+       cx="139.40535"
+       cy="69.279808"
+       r="1.2081354"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 139.43916,60.854599 -0.0451,8.560374"
+       id="path43870-2-1-0"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 139.39406,69.414973 4.55052,4.054917"
+       id="path43872-1-3-7"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 139.43916,60.854599 -1.9824,4.50546"
+       id="path44186-9-3-7"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 137.45676,65.360059 -0.72087,4.685681"
+       id="path44188-0-9-4"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 139.43916,60.854599 2.07252,5.406552"
+       id="path44190-9-2-5"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 141.51168,66.261151 2.52305,2.432949"
+       id="path44192-6-0-5"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 93.670105,69.41497 2.356596,4.812903"
+       id="path44749"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 96.026701,74.227873 0.06372,4.332746"
+       id="path44751"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 93.670105,69.41497 -0.829247,4.558036"
+       id="path44753"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 92.840858,73.973006 -3.058409,3.122125"
+       id="path44755"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 116.04176,69.414973 -0.0129,4.956006"
+       id="path45270"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 116.02886,74.370979 -0.49558,4.235132"
+       id="path45272"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 116.04176,69.414973 2.1948,2.883493"
+       id="path45274"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 118.23656,72.298466 -3.15382,3.829642"
+       id="path45276"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 143.94458,73.46989 -0.40853,3.694475"
+       id="path45391"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 139.39406,69.414973 -0.27336,5.406551"
+       id="path45393"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 139.1207,74.821524 -3.77796,3.829646"
+       id="path45395"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.76111px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="92.516861"
+       y="144.76466"
+       id="text1688"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan1686"
+         style="font-size:7.76111px;stroke-width:0.264583"
+         x="92.516861"
+         y="144.76466">片足支持期間</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:7.76111px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="29.759403"
+       y="144.98999"
+       id="text1688-0"
+       inkscape:export-filename="C:\koomiy.github.io\content\posts\stepping_controller\dsp_ssp.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan1686-8"
+         style="font-size:7.76111px;stroke-width:0.264583"
+         x="29.759403"
+         y="144.98999">両足支持期間</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:5.64444px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="17.58585"
+       y="110.10271"
+       id="text24375"><tspan
+         sodipodi:role="line"
+         id="tspan24373"
+         style="stroke-width:0.264583"
+         x="17.58585"
+         y="110.10271" /></text>
+  </g>
+</svg>

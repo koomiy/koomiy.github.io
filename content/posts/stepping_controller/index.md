@@ -61,7 +61,9 @@ void SteppingController::Update(const Timer& timer, const Param& param, Footstep
 SteppingControllerでは、直近一歩の歩行制御を行います。  
 そのため、一歩が完了するたびに歩行ステップを更新します。  
 その際、`footstep_buffer`というバッファを用います。  
-これは、直近1歩分を表す2つの歩行ステップを格納するバッファです。
+これは、直近1歩分を表す2つの歩行ステップを格納するバッファです(下図参照)。
+
+{{<figure src="./step_buffer.png" class="center" alt="step_buffer" width="50%">}}
 
 2行目の`CheckLanding`で、着地が完了したかを判定します。  
 着地が完了した場合は、バッファを次の1歩分の歩行ステップに更新します(3~17行目)。
@@ -139,47 +141,34 @@ void SteppingController::Update(const Timer& timer, const Param& param, Footstep
 ```
 
 このブロックでは、空の歩行ステップ情報を埋める処理が行われます。  
-この処理は、一歩につき**最初の一度だけ**行われます。
+この処理は、一歩につき最初の一度だけ行われます。
 
-まず、以降のプログラムで用いる変数について説明しておきます。  
+以降のブロックで用いる変数について説明します。  
 `st0`や`st1`は、`footstep`オブジェクトの0番目と1番目の要素です。  
 `stb0`や`stb1`は、`footstep_buffer`オブジェクトの0番目と1番目の要素です。  
-`sup`はその足が支持側の足であることを示すフラグであり、  
+`sup`はその足が支持側の足であることを、  
 `swg`はその足が遊脚側の足であることを示すフラグです。  
-`T`は LIPM の重心運動の時定数です。  
-`offset`は、三次元空間上のDCM と水平面上の ZMP の次元を揃えるために用いる、  
-目標重心高さ分のオフセットです。
 
-17~29行目では、現在の歩行ステップの情報を最新のものに更新しています。  
-はじめに、足の左右判別`side`や、  
-そのステップで歩行と言えるだけの距離を歩いているかの判別`stepping`、  
-歩行期間`duration`を`st`と`stb`で揃えておきます。  
-続いて、現在の歩行ステップの支持足の位置・姿勢を最新の情報に更新します(23~25行目)。  
-また、現在の歩行ステップの離陸足の位置・姿勢を最新の情報に更新します(26~28行目)。  
-さらに、現在の歩行ステップの目標 DCM を、  
-stabilizer側で更新された目標 DCM `centroid.dcm_ref`とします(29行目)。  
+0番目の歩行ステップの`sup`には、現在時刻における支持足の位置・姿勢を、  
+`swg`には、現在時刻における離地足の位置・姿勢を設定します(23~28行目)。
 
-31~34行目では、`st1`の情報をもとに、支持足を基準とした  
-着地足の位置・姿勢および次の歩行ステップの目標 DCM を相対的に決定します。
+1番目の歩行ステップの`sup`は、0番目のものと一致するように設定し、  
+`swg`には、着地足の目標位置・姿勢を設定します(31~34, 36~39行目)。
 
-36~43行目では、次の歩行ステップの情報を最新のものに更新しています。  
-まず、支持足は二つの歩行ステップ間で変化しないので、  
-次の歩行ステップの支持足の位置・姿勢を、  
-現在の歩行ステップのものと一致させます(37~39行目)。  
-続いて、先ほど求めた相対着地位置・姿勢および目標 DCM を絶対座標系に変換し、  
-それらを次の歩行ステップの着地足の位置・姿勢、目標 DCM とします(40~43行目)。  
+また、0番目の歩行ステップの目標 DCM を、歩行安定化制御により修正された  
+現在時刻における目標 DCM `centroid.dcm_ref`に設定します(29行目)。
 
 45~47行目では、現在の歩行ステップにおける目標 ZMP を、  
-歩行開始時と終了時の目標 DCM に合わせて決めます。
-ここで用いられている漸化式は、  
-[目標ZMP・DCM計画](https://koomiy.github.io/posts/dcm_generator/)の記事で説明したものです。
+歩行開始時と終了時の目標 DCM に合わせて決めます。  
+ここで用いられている漸化式は、[目標ZMP・DCM計画](https://koomiy.github.io/posts/dcm_generator/)の記事で説明したものです。
+ここで、`T`は LIPM の重心運動の時定数です。  
+`offset`は、三次元空間上のDCM と水平面上の ZMP の次元を揃えるために用いる、  
+目標重心高さ分のオフセットです。
 
 最後に、歩行ステップの情報がすべて埋まり、歩行制御の準備が整ったので、  
 `buffer_ready = true`とします。
 
-(今一度、歩行ステップとは何か、一歩を歩行ステップでどのように表現するのか、footとかcentroidの中のposと、footstepのposの扱いの違いについて説明した方がいい気がする)
-
--   **遊脚軌道の更新**
+-   **歩行制御**
 
 ```cpp {linenos=inline}
 void SteppingController::Update(const Timer& timer, const Param& param, Footstep& footstep, Footstep& footstep_buffer, Centroid& centroid, Base& base, vector<Foot>& foot){
@@ -263,7 +252,10 @@ void SteppingController::Update(const Timer& timer, const Param& param, Footstep
 このブロックから、本格的に歩行制御が行われます。
 
 歩行は、両足支持期から片足支持期へ移行する流れを繰り返すものとします。  
-浮遊足の離地から着地までの期間が片足支持期です。  
+浮遊足の離地から着地までの期間が片足支持期です(下図)。
+
+{{<figure src="./dsp_ssp.png" class="center" alt="step_duration" width="50%">}}
+
 両足支持期の場合は、支持足はそのまま変化しないように(24~28行目)、  
 もう一方の支持足は離地の位置・姿勢を保持するように(31~37行目)制御します。  
 片足支持期の場合は、支持足はそのまま変化しないように(24~28行目)、  
@@ -287,8 +279,10 @@ DCMの運動方程式を離散化して得られる係数です。
 修正後の目標DCMは`centroid.dcm_ref`です。
 
 遊脚軌道$\boldsymbol{p^{swg}}$は、離地位置を$\boldsymbol{p^{lift}}$、着地位置を$\boldsymbol{p^{land}}$として、  
-次式のように表される(61~62行目)。  
+次式のように表される(61~62行目, 下図)。  
 $$ \boldsymbol{p^{swg}} = \boldsymbol{p^{lift}} + c_h (\phi(t_{ssp})) (\boldsymbol{p^{land}} - \boldsymbol{p^{lift}}) + c_v (\phi(t_{ssp})) \boldsymbol{h_{swg}} $$
+
+{{<figure src="./swg_foot_traj.png" class="center" alt="swing_trajectory" width="50%">}}
 
 ここで、$\boldsymbol{h_{swg}} = [0.0, 0.0, h_{swg}]^T$は足を上げる高さです。  
 また、$c_h$、$c_v$はそれぞれ、正規化されたサイクロイドの横変位と縦変位で、  
