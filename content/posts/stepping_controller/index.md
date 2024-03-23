@@ -5,8 +5,6 @@ categories: ["vnoidの解説"]
 menu: main
 ---
 
-(この記事は制作途中です)
-
 ---
 
 ## 今回の内容
