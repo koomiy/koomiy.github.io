@@ -63,7 +63,7 @@ SteppingControllerでは、直近一歩の歩行制御を行います。
 その際、`footstep_buffer`というバッファを用います。  
 これは、直近1歩分を表す2つの歩行ステップを格納するバッファです(下図参照)。
 
-{{<figure src="./step_buffer.png" class="center" alt="step_buffer" width="100%">}}
+{{<figure src="./step_buffer.png" class="center" alt="step_buffer" width="75%">}}
 
 2行目の`CheckLanding`で、着地が完了したかを判定します。  
 着地が完了した場合は、バッファを次の1歩分の歩行ステップに更新します(3~17行目)。
@@ -254,7 +254,7 @@ void SteppingController::Update(const Timer& timer, const Param& param, Footstep
 歩行は、両足支持期から片足支持期へ移行する流れを繰り返すものとします。  
 浮遊足の離地から着地までの期間が片足支持期です(下図)。
 
-{{<figure src="./dsp_ssp.png" class="center" alt="step_duration" width="100%">}}
+{{<figure src="./dsp_ssp.png" class="center" alt="step_duration" width="75%">}}
 
 両足支持期の場合は、支持足はそのまま変化しないように(24~28行目)、  
 もう一方の支持足は離地の位置・姿勢を保持するように(31~37行目)制御します。  
@@ -282,7 +282,7 @@ DCMの運動方程式を離散化して得られる係数です。
 次式のように表される(61~62行目, 下図)。  
 $$ \boldsymbol{p^{swg}} = \boldsymbol{p^{lift}} + c_h (\phi(t_{ssp})) (\boldsymbol{p^{land}} - \boldsymbol{p^{lift}}) + c_v (\phi(t_{ssp})) \boldsymbol{h_{swg}} $$
 
-{{<figure src="./swg_foot_traj.png" class="center" alt="swing_trajectory" width="100%">}}
+{{<figure src="./swg_foot_traj.png" class="center" alt="swing_trajectory" width="75%">}}
 
 ここで、$\boldsymbol{h_{swg}} = [0.0, 0.0, h_{swg}]^T$は足を上げる高さです。  
 また、$c_h$、$c_v$はそれぞれ、正規化されたサイクロイドの横変位と縦変位で、  
