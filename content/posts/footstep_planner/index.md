@@ -5,7 +5,7 @@ categories: ["vnoidの解説"]
 menu: main
 ---
 
-(この記事は制作途中です)
+年度替わりに伴い、中の人が交代しています。文体等に違いがあるところがあるかと思いますが、ご了承いただければ幸いです。
 
 ---
 
@@ -33,30 +33,70 @@ DCMについては後ほど説明します。
 
 ## サンプルコードの解説
 
--	**歩行パラメータの入力(`myrobot.cpp`192行目~)**
+-	**歩行パラメータの入力(`myrobot.cpp`162行目~)**
 	
 	```cpp {linenos=inline}
 	if(timer.count % 10 == 0){
+    if(use_joystick){
 	    // read joystick
 	    joystick.readCurrentState();
-	    
-	    ...
-	    
-	    Step step;
-	    step.stride   = 0.1     //-max_stride*joystick.getPosition(Joystick::L_STICK_V_AXIS);
-	    step.turn     = 0.0     //-max_turn  *joystick.getPosition(Joystick::L_STICK_H_AXIS);
-	    step.spacing  = 0.20;
-	    step.climb    = 0.0;
-	    step.duration = 0.5;
-	    footstep.steps.push_back(step);
-	    footstep.steps.push_back(step);
-	    footstep.steps.push_back(step);
-	    step.stride = 0.0;
-	    step.turn   = 0.0;
-	    footstep.steps.push_back(step);
-	    
-	    footstep_planner.Plan(param, footstep);
-	    footstep_planner.GenerateDCM(param, footstep);
+
+	    /* Xbox controller mapping:
+		    L_STICK_H_AXIS -> L stick right
+		    L_STICK_V_AXIS -> L stick down
+		    R_STICK_H_AXIS -> L trigger - R trigger
+		    R_STICK_V_AXIS -> R stick down
+		    A_BUTTON -> A
+		    B_BUTTON -> B
+		    X_BUTTON -> X
+		    Y_BUTTON -> Y
+		    L_BUTTON -> L
+		    R_BUTTON -> R
+	        */
+	    /*
+        cout <<  joystick.getPosition(Joystick::L_STICK_H_AXIS) << " " 
+		     << joystick.getPosition(Joystick::L_STICK_V_AXIS) << " " 
+		     << joystick.getPosition(Joystick::R_STICK_H_AXIS) << " " 
+		     << joystick.getPosition(Joystick::R_STICK_V_AXIS) << " " 
+		     << joystick.getButtonState(Joystick::A_BUTTON) << " "
+		     << joystick.getButtonState(Joystick::B_BUTTON) << " "
+		     << joystick.getButtonState(Joystick::X_BUTTON) << " "
+		     << joystick.getButtonState(Joystick::Y_BUTTON) << " "
+		     << joystick.getButtonState(Joystick::L_BUTTON) << " "
+		     << joystick.getButtonState(Joystick::R_BUTTON) << endl;
+         */
+    }
+	
+	// erase current footsteps
+	while(footstep.steps.size() > 2)
+		footstep.steps.pop_back();
+
+    // generate footsteps
+	Step step;
+    if(use_joystick){
+        // set stride and turn based on joystick input
+	    step.stride   = -max_stride*joystick.getPosition(Joystick::L_STICK_V_AXIS);
+	    step.turn     = -max_turn  *joystick.getPosition(Joystick::L_STICK_H_AXIS);
+        step.sway     =  max_sway  *joystick.getPosition(Joystick::R_STICK_H_AXIS);
+    }
+    else{
+        // just walk forward
+        step.stride = 0.1;
+        step.turn   = 0.0;
+        step.sway   = 0.0;
+    }
+	step.spacing  = 0.20;
+	step.climb    = 0.0;
+	step.duration = 0.5;
+	footstep.steps.push_back(step);
+	footstep.steps.push_back(step);
+	footstep.steps.push_back(step);
+	step.stride = 0.0;
+	step.turn   = 0.0;
+	footstep.steps.push_back(step);
+	
+	footstep_planner.Plan(param, footstep);
+    footstep_planner.GenerateDCM(param, footstep);
 	}
 	```
 	
@@ -202,14 +242,199 @@ DCMについては後ほど説明します。
 ---
 
 ## 例題: ジグザグ歩行
+今回の例題のまず始めはジグザグ歩行です。
+myrobot.cppの210行目以降に書かれているコントローラー制御なしのときの歩行パラメータが書かれた部分に注目してください。
+この部分に時間ごとに回転、前進が切り替わるようにパラメータを設定してみましょう。
+下の例では、まず最初の3秒間で反時計回りに回転して、その後6秒間前進します。
+前進が終わると次の6秒間で時計回りに回転して、6秒間前進するというように記述しています。
+以降はその繰り返しです。
+回転角や前進するときの歩幅、それぞれにかける時間を色々変えてみてどのような歩行になるか試してみてください。
+	```cpp {linenos=inline}
+        else{
+            // just walk forward
+            step.stride = 0.1;
+            step.turn   = 0.0;
+            step.sway   = 0.0;
+            if (timer.time < 3.0) {
+                step.stride = 0.0;
+                step.turn   = 0.1745;
+            } 
+            else {
+                if (((int) timer.time - 3) / 6 % 4 == 0 || ((int) timer.time -3) / 6 % 4 == 2) {
+                    step.stride = 0.1;
+                    step.turn   = 0.0;
+                } 
+                else if(((int) timer.time - 3) / 6 % 4 == 3) {
+                    step.stride = 0.0;
+                    step.turn   = 0.1745;
+                } else {
+                    step.stride = 0.0;
+                    step.turn = -0.1745;
+                }
+            }
+        }
+	```
+
+{{<figure src="./vnoid_jiguzagu_1.gif" class="center" alt="vnoid_jiguzagu_1" width="50%">}}  
+
+---
+
+## 例題: ジグザグ歩行2
+二つ目のジグザグ歩行は先ほどのstrideとturnを用いたジグザグ歩行ではなく、strideとswayを利用したジグザグ歩行です。(これをジグザグ歩行というかはわかりませんが...)
+注目する部分は一つ目の例題と同じでmyrobot.cppの210行目以降です。
+下の例では前進すると同時に左右にも歩行パラメータに値を入力するプログラムになっています。
+前進や横への踏み出しをするときの歩幅、それぞれにかける時間を色々変えてみてどのような歩行になるか試してみてください。
+
+	```cpp {linenos=inline}
+       else{
+           // just walk forward
+           step.stride = 0.1;
+           step.turn   = 0.0;
+           step.sway   = 0.0;
+           if ((int)timer.time/5%2 == 0) {
+              step.sway = 0.05;
+           } else {
+              step.sway = -0.05;
+           }
+       }
+	```
+
+{{<figure src="./vnoid_jiguzagu_2.gif" class="center" alt="vnoid_jiguzagu_2" width="50%">}}  
 
 ---
 
 ## 例題: コントローラで歩かせてみよう
+コントローラーを使ってロボットを動かせるようにしてみましょう。
+成功するとラジコンを操縦するように動かせますよ!!
+＊注意(1)：コントローラーはプロジェクトを開く前にご使用のパソコンに接続しておかないとchoreonoid側が認識してくれません。
+＊注意(2)：コントローラーがない方はchoreonoidに仮想ジョイスティックというものがあるのでそちらをご利用ください。使用方法はこの項目の最後に書いてあります。
+	```cpp {linenos=inline}
+	MyRobot::MyRobot(){
+	    base_actuation = false;
 
----
+    	// set use_joystick as true if you want to command robot with joystick
+    	use_joystick = true;	//when true, you can make the robot walk by using your controller. when false, the robot automatically walk 
+    	max_stride = 0.2;
+    	max_turn   = 0.1;
+    	max_sway   = 0.1;
+	}
+	```
+まずは、myrobot.cppの9行目から17行目に書かれているMyRobot::MyRobot()に注目してください。
+この中に書かれているuse_joystick(13行目)という変数をtrueにしましょう。
+これをtrueにすることでコントローラーからの入力を受け取ってロボットを歩かせることができます。
+	```cpp {linenos=inline}
+	void MyRobot::Control(){
+    	Robot::Sense(timer, base, foot, joint);
 
-## 例題: 階段歩行
+	    // calc FK
+    	fk_solver.Comp(param, joint, base, centroid, hand, foot);
+
+		if(timer.count % 10 == 0){
+    	    if(use_joystick){
+			    // read joystick
+		    	joystick.readCurrentState();
+
+			    /* Xbox controller mapping:
+				    L_STICK_H_AXIS -> L stick right
+				    L_STICK_V_AXIS -> L stick down
+				    R_STICK_H_AXIS -> L trigger - R trigger
+			    	R_STICK_V_AXIS -> R stick down
+				    A_BUTTON -> A
+				    B_BUTTON -> B
+				    X_BUTTON -> X
+				    Y_BUTTON -> Y
+				    L_BUTTON -> L
+				    R_BUTTON -> R
+			        */
+		    	/*
+	            cout <<  joystick.getPosition(Joystick::L_STICK_H_AXIS) << " " 
+				     << joystick.getPosition(Joystick::L_STICK_V_AXIS) << " " 
+				     << joystick.getPosition(Joystick::R_STICK_H_AXIS) << " " 
+				     << joystick.getPosition(Joystick::R_STICK_V_AXIS) << " " 
+			    	 << joystick.getButtonState(Joystick::A_BUTTON) << " "
+				     << joystick.getButtonState(Joystick::B_BUTTON) << " "
+				     << joystick.getButtonState(Joystick::X_BUTTON) << " "
+				     << joystick.getButtonState(Joystick::Y_BUTTON) << " "
+				     << joystick.getButtonState(Joystick::L_BUTTON) << " "
+			    	 << joystick.getButtonState(Joystick::R_BUTTON) << endl;
+            	 */
+        	}
+		
+			// erase current footsteps
+			while(footstep.steps.size() > 2)
+				footstep.steps.pop_back();
+
+	        // generate footsteps
+			Step step;
+        	if(use_joystick){
+            	// set stride and turn based on joystick input
+		    	step.stride   = -max_stride*joystick.getPosition(Joystick::L_STICK_V_AXIS);
+			    step.turn     = -max_turn  *joystick.getPosition(Joystick::L_STICK_H_AXIS);
+    	        step.sway     =  max_sway  *joystick.getPosition(Joystick::R_STICK_H_AXIS);
+        	}
+	        else{
+    	        // just walk forward
+         	   	step.stride = 0.1;
+            	step.turn   = 0.0;
+	            step.sway   = 0.0;
+    	    }
+			step.spacing  = 0.20;
+			step.climb    = 0.0;
+			step.duration = 0.5;
+			footstep.steps.push_back(step);
+			footstep.steps.push_back(step);
+			footstep.steps.push_back(step);
+			step.stride = 0.0;
+			step.turn   = 0.0;
+			footstep.steps.push_back(step);
+		
+			footstep_planner.Plan(param, footstep);
+    	    footstep_planner.GenerateDCM(param, footstep);
+		}
+
+	    // stepping controller generates swing foot trajectory 
+    	// it also performs landing position adaptation
+    	stepping_controller.Update(timer, param, footstep, footstep_buffer, centroid, base, foot);
+    
+	    // stabilizer performs balance feedback
+    	stabilizer         .Update(timer, param, footstep_buffer, centroid, base, foot);
+    
+	    // step timing adaptation
+    	//Centroid centroid_pred = centroid;
+   	 	//stabilizer.Predict(timer, param, footstep_buffer, base, centroid_pred);
+    	//stepping_controller.AdjustTiming(timer, param, centroid_pred, footstep, footstep_buffer);
+
+	    hand[0].pos_ref = centroid.com_pos_ref + base.ori_ref*Vector3(0.0, -0.25, -0.1);
+    	hand[0].ori_ref = base.ori_ref;
+    	hand[1].pos_ref = centroid.com_pos_ref + base.ori_ref*Vector3(0.0,  0.25, -0.1);
+    	hand[1].ori_ref = base.ori_ref;
+
+	    // calc CoM IK
+    	ik_solver.Comp(&fk_solver, param, centroid, base, hand, foot, joint);
+
+		Robot::Actuate(timer, base, joint);
+	
+		timer.Countup();
+	}
+	```
+さあ実際に制御している部分を見ていきましょう。
+まず、165行目に書かれているjoystick.readCurrentState()でジョイスティックの入力を読み込んできます。
+ジョイスティックの入力値の値はその下にコメントアウトで書かれている通りですので、そちらを参照して対応関係をとってみてください。
+そこからずーっと下のほうに下がっていくと、201行目にif(use_joystick)と書かれていますね。
+さきほどtrueにしたことによって、この条件分岐の中に入っていくことになります。
+この中身に書かれている３行でロボットに送る指令値を前進(step.stride)、回転(step.turn)、横歩き(step.sway)として計算しています。
+あとは`footstep_planner`において前述した方法を用いて着地位置と姿勢が啓作されることになります。
+
+**仮想ジョイスティックの使用方法**
+{{<figure src="./virtual_joystick.png" class="center" alt="footstep_sample" width="50%">}}  
+「ジョイスティックなんか持ってないよ!!」「ロボットを歩かせられないよ!!」というそんなあなたのために仮想ジョイスティックというものをご紹介します。
+まずは普通にchoreonoidを起動してください。
+そのあとプロジェクトも起動してください。
+写真のように上のツールバーに表示というボタンがあるので、それを選択してください。
+すると、写真のようにプルダウンメニューが出てくるので、そこのビューの表示にカーソルを合わせると、さらにプルダウンメニューが出てくるので、その中にある仮想ジョイスティックの項目にチェックを入れてください。
+チェックを入れるとこれまで関節角度などが表示されていたところに仮想ジョイスティックが追加されるので、ジョイスティックを持っていないあなたも自分の思い通りに動かせるようになりました!!
+ちなみに、前進後退が[E]と[D]ボタン、回転が[S]と[F]ボタン、横歩きが[J]と[L]ボタンになっています。
+キーボードでも同じボタンを押せば操作できるみたいです。
 
 ---
 

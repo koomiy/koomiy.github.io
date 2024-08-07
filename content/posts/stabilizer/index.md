@@ -5,7 +5,7 @@ categories: ["vnoidの解説"]
 menu: main
 ---
 
-(この記事は制作途中です)
+年度替わりに伴い、中の人が交代しています。文体等に違いがあるところがあるかと思いますが、ご了承いただければ幸いです。
 
 ---
 
@@ -88,24 +88,117 @@ void Stabilizer::Update(const Timer& timer, const Param& param, const Footstep& 
 }
 ```
 
+stabilizerでもfootstep_plannerで行ったのと同じように、参照変数として`st0`、`st1`を定義します。
+`st0`や`st1`には、両足分の着地位置・姿勢情報を代入します。
+これもfootstep_plannerと同じですね。	  
+そのため、ここでも左右のうちどちらが支持足で、  
+どちらが振り足かを見分けておく必要があります。  
+そこでこれまたfootstep_plannerと同じように`sup`と`swg`変数を用意します。  
+`sup`が支持足であることを意味し、  
+`swg`が振り足であることを意味します。
+次にCalcZmpという関数でZMPの位置を算出します。
+ZMPについては[009 - 目標DCM計画器](https://koomiy.github.io/posts/dcm_generator/)で、
+詳しく説明していますので、そちらをご覧ください。
+関数の中身については、下に続く各項目にて解説しています!!
+250行目と251行目ではベースリンクの角度と角速度を目標値との誤差を計算しています。
+これらの誤差を用いて、254行目にあるCalcBaseTiltという関数を使ってベースリンクの傾きを計算しています。
+257行目のCalcDcmDynamicsではDCMや重心の運動について計算されています。
+260行目と261行目ではそれらの結果から重心に作用されるべき床反力とモーメントを計算しています。
+デフォルトのままでは、目標モーメントの値が各軸で0になっているため、
+現状の重心などの状態は反映された目標値になっていません。
+264行目のCalcForceDistributionでは目標ZMPから作用する床反力を計算しています。
+そのあとのfor文の中で目標とする床反力を制御するために、歩行計画で予定していた位置などからずれて
+「どこに」、「どんな角度で」、「どのような姿勢で」足をつけばいいかを計算しています。
+最後に278行目から280行目でその修正量を歩行計画で算出した値に
+加えることで着地位置修正を考慮した新たな着地位置等をロボットに入力することになります。
 
+では、次は各関数の中でどのようなことが行われているのかを見ていきましょう!!
 
 ---
 
 -   **CalcZmp**
 
 ```cpp {linenos=inline}
+	void Stabilizer::CalcZmp(const Param& param, Centroid& centroid, vector<Foot>& foot){
+    	// get actual force from the sensor
+		for(int i = 0; i < 2; i++){
+			// set contact state
+			foot[i].contact = (foot[i].force.z() >= min_contact_force);
 
+			// measure continuous contact duration
+			if(foot[i].contact){
+				foot[i].zmp = Vector3(-foot[i].moment.y()/foot[i].force.z(), foot[i].moment.x()/foot[i].force.z(), 0.0);
+			}
+			else{
+				foot[i].zmp = Vector3(0.0, 0.0, 0.0);
+			}
+		}
+			// both feet not in contact
+		if(!foot[0].contact && !foot[1].contact){
+			foot[0].balance = 0.5;
+			foot[1].balance = 0.5;
+			centroid.zmp = Vector3(0.0, 0.0, 0.0);
+		}
+		else{
+			double f0 = std::max(0.0, foot[0].force.z());
+			double f1 = std::max(0.0, foot[1].force.z());
+			foot[0].balance = f0/(f0 + f1);
+			foot[1].balance = f1/(f0 + f1);
+			centroid.zmp =
+			     (foot[0].balance) * (foot[0].pos_ref + foot[0].ori_ref * foot[0].zmp)
+	           + (foot[1].balance) * (foot[1].pos_ref + foot[1].ori_ref * foot[1].zmp);
+		}
+	}
 ```
 
-
+まずはCalcZmpからです。
+この関数内では全体の流れでも書いたようにZMPの位置を計算しています。
+まず、43行目で足が設置しているかどうかをセンサーからの値で確認しています。
+床反力のz軸方向が最小接触力$min_contact_force$よりも大きいとき、
+$foot[i].contact$にはtrueが代入され、そうでないときはfalseが代入されます。
+この$foot[i].contact$がtrueのとき、各軸回りのモーメントと床反力から
+$$\boldsymbpl{p} = \frac{\boldsymbol{M}}{\boldsymbol{F}}$$
+を用いて、ZMPの位置を推定しています。
+ただし、$\boldsymbpl{p}$はZMP、$\boldsymbol{M}$はモーメント、$\boldsymbol{F}$は床反力を表しています。
+49行目で0が代入されているのは、足が地面に接触していないときのZMPですね。
+ここで、求めたのは各足のZMPですが、知りたいのは支持多角形全体でどの位置にZMPがあるかです。
+そこで60行目からの計算が必要になってきます。
+55行目から始まるif文は両足とも地面に接触していないとき、
+つまり、両足ともが空中に浮いているときの話をしています。
+さて、60行目からですが、ZMPは各足に作用している床反力の大きさの比によってその位置が決定されます。
+そのため、2点間を内分する点を求めることでZMPを求めることができます。
+61行目と62行目は各足が接触していれば、床反力の値が$f_0$と$f_1$にその値を代入します。
+63行目と64行目で内分比を導出します。
+もし仮に片側の足が接触していなかった場合、$f_0$か$f_1$のどちらかには0が代入されているため、
+`foot[0].balance`か`foot[1].balance`のどちらかが0となるため、
+もう一方の足で求めたZMPの位置がロボットのZMPの位置となります。
+両方ともの足が接触している場合は、床反力の大きさに応じて内分比が求められるため、
+最終的に65行目以降でロボットのZMPの位置が導出されます。
 
 ---
 
 -   **CalcBaseTilt**
 
 ```cpp {linenos=inline}
+	void Stabilizer::CalcBaseTilt(const Timer& timer, const Param& param, Base& base, Vector3 theta, Vector3 omega){
+		// desired angular acceleration for regulating orientation (in local coordinate)
+		Vector3 omegadd_local(
+			-(orientation_ctrl_gain_p*theta.x() + orientation_ctrl_gain_d*omega.x()),
+			-(orientation_ctrl_gain_p*theta.y() + orientation_ctrl_gain_d*omega.y()),
+			0.0
+		);
 
+		// 
+		Vector3 omegadd_base(
+			-base_tilt_rate*omegadd_local.x() - base_tilt_damping_p*base.angle_ref.x() - base_tilt_damping_d*base.angvel_ref.x(),
+			-base_tilt_rate*omegadd_local.y() - base_tilt_damping_p*base.angle_ref.y() - base_tilt_damping_d*base.angvel_ref.y(),
+			 0.0
+		);
+
+		base.angle_ref  += base.angvel_ref*timer.dt;
+		base.ori_ref = FromRollPitchYaw(base.angle_ref);
+		base.angvel_ref += omegadd_base*timer.dt;
+	}
 ```
 
 
@@ -115,7 +208,75 @@ void Stabilizer::Update(const Timer& timer, const Param& param, const Footstep& 
 -   **CalcDcmDynamics**
 
 ```cpp {linenos=inline}
+	void Stabilizer::CalcDcmDynamics(const Timer& timer, const Param& param, const Footstep& footstep_buffer, const Base& base, Vector3 theta, Vector3 omega, Centroid& centroid){
+		const Step& stb0 = footstep_buffer.steps[0];
+	    const Step& stb1 = footstep_buffer.steps[1];
+    	int sup =  stb0.side;
+    	int swg = !stb0.side;
+	
+		double T = param.T;
+		double m = param.total_mass;
+		double h = param.com_height;
+		double T_mh  = T/(m*h);
+		double T2_mh = T*T_mh;
 
+		Vector3 offset(0.0, 0.0, param.com_height);
+
+		// desired angular acceleration for regulating orientation (in local coordinate)
+		Vector3 omegadd_local(
+			-(orientation_ctrl_gain_p*theta.x() + orientation_ctrl_gain_d*omega.x()),
+			-(orientation_ctrl_gain_p*theta.y() + orientation_ctrl_gain_d*omega.y()),
+			//-(orientation_ctrl_gain_p*theta.z() + orientation_ctrl_gain_d*omega.z())
+			0.0
+		);
+		// desired moment (in local coordinate)
+		Vector3 Ld_local(
+			param.nominal_inertia.x()*omegadd_local.x(),
+			param.nominal_inertia.y()*omegadd_local.y(),
+			param.nominal_inertia.z()*omegadd_local.z()
+		);
+		// limit recovery moment for safety
+		for(int i = 0; i < 3; i++){
+			Ld_local[i] = std::min(std::max(-recovery_moment_limit, Ld_local[i]), recovery_moment_limit);
+		}
+		// desired moment (in global coordinate);
+		Vector3 Ld = base.ori_ref * Ld_local;
+
+		// virtual disturbance applied to DCM dynamics to generate desired recovery moment
+		Vector3 delta = Vector3(-T_mh*Ld.y(), T_mh*Ld.x(), 0.0);
+
+		// calc zmp for regulating dcm
+		const double rate = 1.0;
+		centroid.zmp_ref = stb0.zmp + dcm_ctrl_gain*(centroid.dcm_ref - stb0.dcm) + rate*T*delta;
+
+		// project zmp inside support region
+		if(stb0.stepping){
+			Vector3 zmp_local = stb0.foot_ori[sup].conjugate()*(centroid.zmp_ref - stb0.foot_pos[sup]);
+			for(int j = 0; j < 3; j++){
+				zmp_local[j] = std::min(std::max(param.zmp_min[j], zmp_local[j]), param.zmp_max[j]);
+			}
+			centroid.zmp_ref = stb0.foot_pos[sup] + stb0.foot_ori	[sup]*zmp_local;
+		}
+
+		// calc DCM derivative
+		Vector3 dcm_d = (1/T)*(centroid.dcm_ref - (centroid.zmp_ref + Vector3(0.0, 0.0, h))) + delta;
+
+		// calc CoM acceleration
+		centroid.com_acc_ref = (1/T)*(dcm_d - centroid.com_vel_ref);
+
+		// update DCM
+		centroid.dcm_ref += dcm_d*timer.dt;
+		// limit deviation from reference dcm
+		for(int j = 0; j < 3; j++){
+			centroid.dcm_ref[j] = std::min(std::max(stb0.dcm[j] - dcm_deviation_limit, centroid.dcm_ref[j]), stb0.dcm[j] + dcm_deviation_limit);
+		}
+
+		// calc CoM velocity from dcm
+		centroid.com_vel_ref = (1/T)*(centroid.dcm_ref - centroid.com_pos_ref);
+
+		// update CoM position
+		centroid.com_pos_ref += centroid.com_vel_ref*timer.dt;
+	}
 ```
 
 
@@ -125,7 +286,66 @@ void Stabilizer::Update(const Timer& timer, const Param& param, const Footstep& 
 -   **CalcForceDistribution**
 
 ```cpp {linenos=inline}
+	void Stabilizer::CalcForceDistribution(const Param& param, Centroid& centroid, vector<Foot>& foot){
+		// switch based on contact state
+		if(!foot[0].contact_ref && !foot[1].contact_ref){
+			foot[0].balance_ref = 0.5;
+			foot[1].balance_ref = 0.5;
+			foot[0].zmp_ref = Vector3(0.0, 0.0, 0.0);
+			foot[1].zmp_ref = Vector3(0.0, 0.0, 0.0);
+		}
+		if( foot[0].contact_ref && !foot[1].contact_ref){
+			foot[0].balance_ref = 1.0;
+			foot[1].balance_ref = 0.0;
+			foot[0].zmp_ref = foot[0].ori_ref.conjugate() * (centroid.zmp_ref - foot[0].pos_ref);
+			foot[1].zmp_ref = Vector3(0.0, 0.0, 0.0);
+		}
+		if(!foot[0].contact_ref &&  foot[1].contact_ref){
+			foot[0].balance_ref = 0.0;
+			foot[1].balance_ref = 1.0;
+			foot[0].zmp_ref = Vector3(0.0, 0.0, 0.0);
+			foot[1].zmp_ref = foot[1].ori_ref.conjugate() * (centroid.zmp_ref - foot[1].pos_ref);
+		}
+		if( foot[0].contact_ref &&  foot[1].contact_ref){
+			//
+			Vector2 b;
+			Vector3 pdiff  = foot[1].pos_ref - foot[0].pos_ref;
+			double  pdiff2 = pdiff.squaredNorm();
+			const double eps = 1.0e-10;
+			if(pdiff2 < eps){
+				b[0] = b[1] = 0.5;
+			}
+			else{
+				b[0] = (pdiff.dot(foot[1].pos_ref - centroid.zmp_ref))/pdiff2;
+				b[0] = std::min(std::max(0.0, b[0]), 1.0);
+				b[1] = 1.0 - b[0];
+			}
 
+			foot[0].balance_ref = b[0];
+			foot[1].balance_ref = b[1];
+
+			Vector3 zmp_proj = b[0]*foot[0].pos_ref + b[1]*foot[1].pos_ref;
+
+			double b2 = b.squaredNorm();
+			foot[0].zmp_ref = (b[0]/b2) * (foot[0].ori_ref.conjugate() * (centroid.zmp_ref - zmp_proj));
+			foot[1].zmp_ref = (b[1]/b2) * (foot[1].ori_ref.conjugate() * (centroid.zmp_ref - zmp_proj));
+		}
+
+		// limit zmp
+		for(int i = 0; i < 2; i++){
+			for(int j = 0; j < 3; j++){
+				foot[i].zmp_ref[j] = std::min(std::max(param.zmp_min[j], foot[i].zmp_ref[j]), param.zmp_max[j]);
+			}
+		}
+
+		for(int i = 0; i < 2; i++){
+			// force and moment to realize desired Zmp
+			foot[i].force_ref     =  foot[i].ori_ref.conjugate() * (foot[i].balance_ref * centroid.force_ref);
+			foot[i].moment_ref[0] =  foot[i].force_ref.z() * foot[i].zmp_ref.y();
+			foot[i].moment_ref[1] = -foot[i].force_ref.z() * foot[i].zmp_ref.x();
+			foot[i].moment_ref[2] =  foot[i].balance_ref * centroid.moment_ref.z();
+		}
+	}
 ```
 
 
