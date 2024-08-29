@@ -243,7 +243,7 @@ DCMについては後ほど説明します。
 
 ## 例題: ジグザグ歩行
 
-	```cpp {linenos=inline}
+	```cpp
     else{
         // just walk forward
         step.stride = 0.1;
