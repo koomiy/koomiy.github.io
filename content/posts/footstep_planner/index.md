@@ -24,7 +24,7 @@ vnoidというサンプルパッケージが用意されております。
 本記事ではステップ計画と呼びます。
 
 以下の画像のようなイメージです。
-{{<figure src="./footstep_sample.png" class="center" alt="footstep_sample" width="50%">}}  
+{{<figure src="./footstep_sample.png" class="center" alt="footstep_sample" width="80%">}}  
 
 また、ステップ計画では着地瞬間の目標DCMも計画します。  
 DCMについては後ほど説明します。
@@ -249,33 +249,34 @@ myrobot.cppの210行目以降に書かれているコントローラー制御な
 前進が終わると次の6秒間で時計回りに回転して、6秒間前進するというように記述しています。
 以降はその繰り返しです。
 回転角や前進するときの歩幅、それぞれにかける時間を色々変えてみてどのような歩行になるか試してみてください。
+
 	```cpp {linenos=inline}
-        else{
-            // just walk forward
-            step.stride = 0.1;
-            step.turn   = 0.0;
-            step.sway   = 0.0;
-            if (timer.time < 3.0) {
+    else{
+        // just walk forward
+        step.stride = 0.1;
+        step.turn   = 0.0;
+        step.sway   = 0.0;
+        if (timer.time < 3.0) {
+            step.stride = 0.0;
+            step.turn   = 0.1745;
+        } 
+        else {
+            if (((int) timer.time - 3) / 6 % 4 == 0 || ((int) timer.time -3) / 6 % 4 == 2) {
+                step.stride = 0.1;
+                step.turn   = 0.0;
+            } 
+            else if(((int) timer.time - 3) / 6 % 4 == 3) {
                 step.stride = 0.0;
                 step.turn   = 0.1745;
-            } 
-            else {
-                if (((int) timer.time - 3) / 6 % 4 == 0 || ((int) timer.time -3) / 6 % 4 == 2) {
-                    step.stride = 0.1;
-                    step.turn   = 0.0;
-                } 
-                else if(((int) timer.time - 3) / 6 % 4 == 3) {
-                    step.stride = 0.0;
-                    step.turn   = 0.1745;
-                } else {
-                    step.stride = 0.0;
-                    step.turn = -0.1745;
-                }
+            } else {
+                step.stride = 0.0;
+                step.turn = -0.1745;
             }
         }
+    }
 	```
 
-{{<figure src="./vnoid_jiguzagu_1.gif" class="center" alt="vnoid_jiguzagu_1" width="50%">}}  
+{{<figure src="./vnoid_jiguzagu_1.gif" class="center" alt="vnoid_jiguzagu_1" width="80%">}}  
 
 ---
 
@@ -286,20 +287,20 @@ myrobot.cppの210行目以降に書かれているコントローラー制御な
 前進や横への踏み出しをするときの歩幅、それぞれにかける時間を色々変えてみてどのような歩行になるか試してみてください。
 
 	```cpp {linenos=inline}
-       else{
-           // just walk forward
-           step.stride = 0.1;
-           step.turn   = 0.0;
-           step.sway   = 0.0;
-           if ((int)timer.time/5%2 == 0) {
-              step.sway = 0.05;
-           } else {
-              step.sway = -0.05;
-           }
+    else{
+       // just walk forward
+       step.stride = 0.1;
+       step.turn   = 0.0;
+       step.sway   = 0.0;
+       if ((int)timer.time/5%2 == 0) {
+          step.sway = 0.05;
+       } else {
+          step.sway = -0.05;
        }
+    }
 	```
 
-{{<figure src="./vnoid_jiguzagu_2.gif" class="center" alt="vnoid_jiguzagu_2" width="50%">}}  
+{{<figure src="./vnoid_jiguzagu_2.gif" class="center" alt="vnoid_jiguzagu_2" width="80%">}}  
 
 ---
 
@@ -308,6 +309,7 @@ myrobot.cppの210行目以降に書かれているコントローラー制御な
 成功するとラジコンを操縦するように動かせますよ!!
 ＊注意(1)：コントローラーはプロジェクトを開く前にご使用のパソコンに接続しておかないとchoreonoid側が認識してくれません。
 ＊注意(2)：コントローラーがない方はchoreonoidに仮想ジョイスティックというものがあるのでそちらをご利用ください。使用方法はこの項目の最後に書いてあります。
+
 	```cpp {linenos=inline}
 	MyRobot::MyRobot(){
 	    base_actuation = false;
@@ -322,6 +324,7 @@ myrobot.cppの210行目以降に書かれているコントローラー制御な
 まずは、myrobot.cppの9行目から17行目に書かれているMyRobot::MyRobot()に注目してください。
 この中に書かれているuse_joystick(13行目)という変数をtrueにしましょう。
 これをtrueにすることでコントローラーからの入力を受け取ってロボットを歩かせることができます。
+
 	```cpp {linenos=inline}
 	void MyRobot::Control(){
     	Robot::Sense(timer, base, foot, joint);
@@ -417,6 +420,7 @@ myrobot.cppの210行目以降に書かれているコントローラー制御な
 		timer.Countup();
 	}
 	```
+
 さあ実際に制御している部分を見ていきましょう。
 まず、165行目に書かれているjoystick.readCurrentState()でジョイスティックの入力を読み込んできます。
 ジョイスティックの入力値の値はその下にコメントアウトで書かれている通りですので、そちらを参照して対応関係をとってみてください。
@@ -426,7 +430,7 @@ myrobot.cppの210行目以降に書かれているコントローラー制御な
 あとは`footstep_planner`において前述した方法を用いて着地位置と姿勢が啓作されることになります。
 
 **仮想ジョイスティックの使用方法**
-{{<figure src="./virtual_joystick.png" class="center" alt="footstep_sample" width="50%">}}  
+{{<figure src="./virtual_joystick.png" class="center" alt="footstep_sample" width="80%">}}  
 「ジョイスティックなんか持ってないよ!!」「ロボットを歩かせられないよ!!」というそんなあなたのために仮想ジョイスティックというものをご紹介します。
 まずは普通にchoreonoidを起動してください。
 そのあとプロジェクトも起動してください。
