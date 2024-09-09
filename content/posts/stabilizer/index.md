@@ -157,9 +157,9 @@ ZMPについては[009 - 目標DCM計画器](https://koomiy.github.io/posts/dcm_
 床反力のz軸方向が最小接触力$min_contact_force$よりも大きいとき、  
 $foot[i].contact$にはtrueが代入され、そうでないときはfalseが代入されます。  
 この$foot[i].contact$がtrueのとき、各軸回りのモーメントと床反力から  
-$$\boldsymbpl{p} = \frac{\boldsymbol{M}}{\boldsymbol{F}}$$  
+$$\boldsymbol{p} = \frac{\boldsymbol{M}}{\boldsymbol{F}}$$  
 を用いて、ZMPの位置を推定しています。  
-ただし、$\boldsymbpl{p}$はZMP、$\boldsymbol{M}$はモーメント、$\boldsymbol{F}$は床反力を表しています。  
+ただし、$\boldsymbol{p}$はZMP、$\boldsymbol{M}$はモーメント、$\boldsymbol{F}$は床反力を表しています。  
 49行目で0が代入されているのは、足が地面に接触していないときのZMPですね。  
 ここで、求めたのは各足のZMPですが、知りたいのは支持多角形全体でどの位置にZMPがあるかです。  
 そこで60行目からの計算が必要になってきます。  
