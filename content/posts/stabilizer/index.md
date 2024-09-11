@@ -306,8 +306,10 @@ $$\boldsymbol{p} = \frac{\boldsymbol{M}}{\boldsymbol{F}}$$
 [009 - 目標ZMP・DCM計画](https://koomiy.github.io/posts/dcm_generator/)の回でやったように、DCMはZMPから直線的に離れていきます。  
 イメージは下の図のような感じです。  
 
+<p>
 {{<figure src="./dcm_dynamics.png" class="center" alt="dcm_dynamics" width="50%">}}
 {{<figure src="./change_dcm_dynamics.png" class="center" alt="change_dcm_dynamics" width="50%">}}
+</p>
 
 さて、回復モーメントを考えなければ、  
 当初計画していたDCMの運動(黒色)でよかったとしましょう。  
