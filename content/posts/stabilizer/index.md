@@ -307,8 +307,10 @@ $$\boldsymbol{p} = \frac{\boldsymbol{M}}{\boldsymbol{F}}$$
 イメージは下の図のような感じです。  
 
 <p>
-{{<figure src="./dcm_dynamics.png" class="center" alt="dcm_dynamics" width="50%">}}
-{{<figure src="./change_dcm_dynamics.png" class="center" alt="change_dcm_dynamics" width="50%">}}
+<figure src="./dcm_dynamics.png" class="center" alt="dcm_dynamics" width="50%">
+<figure src="./change_dcm_dynamics.png" class="center" alt="change_dcm_dynamics" width="50%">
+<!-- {{<figure src="./dcm_dynamics.png" class="center" alt="dcm_dynamics" width="50%">}}
+{{<figure src="./change_dcm_dynamics.png" class="center" alt="change_dcm_dynamics" width="50%">}} -->
 </p>
 
 さて、回復モーメントを考えなければ、  
