@@ -15,7 +15,8 @@ menu: main
 
 ## イベントの様子
 
-{{<figure src="./conpetition.png" class="center" alt="conpetition" width="80%">}}  
+![conpetition](./conpetition.png)
+<!-- {{<figure src="./conpetition.png" class="center" alt="conpetition" width="80%">}}   -->
 
 本年度は、イベントにおいて初の対面とオンラインのハイブリッド開催となりました。  
 オープンフォーラムということもあり、大会参加者以外の方々も  
