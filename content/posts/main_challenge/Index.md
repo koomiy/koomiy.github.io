@@ -83,7 +83,7 @@ menu: main
 
 -   **Wa1kers**
 
-{{<figure src="./wa1kers_presents.png" class="center" alt="tazaki_dance" width="80%">}}  
+{{<figure src="./wa1kers_presents.png" class="center" alt="wa1kers_presents" width="80%">}}  
 
 
 アスレチック種目には私たち神戸大学の学生チームWa1kersが参加しました。  
@@ -95,4 +95,4 @@ menu: main
 さらに1stステージの難しいコースも渡りきることができました。  
 今後は2ndステージ以降の難しいコースや自動化に向けた取り組みをしていきたいと思います。  
 
-{{<figure src="./wa1kers_performance.png" class="center" alt="tazaki_dance" width="80%">}}  
+{{<figure src="./wa1kers_performance.png" class="center" alt="wa1kers_performance" width="80%">}}  
