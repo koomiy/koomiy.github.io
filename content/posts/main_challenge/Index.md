@@ -15,7 +15,7 @@ menu: main
 
 ## イベントの様子
 
-{{<figure src="./conpetition.png" class="center" alt="tazaki_dance" width="80%">}}  
+{{<figure src="./conpetition.png" class="center" alt="conpetition" width="80%">}}  
 
 本年度は、イベントにおいて初の対面とオンラインのハイブリッド開催となりました。  
 オープンフォーラムということもあり、大会参加者以外の方々も  
@@ -37,9 +37,10 @@ menu: main
 本年度も川崎重工株式会社様のFriendsのモデルを利用してダンスを披露できるという  
 夢のような種目になっています。
 
-{{<figure src="./" class="center" alt="Friends" width="100%">}}
+<!-- {{<figure src="./" class="center" alt="Friends" width="100%">}} -->
 
 -   **teketeke**
+
 ダンス種目の挑戦者1チーム目は岐阜大学より参加されたteketekeです。  
 認知科学の観点から踊りを研究されており、  
 その知見を活かして、課題曲である『みくみくにしてあげる』で  
@@ -68,6 +69,7 @@ menu: main
 ## ショートトラック
 
 -   **FisMa** 
+
 ショートトラック種目にはFisMaから2名の方が参加されていました。  
 今年度はモデルベースのプログラムでショートトラックを走らせていました。  
 最終的な目標は機械学習も織り交ぜて走らせることだとおっしゃっていました。  
@@ -84,7 +86,6 @@ menu: main
 -   **Wa1kers**
 
 {{<figure src="./wa1kers_presents.png" class="center" alt="wa1kers_presents" width="80%">}}  
-
 
 アスレチック種目には私たち神戸大学の学生チームWa1kersが参加しました。  
 今年は昨年度達成することができなかった、簡単なコースでのゴールを目指しました。  
