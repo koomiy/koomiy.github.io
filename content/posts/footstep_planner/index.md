@@ -243,40 +243,40 @@ DCMについては後ほど説明します。
 
 ## 例題: ジグザグ歩行
 
-	今回の例題のまず始めはジグザグ歩行です。  
+今回の例題のまず始めはジグザグ歩行です。  
 
-	```cpp
-    else{
-        // just walk forward
-        step.stride = 0.1;
-        step.turn   = 0.0;
-        step.sway   = 0.0;
-        if (timer.time < 3.0) {
+```cpp
+else{
+    // just walk forward
+    step.stride = 0.1;
+    step.turn   = 0.0;
+    step.sway   = 0.0;
+    if (timer.time < 3.0) {
+    	step.stride = 0.0;
+		step.turn   = 0.1745;
+    } 
+    else {
+		if (((int) timer.time - 3) / 6 % 4 == 0 || ((int) timer.time -3) / 6 % 4 == 2) {
+			step.stride = 0.1;
+        	step.turn   = 0.0;
+        } 
+        else if(((int) timer.time - 3) / 6 % 4 == 3) {
             step.stride = 0.0;
             step.turn   = 0.1745;
-        } 
-        else {
-            if (((int) timer.time - 3) / 6 % 4 == 0 || ((int) timer.time -3) / 6 % 4 == 2) {
-                step.stride = 0.1;
-                step.turn   = 0.0;
-            } 
-            else if(((int) timer.time - 3) / 6 % 4 == 3) {
-                step.stride = 0.0;
-                step.turn   = 0.1745;
-            } else {
-                step.stride = 0.0;
-                step.turn = -0.1745;
-            }
+        } else {
+            step.stride = 0.0;
+            step.turn = -0.1745;
         }
     }
-	```
+}
+```
 
-	myrobot.cppの210行目以降に書かれているコントローラー制御なしのときの歩行パラメータが書かれた部分に注目してください。  
-	この部分に時間ごとに回転、前進が切り替わるようにパラメータを設定してみましょう。  
-	下の例では、まず最初の3秒間で反時計回りに回転して、その後6秒間前進します。  
-	前進が終わると次の6秒間で時計回りに回転して、6秒間前進するというように記述しています。  
-	以降はその繰り返しです。  
-	回転角や前進するときの歩幅、それぞれにかける時間を色々変えてみてどのような歩行になるか試してみてください。  
+myrobot.cppの210行目以降に書かれているコントローラー制御なしのときの歩行パラメータが書かれた部分に注目してください。  
+この部分に時間ごとに回転、前進が切り替わるようにパラメータを設定してみましょう。  
+下の例では、まず最初の3秒間で反時計回りに回転して、その後6秒間前進します。  
+前進が終わると次の6秒間で時計回りに回転して、6秒間前進するというように記述しています。  
+以降はその繰り返しです。  
+回転角や前進するときの歩幅、それぞれにかける時間を色々変えてみてどのような歩行になるか試してみてください。  
 
 {{<figure src="./vnoid_jiguzagu_1.gif" class="center" alt="vnoid_jiguzagu_1" width="80%">}}  
 
