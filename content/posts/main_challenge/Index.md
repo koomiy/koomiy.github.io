@@ -15,7 +15,7 @@ menu: main
 
 ## イベントの様子
 
-{{<figure src="./conpetition.png" class="center" alt="conpetition" width="80%">}}  
+{{<figure src="./conpetition.png" class="center" alt="conpetition" width="50%">}}  
 
 本年度は、イベントにおいて初の対面とオンラインのハイブリッド開催となりました。  
 オープンフォーラムということもあり、大会参加者以外の方々も  
@@ -54,7 +54,7 @@ menu: main
 
 -   **田﨑先生**
 
-    {{<figure src="./tazaki_dance.png" class="center" alt="tazaki_dance" width="80%">}}  
+    {{<figure src="./tazaki_dance.png" class="center" alt="tazaki_dance" width="50%">}}  
 
     挑戦者2チーム目は本イベントの主催者でもある田﨑先生です。  
     昨年度のメインチャレンジでは、イントロ部分のダンスを完成されていましたが、  
@@ -85,7 +85,7 @@ menu: main
 
 -   **Wa1kers**
 
-    {{<figure src="./wa1kers_presents.png" class="center" alt="wa1kers_presents" width="80%">}}  
+    {{<figure src="./wa1kers_presents.png" class="center" alt="wa1kers_presents" width="50%">}}  
 
     アスレチック種目には私たち神戸大学の学生チームWa1kersが参加しました。  
     今年は昨年度達成することができなかった、簡単なコースでのゴールを目指しました。  
@@ -96,11 +96,10 @@ menu: main
     さらに1stステージの難しいコースも渡りきることができました。  
     今後は2ndステージ以降の難しいコースや自動化に向けた取り組みをしていきたいと思います。  
 
-    {{<figure src="./wa1kers_performance.png" class="center" alt="wa1kers_performance" width="80%">}}  
+    {{<figure src="./wa1kers_performance.png" class="center" alt="wa1kers_performance" width="50%">}}  
 
 ## まとめ
 
 初めてのハイブリッド形式での開催ということもあり、非常に盛り上がったと思います。  
 現地では、発表された方以外にも多数の方が発表を聞いてくださいました。  
-来年以降、さらに盛り上がり新たなる挑戦者が現れると  
-より楽しい会になるんじゃないでしょうか。
+来年以降、新たにチャレンジされる方が増え、より盛り上がることが楽しみです。
