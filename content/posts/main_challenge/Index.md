@@ -37,6 +37,8 @@ menu: main
 本年度も川崎重工株式会社様のFriendsのモデルを利用してダンスを披露できるという  
 夢のような種目になっています。
 
+{{<figure src="./dance.png" class="center" alt="dance" width="50%">}}  
+
 <!-- {{<figure src="./" class="center" alt="Friends" width="100%">}} -->
 
 -   **teketeke**
