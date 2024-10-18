@@ -14,10 +14,9 @@ menu: main
 ---
 
 ## イベントの様子
-
-{{<figure src="./conpetition.png" class="center" alt="conpetition" width="50%">}} 
  
 本年度は、イベントにおいて初の対面とオンラインのハイブリッド開催となりました。  
+{{<figure src="./conpetition.png" class="center" alt="conpetition" width="50%">}} 
 オープンフォーラムということもあり、大会参加者以外の方々も  
 多数来場されており、例年にない盛り上がりを見せていたと思います。  
 
@@ -83,9 +82,8 @@ menu: main
 
 -   **Wa1kers**
 
-    {{<figure src="./wa1kers_presents.png" class="center" alt="wa1kers_presents" width="50%">}}  
-
     アスレチック種目には私たち神戸大学の学生チームWa1kersが参加しました。  
+    {{<figure src="./wa1kers_presents.png" class="center" alt="wa1kers_presents" width="50%">}}  
     今年は昨年度達成することができなかった、簡単なコースでのゴールを目指しました。  
     昨年上ることができなかった階段も無事上ることができ、  
     本年は簡単なコースの踏破は無事達成しました。
@@ -93,7 +91,6 @@ menu: main
     タイムも90秒代という好成績を残すことができました。  
     さらに1stステージの難しいコースも渡りきることができました。  
     今後は2ndステージ以降の難しいコースや自動化に向けた取り組みをしていきたいと思います。  
-
     {{<figure src="./wa1kers_performance.png" class="center" alt="wa1kers_performance" width="50%">}}  
 
 ## まとめ
