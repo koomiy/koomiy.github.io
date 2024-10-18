@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3 (1:1.3+202307231459+0e150ed6c4)"
+   sodipodi:docname="dprel_vs_turn.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.4589137"
+     inkscape:cx="557.9494"
+     inkscape:cy="535.32983"
+     inkscape:window-width="2488"
+     inkscape:window-height="1376"
+     inkscape:window-x="1920"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <marker
+       style="overflow:visible"
+       id="ConcaveTriangle"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Concave triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="M -2,-4 9,0 -2,4 c 2,-2.33 2,-5.66 0,-8 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="path7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="ConcaveTriangle-7"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Concave triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="M -2,-4 9,0 -2,4 c 2,-2.33 2,-5.66 0,-8 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="path7-5" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-dasharray:none;marker-end:url(#ConcaveTriangle)"
+       d="M 52.315982,186.26913 V 92.362221"
+       id="path1" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-dasharray:none;marker-end:url(#ConcaveTriangle-7)"
+       d="M 51.746753,185.90622 H 145.65366"
+       id="path1-5" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-dasharray:none"
+       d="m 70.663091,147.52745 c 12.286239,-12.36608 19.07334,-42.5297 30.335019,-42.5297 9.10605,0 19.68505,30.23667 29.9633,41.59924 0.39081,0.43204 0.39455,0.80729 0.39455,0.80729"
+       id="path2"
+       sodipodi:nodetypes="cssc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-dasharray:1.5,0.5;stroke-dashoffset:0"
+       d="M 101.15689,105.08302 H 48.104607"
+       id="path3" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-dasharray:1.50000767,0.5;stroke-dashoffset:0"
+       d="M 70.763783,189.72691 V 147.27148"
+       id="path3-1" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-dasharray:1.50001, 0.5;stroke-dashoffset:0"
+       d="M 131.23604,189.27251 V 146.81708"
+       id="path3-1-9" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;fill:#000000;stroke:none;stroke-width:0.499999;stroke-dasharray:1.50001, 0.499999;stroke-dashoffset:0;fill-opacity:1"
+       x="23.715227"
+       y="107.79773"
+       id="text3"><tspan
+         sodipodi:role="line"
+         id="tspan3"
+         style="stroke-width:0.5;fill:#000000;fill-opacity:1;stroke:none"
+         x="23.715227"
+         y="107.79773">最大値</tspan></text>
+    <path
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-dasharray:1.50001305,0.5;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 101.04474,105.05582 v 85.42087"
+       id="path4" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.499999;stroke-dasharray:1.50001, 0.499999;stroke-dashoffset:0;stroke-opacity:1"
+       x="67.027435"
+       y="197.41977"
+       id="text4"><tspan
+         sodipodi:role="line"
+         id="tspan4"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5"
+         x="67.027435"
+         y="197.41977">-π</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.499999;stroke-dasharray:1.50001, 0.499999;stroke-dashoffset:0;stroke-opacity:1"
+       x="129.44702"
+       y="197.01227"
+       id="text4-6"><tspan
+         sodipodi:role="line"
+         id="tspan4-2"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5"
+         x="129.44702"
+         y="197.01227">π</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.499999;stroke-dasharray:1.50001, 0.499999;stroke-dashoffset:0;stroke-opacity:1"
+       x="99.073723"
+       y="197.67599"
+       id="text5"><tspan
+         sodipodi:role="line"
+         id="tspan5"
+         style="stroke-width:0.5"
+         x="99.073723"
+         y="197.67599">0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.499999;stroke-dasharray:1.50001, 0.499999;stroke-dashoffset:0;stroke-opacity:1"
+       x="87.274536"
+       y="98.51844"
+       id="text6"><tspan
+         sodipodi:role="line"
+         id="tspan6"
+         style="stroke-width:0.5"
+         x="87.274536"
+         y="98.51844">ほぼ対称</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.499999;stroke-dasharray:1.50001, 0.499999;stroke-dashoffset:0;stroke-opacity:1"
+       x="154.62045"
+       y="188.14287"
+       id="text7"><tspan
+         sodipodi:role="line"
+         id="tspan7"
+         style="stroke-width:0.5"
+         x="154.62045"
+         y="188.14287">⊿θ</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.25;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       x="39.814125"
+       y="80.755127"
+       id="text7-7"><tspan
+         sodipodi:role="line"
+         id="tspan7-9"
+         style="stroke-width:0.25;stroke-dasharray:none"
+         x="39.814125"
+         y="80.755127">||<tspan
+   style="stroke:#000000;stroke-width:0.25;stroke-dasharray:none;stroke-opacity:1"
+   id="tspan9">⊿p</tspan><tspan
+   style="font-size:65%;baseline-shift:sub;stroke:#000000;stroke-width:0.25;stroke-dasharray:none;stroke-opacity:1"
+   id="tspan8">rel</tspan>||</tspan></text>
+  </g>
+</svg>
