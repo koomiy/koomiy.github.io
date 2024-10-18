@@ -16,7 +16,7 @@ menu: main
 ## イベントの様子
  
 本年度は、イベントにおいて初の対面とオンラインのハイブリッド開催となりました。  
-{{<figure src="./conpetition.png" class="center" alt="conpetition" width="80%">}}  
+{{<figure src="./conpetition.png" class="center" alt="competition" width="80%">}}  
 オープンフォーラムということもあり、大会参加者以外の方々も  
 多数来場されており、例年にない盛り上がりを見せていたと思います。  
 
@@ -35,7 +35,7 @@ menu: main
 昨年度新設された種目であるダンス競技は本年は2組参加されていました。  
 本年度も川崎重工株式会社様のFriendsのモデルを利用してダンスを披露できるという  
 夢のような種目になっています。
-{{<figure src="./dance.png" class="center" alt="dance" width="50%">}}  
+{{<figure src="./dance.png" class="center" alt="dance" width="80%">}}  
 
 -   **teketeke**
 
@@ -53,7 +53,7 @@ menu: main
 -   **田﨑先生**
 
     挑戦者2チーム目は本イベントの主催者でもある田﨑先生です。  
-    {{<figure src="./tazaki_dance.png" class="center" alt="tazaki_dance" width="50%">}}  
+	{{<figure src="./tazaki_dance.png" class="center" alt="tazaki_dance" width="80%">}}  
     昨年度のメインチャレンジでは、イントロ部分のダンスを完成されていましたが、  
     本年はBメロ部分までのダンスを披露してくださいました。  
     昨年度に引き続きヌルヌルと動くロボットに魅了されました。  
@@ -83,7 +83,7 @@ menu: main
 -   **Wa1kers**
 
     アスレチック種目には私たち神戸大学の学生チームWa1kersが参加しました。  
-    {{<figure src="./wa1kers_presents.png" class="center" alt="wa1kers_presents" width="50%">}}  
+	{{<figure src="./wa1kers_presents.png" class="center" alt="wa1kers_presents" width="80%">}}  
     今年は昨年度達成することができなかった、簡単なコースでのゴールを目指しました。  
     昨年上ることができなかった階段も無事上ることができ、  
     本年は簡単なコースの踏破は無事達成しました。
@@ -91,7 +91,7 @@ menu: main
     タイムも90秒代という好成績を残すことができました。  
     さらに1stステージの難しいコースも渡りきることができました。  
     今後は2ndステージ以降の難しいコースや自動化に向けた取り組みをしていきたいと思います。  
-    {{<figure src="./wa1kers_performance.png" class="center" alt="wa1kers_performance" width="50%">}}  
+	{{<figure src="./wa1kers_performance.png" class="center" alt="wa1kers_performance" width="80%">}}  
 
 ## まとめ
 
