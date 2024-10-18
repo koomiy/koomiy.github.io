@@ -24,7 +24,7 @@ vnoidというサンプルパッケージが用意されております。
 本記事ではステップ計画と呼びます。
 
 以下の画像のようなイメージです。
-{{<figure src="./footstep_sample.png" class="center" alt="footstep_sample" width="80%">}}  
+{{<figure src="./conpetition.png" class="center" alt="footstep_sample" width="80%">}}  
 
 また、ステップ計画では着地瞬間の目標DCMも計画します。  
 DCMについては後ほど説明します。
