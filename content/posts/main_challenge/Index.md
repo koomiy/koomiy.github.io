@@ -15,8 +15,8 @@ menu: main
 
 ## イベントの様子
 
-{{<figure src="./conpetition.png" class="center" alt="conpetition" width="50%">}}  
-
+{{<figure src="./conpetition.png" class="center" alt="conpetition" width="50%">}} 
+ 
 本年度は、イベントにおいて初の対面とオンラインのハイブリッド開催となりました。  
 オープンフォーラムということもあり、大会参加者以外の方々も  
 多数来場されており、例年にない盛り上がりを見せていたと思います。  
@@ -36,10 +36,7 @@ menu: main
 昨年度新設された種目であるダンス競技は本年は2組参加されていました。  
 本年度も川崎重工株式会社様のFriendsのモデルを利用してダンスを披露できるという  
 夢のような種目になっています。
-
 {{<figure src="./dance.png" class="center" alt="dance" width="50%">}}  
-
-<!-- {{<figure src="./" class="center" alt="Friends" width="100%">}} -->
 
 -   **teketeke**
 
@@ -56,9 +53,8 @@ menu: main
 
 -   **田﨑先生**
 
-    {{<figure src="./tazaki_dance.png" class="center" alt="tazaki_dance" width="50%">}}  
-
     挑戦者2チーム目は本イベントの主催者でもある田﨑先生です。  
+    {{<figure src="./tazaki_dance.png" class="center" alt="tazaki_dance" width="50%">}}  
     昨年度のメインチャレンジでは、イントロ部分のダンスを完成されていましたが、  
     本年はBメロ部分までのダンスを披露してくださいました。  
     昨年度に引き続きヌルヌルと動くロボットに魅了されました。  
