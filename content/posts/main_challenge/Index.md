@@ -16,7 +16,7 @@ menu: main
 ## イベントの様子
  
 本年度は、イベントにおいて初の対面とオンラインのハイブリッド開催となりました。  
-{{<figure src="./conpetition.png" class="center" alt="conpetition" width="80%">}} 
+{{<figure src="./conpetition.png" class="center" alt="conpetition" width="80%">}}  
 オープンフォーラムということもあり、大会参加者以外の方々も  
 多数来場されており、例年にない盛り上がりを見せていたと思います。  
 
