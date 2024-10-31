@@ -19,8 +19,8 @@ paginate = 20
 
 # 自己紹介
 [Author]
-    name = "koomiy"
-    bio = "ロボティクスが大好きです"
+    name = "MA1-Biped"
+    bio = "二足ロボの研究チームメンバーです"
     avatar = "img/scorpion.png"
 
 [Params]
