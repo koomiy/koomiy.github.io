@@ -56,7 +56,7 @@ menu: main
 
 {{<figure src="./not_climb_stair.gif" class="center" alt="not_climb_stair" width="80%">}}  
 
-あれ？おかしいですね。  
+<!-- あれ？おかしいですね。  
 `step.climb`を変更しているのに、階段まで足を上げてくれません。  
 これはどういうことなんでしょうか。  
 実は`step.climb`で指定しているのは着地位置の高さ情報だけで、  
@@ -66,7 +66,7 @@ menu: main
 
 {{<figure src ="./climb_trajectory.png" class="center" alt="climb_trajectroy" width="50%">}}
 
-今回は上の図の点線のような動きをしてくれるように遊脚の軌道を生成する方法を考えていきます。  
+今回は上の図の点線のような動きをしてくれるように遊脚の軌道を生成する方法を考えていきます。   -->
 
 ---
 
