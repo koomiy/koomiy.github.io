@@ -32,7 +32,7 @@ menu: main
 おそらく、下の動画みたいにめちゃくちゃ足を上げて虚空に着地しようとしたのではないでしょうか。  
 そうなっていたらとりあえず成功です。  
 
-{{<figure src="./climb.gif" class="center" alt="climb" width="50%">}}  
+{{<figure src="./climb.gif" class="center" alt="climb" width="80%">}}  
 
 ---
 
