@@ -64,8 +64,6 @@ menu: main
 そのため、下の図に示すように僕たちは点線のように足が動いてくれることを期待しました。  
 しかし、実際の足の動きは実線のようになっているんです。  
 
-{{<figure src ="./climb_trajectory.png" class="center" alt="climb_trajectory" width="50%">}}
-
 ---
 
 ## まとめ・次回予告
