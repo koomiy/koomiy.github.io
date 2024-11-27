@@ -54,6 +54,9 @@ menu: main
 `step.climb`と`step.stride`もその値にしてしまいましょう。  
 さあ、これで準備が整いました。きっと問題なく階段を上ってくれるはずです。  
 
+{{<figure src="./not_climb_stair.gif" class="center" alt="not_climb_stair" width="80%">}}
+
+
 ---
 
 ## まとめ・次回予告
